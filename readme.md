@@ -1,7 +1,7 @@
-Lumen 5.2 Framework + ReactJs + AdminLTE
+Lumen 5.3 Framework + ReactJs + AdminLTE
 
 ## Versions
-- Laravel 5.3.0
+- Laravel 5.3
 - ReactJs
 - AdminLTE
 

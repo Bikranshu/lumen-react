@@ -29750,7 +29750,7 @@
 	                        _react2.default.createElement(
 	                            "div",
 	                            { className: "modal-body" },
-	                            _react2.default.createElement("input", { id: "account-id", value: "", type: "hidden" }),
+	                            _react2.default.createElement("input", { id: "product-id", value: "", type: "hidden" }),
 	                            _react2.default.createElement(
 	                                "p",
 	                                null,

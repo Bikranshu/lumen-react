@@ -1,8 +1,8 @@
-Lumen 5.3 Framework + ReactJs + AdminLTE
+Lumen 5.3 Framework + ReactJS + AdminLTE
 
 ## Versions
 - Laravel 5.3
-- ReactJs
+- ReactJS
 - AdminLTE
 
 
@@ -17,14 +17,24 @@ Lumen 5.3 Framework + ReactJs + AdminLTE
 ## Installation
 
 - clone repository
-- run command on terminal `composer install`
-- run command on terminal `npm install`
-- go to project folder and run `php -S localhost:8000 -t public/`
-- run command on terminal `npm run watch`
+- go to project folder
+- run command on terminal 
+```
+ $ composer install
+ $ npm install
+ $ cp .env.example .env
+ $ php artisan jwt:secret
+ $ php -S localhost:8000 -t public/
+ $ npm run watch
+ $ php artisan migrate
+```
 
+## USEFUL LINK
 
-## Database
+- dingo/api [https://github.com/dingo/api](https://github.com/dingo/api)
+- json-web-token(jwt) [https://github.com/tymondesigns/jwt-auth](https://github.com/tymondesigns/jwt-auth)
+- transformer [fractal](http://fractal.thephpleague.com/)
+- apidoc [apidocjs](http://apidocjs.com/)
+- debug rest api [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
+- api doc [http://lumen.lyyw.info/apidoc](http://lumen.lyyw.info/apidoc)
 
-Set proper credentials in `.env` file in order to use database.
-
-Run migrations via `php artisan migrate`.

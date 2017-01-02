@@ -12,7 +12,7 @@ class ProductConfirmBox extends Component {
                             </div>
 
                             <div className="modal-body">
-                                <input id="account-id" value="" type="hidden"/>
+                                <input id="product-id" value="" type="hidden"/>
                                 <p>Are you sure you want to delete?</p>
                             </div>
                             <div className="modal-footer">

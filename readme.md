@@ -1,7 +1,7 @@
 Lumen 5.3 Framework + ReactJS + AdminLTE
 
 ## Versions
-- Laravel 5.3
+- Lumen 5.3
 - ReactJS
 - AdminLTE
 
@@ -18,15 +18,15 @@ Lumen 5.3 Framework + ReactJS + AdminLTE
 
 - clone repository
 - go to project folder
-- run command on terminal 
+- run the following command on terminal 
 ```
  $ composer install
  $ npm install
  $ cp .env.example .env
  $ php artisan jwt:secret
+ $ php artisan migrate
  $ php -S localhost:8000 -t public/
  $ npm run watch
- $ php artisan migrate
 ```
 
 ## USEFUL LINK

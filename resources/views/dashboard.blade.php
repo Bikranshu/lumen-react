@@ -40,7 +40,7 @@
 <body class="hold-transition skin-blue sidebar-mini">
 
 <!--Container for React rendering-->
-<div id="dashboard-container"></div>
+<div id="root-container"></div>
 
 <!--Bundled file-->
 <script src="js/build/bundle.js"></script>

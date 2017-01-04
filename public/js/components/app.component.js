@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
 // Import custom components
-import Header from './common/header/header.component.jsx'
-import Sidebar from './common/sidebar/sidebar.component.jsx'
-import Footer from './common/footer/footer.component.jsx'
+import Header from './common/header/header.component';
+import Sidebar from './common/sidebar/sidebar.component';
+import Footer from './common/footer/footer.component';
 
 class App extends Component {
     render(){

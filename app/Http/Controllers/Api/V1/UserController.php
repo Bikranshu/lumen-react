@@ -73,11 +73,11 @@ class UserController extends BaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
      * @param  Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($id, Request $request)
+    public function update(Request $request, $id)
     {
       return true;
     }

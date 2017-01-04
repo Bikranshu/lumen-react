@@ -25,7 +25,7 @@ class Sidebar extends Component {
               <ul className="sidebar-menu">
                 <li className="header">MAIN NAVIGATION</li>
                 <li className="active">
-                  <a href="#">
+                  <a href="/#/dashboard">
                     <i className="fa fa-dashboard"></i> <span>Dashboard</span>
                   </a>
                 </li>

@@ -1,7 +1,9 @@
 //libraries
 import _ from 'lodash';
 
-// Import constants
+/**
+ * Import all constants as an object.
+ */
 import * as ActionType from '../constants/actionType';
 
 var initialState = {
@@ -9,27 +11,30 @@ var initialState = {
         isAuthenticated: false,
 };
 
+/**
+ * A reducer takes two arguments, the current state and an action.
+ */
 export default function (state , action) {
     state = state || initialState;
 
     switch (action.type) {
         case ActionType.LOG_IN_SUCCESS:
-            var newState = _.cloneDeep(state);
-            newState.isAuthenticated = true;
-            newState.token = action.token;
-            return newState;
+            return Object.assign({}, state, {
+                isAuthenticated: true,
+                token: action.payload,
+            });
 
         case ActionType.LOG_IN_FAILURE:
-            var newState = _.cloneDeep(state);
-            newState.isAuthenticated = false;
-            newState.token = null;
-            return newState;
+            return Object.assign({}, state, {
+                isAuthenticated: false,
+                token: null,
+            });
 
         case ActionType.LOG_OUT:
-            var newState = _.cloneDeep(state);
-            newState.isAuthenticated = false;
-            newState.token = null;
-            return newState;
+            return Object.assign({}, state, {
+                isAuthenticated: false,
+                token: null,
+            });
 
         default:
             return state;

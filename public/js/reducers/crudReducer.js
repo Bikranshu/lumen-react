@@ -9,26 +9,29 @@ var initialState = {
     pagination: {},
 };
 
+/**
+ * A reducer takes two arguments, the current state and an action.
+ */
 export default function (state , action) {
     state = state || initialState;
 
     switch (action.type) {
         case ActionType.LIST:
             var newState = _.cloneDeep(state);
-            newState[action.entity] = _.cloneDeep(action.data.data);
+            newState[action.entity + 's'] = _.cloneDeep(action.data.data);
             return newState;
 
 
         case ActionType.DELETE:
             var newState = _.cloneDeep(state);
-            var data = newState[action.entity];
+            var data = newState[action.entity + 's'];
             var index = _.indexOf(data, _.find(data, {id: action.id}));
             data.splice(index, 1);
             return newState;
 
         case ActionType.CLEAR_LIST:
             var newState = _.cloneDeep(state);
-            newState[action.entity] = {};
+            newState[action.entity + 's'] = {};
             return newState;
 
         case ActionType.PAGINATION_INDEX:

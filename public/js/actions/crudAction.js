@@ -51,7 +51,7 @@ export function fetchAll(entity, data) {
     return function (dispatch) {
         dispatch(apiAction.apiRequest());
         return apiService.fetch(entity, data) .then((response) => {
-                dispatch(commonActions.list(entity, response.body));
+                dispatch(commonActions.list(entity, response.data));
             })
             .catch(response => dispatch(errorHandler(response.data.error)));
     };

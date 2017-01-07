@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
-// Import authService
+/**
+ * Import all authService as an object.
+ */
 import * as authService from '../../services/authService';
 
 class Login extends Component {
@@ -48,6 +50,9 @@ class Login extends Component {
     }
 }
 
+/**
+ * Map the state to props.
+ */
 function mapStateToProps(state) {
     return {
         token: state.auth.token,
@@ -55,9 +60,16 @@ function mapStateToProps(state) {
     }
 }
 
+/**
+ * Map the actions to props.
+ */
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(_.assign({}, authService), dispatch)
     }
 }
+
+/**
+ * Connect the component to the Redux store.
+ */
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

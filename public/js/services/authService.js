@@ -1,14 +1,20 @@
 import axios from 'axios';
 import cookie from 'react-cookie';
 
-// Import constants
+/**
+ * Import all constants as an object.
+ */
 import * as ActionType from '../constants/actionType';
+
 import AppConstant from '../constants/app';
 
 export function login({ email, password }) {
     return function (dispatch) {
-           axios.post(AppConstant.API_URL + 'auth/login', { email, password }).then((response) => {
-                   dispatch({ type: ActionType.LOG_IN_SUCCESS });
+         axios.post(AppConstant.API_URL + 'auth/login', { email, password }).then((response) => {
+                    dispatch({
+                        type: ActionType.LOG_IN_SUCCESS,
+                        payload: response.data.token
+                    });
                     cookie.save(AppConstant.TOKEN, response.data.token, { path: '/' });
                     window.location.href = AppConstant.ROOT_URL + 'dashboard';
                 })

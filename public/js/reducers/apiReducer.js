@@ -9,6 +9,9 @@ var initialState = {
     numberOfRequests: 0
 };
 
+/**
+ * A reducer takes two arguments, the current state and an action.
+ */
 export default function (state , action) {
     state = state || initialState;
 

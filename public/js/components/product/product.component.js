@@ -5,12 +5,16 @@ import { connect } from 'react-redux';
 //libraries
 import _ from 'lodash';
 
-// Import constants
-import ActionType from '../../constants/actionType';
+/**
+ * Import all constants as an object.
+ */
+import * as ActionType from '../../constants/actionType';
 import Message from '../../constants/message';
 import Common from '../../constants/common';
 
-// Import apiAction
+/**
+ * Import all apiAction and crudAction as an object.
+ */
 import * as apiAction from '../../actions/apiAction';
 import * as crudAction from '../../actions/crudAction';
 
@@ -59,19 +63,27 @@ class Product extends Component {
     }
 }
 
-
+/**
+ * Map the state to props.
+ */
 function mapStateToProps(state) {
     return {
-        product: state.crud.product,
+        products: state.crud.products,
         pagination: state.crud.pagination,
         apiState: state.api
     }
 }
 
+/**
+ * Map the actions to props.
+ */
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(_.assign({}, crudAction, apiAction), dispatch)
     }
 }
 
+/**
+ * Connect the component to the Redux store.
+ */
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

@@ -25,9 +25,13 @@ Lumen 5.3 Framework + ReactJS + AdminLTE
  $ cp .env.example .env
  $ php artisan jwt:secret
  $ php artisan migrate
+ $ php artisan db:seed
  $ php -S localhost:8000 -t public/
  $ npm run watch
 ```
+Credential:
+- username: admin@admin.com
+- password: 1234
 
 ## USEFUL LINK
 

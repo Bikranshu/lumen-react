@@ -19,19 +19,19 @@ export default function (state , action) {
 
     switch (action.type) {
         case ActionType.LOG_IN_SUCCESS:
-            return Object.assign({}, state, {
+            return _.assign({}, state, {
                 isAuthenticated: true,
                 token: action.payload,
             });
 
         case ActionType.LOG_IN_FAILURE:
-            return Object.assign({}, state, {
+            return _.assign({}, state, {
                 isAuthenticated: false,
                 token: null,
             });
 
         case ActionType.LOG_OUT:
-            return Object.assign({}, state, {
+            return _.assign({}, state, {
                 isAuthenticated: false,
                 token: null,
             });

@@ -5,11 +5,16 @@ import cookie from 'react-cookie';
  * Import all constants as an object.
  */
 import * as ActionType from '../constants/actionType';
-
 import AppConstant from '../constants/app';
+
+/**
+ * Import all apiAction as an object.
+ */
+import * as apiAction from '../actions/apiAction';
 
 export function login({ email, password }) {
     return function (dispatch) {
+         dispatch(apiAction.apiRequest());
          axios.post(AppConstant.API_URL + 'auth/login', { email, password }).then((response) => {
                     dispatch({
                         type: ActionType.LOG_IN_SUCCESS,

@@ -71,23 +71,23 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _notFound = __webpack_require__(/*! ./components/error/not-found.component */ 306);
+	var _notFound = __webpack_require__(/*! ./components/error/not-found.component */ 308);
 	
 	var _notFound2 = _interopRequireDefault(_notFound);
 	
-	var _login = __webpack_require__(/*! ./components/login/login.component */ 307);
+	var _login = __webpack_require__(/*! ./components/login/login.component */ 309);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
-	var _dashboard = __webpack_require__(/*! ./components/dashboard/dashboard.component */ 308);
+	var _dashboard = __webpack_require__(/*! ./components/dashboard/dashboard.component */ 310);
 	
 	var _dashboard2 = _interopRequireDefault(_dashboard);
 	
-	var _product = __webpack_require__(/*! ./components/product/product.component */ 311);
+	var _product = __webpack_require__(/*! ./components/product/product.component */ 313);
 	
 	var _product2 = _interopRequireDefault(_product);
 	
-	var _store = __webpack_require__(/*! ./store/store */ 322);
+	var _store = __webpack_require__(/*! ./store/store */ 327);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -29853,7 +29853,7 @@
 	
 	var _sidebar2 = _interopRequireDefault(_sidebar);
 	
-	var _footer = __webpack_require__(/*! ./common/footer/footer.component */ 305);
+	var _footer = __webpack_require__(/*! ./common/footer/footer.component */ 307);
 	
 	var _footer2 = _interopRequireDefault(_footer);
 	
@@ -32271,8 +32271,10 @@
 	    value: true
 	});
 	var appConstant = {
-	    API_URL: 'http://localhost:8000/api/',
-	    ROOT_URL: 'http://localhost:8000/#/',
+	    // API_URL: 'http://localhost:8000/api/',
+	    // ROOT_URL: 'http://localhost:8000/#/',
+	    API_URL: 'http://dev.react.com/api/',
+	    ROOT_URL: 'http://dev.react.com/#/',
 	    AUTHORIZATION: 'Authorization',
 	    BEARER: 'Bearer',
 	    TOKEN: 'token',
@@ -32341,7 +32343,7 @@
   \******************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -32353,6 +32355,14 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _userPanel = __webpack_require__(/*! ./user-panel.component */ 305);
+	
+	var _userPanel2 = _interopRequireDefault(_userPanel);
+	
+	var _search = __webpack_require__(/*! ./search.component */ 306);
+	
+	var _search2 = _interopRequireDefault(_search);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32360,6 +32370,9 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// Import custom components
+	
 	
 	var Sidebar = function (_Component) {
 	  _inherits(Sidebar, _Component);
@@ -32371,700 +32384,660 @@
 	  }
 	
 	  _createClass(Sidebar, [{
-	    key: "render",
+	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
-	        "aside",
-	        { className: "main-sidebar" },
+	        'aside',
+	        { className: 'main-sidebar' },
 	        _react2.default.createElement(
-	          "section",
-	          { className: "sidebar" },
+	          'section',
+	          { className: 'sidebar' },
+	          _react2.default.createElement(_userPanel2.default, null),
+	          _react2.default.createElement(_search2.default, null),
 	          _react2.default.createElement(
-	            "div",
-	            { className: "user-panel" },
+	            'ul',
+	            { className: 'sidebar-menu' },
 	            _react2.default.createElement(
-	              "div",
-	              { className: "pull-left image" },
-	              _react2.default.createElement("img", { src: "js/theme/img/user2-160x160.jpg", className: "img-circle", alt: "User Image" })
+	              'li',
+	              { className: 'header' },
+	              'MAIN NAVIGATION'
 	            ),
 	            _react2.default.createElement(
-	              "div",
-	              { className: "pull-left info" },
+	              'li',
+	              { className: 'active' },
 	              _react2.default.createElement(
-	                "p",
-	                null,
-	                "Alexander Pierce"
-	              ),
-	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-circle text-success" }),
-	                " Online"
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "form",
-	            { action: "#", method: "get", className: "sidebar-form" },
-	            _react2.default.createElement(
-	              "div",
-	              { className: "input-group" },
-	              _react2.default.createElement("input", { type: "text", name: "q", className: "form-control", placeholder: "Search..." }),
-	              _react2.default.createElement(
-	                "span",
-	                { className: "input-group-btn" },
+	                'a',
+	                { href: '/#/dashboard' },
+	                _react2.default.createElement('i', { className: 'fa fa-dashboard' }),
+	                ' ',
 	                _react2.default.createElement(
-	                  "button",
-	                  { type: "submit", name: "search", id: "search-btn", className: "btn btn-flat" },
-	                  _react2.default.createElement("i", { className: "fa fa-search" })
-	                )
-	              )
-	            )
-	          ),
-	          _react2.default.createElement(
-	            "ul",
-	            { className: "sidebar-menu" },
-	            _react2.default.createElement(
-	              "li",
-	              { className: "header" },
-	              "MAIN NAVIGATION"
-	            ),
-	            _react2.default.createElement(
-	              "li",
-	              { className: "active" },
-	              _react2.default.createElement(
-	                "a",
-	                { href: "/#/dashboard" },
-	                _react2.default.createElement("i", { className: "fa fa-dashboard" }),
-	                " ",
-	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Dashboard"
+	                  'Dashboard'
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
+	              'li',
 	              null,
 	              _react2.default.createElement(
-	                "a",
-	                { href: "/#/products" },
-	                _react2.default.createElement("i", { className: "fa fa-dashboard" }),
-	                " ",
+	                'a',
+	                { href: '/#/products' },
+	                _react2.default.createElement('i', { className: 'fa fa-dashboard' }),
+	                ' ',
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Product"
+	                  'Product'
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
-	              { className: "treeview" },
+	              'li',
+	              { className: 'treeview' },
 	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-files-o" }),
+	                'a',
+	                { href: '#' },
+	                _react2.default.createElement('i', { className: 'fa fa-files-o' }),
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Layout Options"
+	                  'Layout Options'
 	                ),
 	                _react2.default.createElement(
-	                  "span",
-	                  { className: "pull-right-container" },
+	                  'span',
+	                  { className: 'pull-right-container' },
 	                  _react2.default.createElement(
-	                    "span",
-	                    { className: "label label-primary pull-right" },
-	                    "4"
+	                    'span',
+	                    { className: 'label label-primary pull-right' },
+	                    '4'
 	                  )
 	                )
 	              ),
 	              _react2.default.createElement(
-	                "ul",
-	                { className: "treeview-menu" },
+	                'ul',
+	                { className: 'treeview-menu' },
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Top Navigation"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Top Navigation'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Boxed"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Boxed'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Fixed"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Fixed'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Collapsed Sidebar"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Collapsed Sidebar'
 	                  )
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
+	              'li',
 	              null,
 	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-th" }),
-	                " ",
+	                'a',
+	                { href: '#' },
+	                _react2.default.createElement('i', { className: 'fa fa-th' }),
+	                ' ',
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Widgets"
+	                  'Widgets'
 	                ),
 	                _react2.default.createElement(
-	                  "span",
-	                  { className: "pull-right-container" },
+	                  'span',
+	                  { className: 'pull-right-container' },
 	                  _react2.default.createElement(
-	                    "small",
-	                    { className: "label pull-right bg-green" },
-	                    "new"
+	                    'small',
+	                    { className: 'label pull-right bg-green' },
+	                    'new'
 	                  )
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
-	              { className: "treeview" },
+	              'li',
+	              { className: 'treeview' },
 	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-pie-chart" }),
+	                'a',
+	                { href: '#' },
+	                _react2.default.createElement('i', { className: 'fa fa-pie-chart' }),
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Charts"
+	                  'Charts'
 	                ),
 	                _react2.default.createElement(
-	                  "span",
-	                  { className: "pull-right-container" },
-	                  _react2.default.createElement("i", { className: "fa fa-angle-left pull-right" })
+	                  'span',
+	                  { className: 'pull-right-container' },
+	                  _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
 	                )
 	              ),
 	              _react2.default.createElement(
-	                "ul",
-	                { className: "treeview-menu" },
+	                'ul',
+	                { className: 'treeview-menu' },
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " ChartJS"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' ChartJS'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Morris"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Morris'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Flot"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Flot'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Inline charts"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Inline charts'
 	                  )
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
-	              { className: "treeview" },
+	              'li',
+	              { className: 'treeview' },
 	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-laptop" }),
+	                'a',
+	                { href: '#' },
+	                _react2.default.createElement('i', { className: 'fa fa-laptop' }),
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "UI Elements"
+	                  'UI Elements'
 	                ),
 	                _react2.default.createElement(
-	                  "span",
-	                  { className: "pull-right-container" },
-	                  _react2.default.createElement("i", { className: "fa fa-angle-left pull-right" })
+	                  'span',
+	                  { className: 'pull-right-container' },
+	                  _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
 	                )
 	              ),
 	              _react2.default.createElement(
-	                "ul",
-	                { className: "treeview-menu" },
+	                'ul',
+	                { className: 'treeview-menu' },
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " General"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' General'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Icons"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Icons'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Buttons"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Buttons'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Sliders"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Sliders'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Timeline"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Timeline'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Modals"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Modals'
 	                  )
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
-	              { className: "treeview" },
+	              'li',
+	              { className: 'treeview' },
 	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-edit" }),
-	                " ",
+	                'a',
+	                { href: '#' },
+	                _react2.default.createElement('i', { className: 'fa fa-edit' }),
+	                ' ',
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Forms"
+	                  'Forms'
 	                ),
 	                _react2.default.createElement(
-	                  "span",
-	                  { className: "pull-right-container" },
-	                  _react2.default.createElement("i", { className: "fa fa-angle-left pull-right" })
+	                  'span',
+	                  { className: 'pull-right-container' },
+	                  _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
 	                )
 	              ),
 	              _react2.default.createElement(
-	                "ul",
-	                { className: "treeview-menu" },
+	                'ul',
+	                { className: 'treeview-menu' },
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " General Elements"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' General Elements'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Advanced Elements"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Advanced Elements'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Editors"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Editors'
 	                  )
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
-	              { className: "treeview" },
+	              'li',
+	              { className: 'treeview' },
 	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-table" }),
-	                " ",
+	                'a',
+	                { href: '#' },
+	                _react2.default.createElement('i', { className: 'fa fa-table' }),
+	                ' ',
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Tables"
+	                  'Tables'
 	                ),
 	                _react2.default.createElement(
-	                  "span",
-	                  { className: "pull-right-container" },
-	                  _react2.default.createElement("i", { className: "fa fa-angle-left pull-right" })
+	                  'span',
+	                  { className: 'pull-right-container' },
+	                  _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
 	                )
 	              ),
 	              _react2.default.createElement(
-	                "ul",
-	                { className: "treeview-menu" },
+	                'ul',
+	                { className: 'treeview-menu' },
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Simple tables"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Simple tables'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Data tables"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Data tables'
 	                  )
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
+	              'li',
 	              null,
 	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-calendar" }),
-	                " ",
+	                'a',
+	                { href: '#' },
+	                _react2.default.createElement('i', { className: 'fa fa-calendar' }),
+	                ' ',
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Calendar"
+	                  'Calendar'
 	                ),
 	                _react2.default.createElement(
-	                  "span",
-	                  { className: "pull-right-container" },
+	                  'span',
+	                  { className: 'pull-right-container' },
 	                  _react2.default.createElement(
-	                    "small",
-	                    { className: "label pull-right bg-red" },
-	                    "3"
+	                    'small',
+	                    { className: 'label pull-right bg-red' },
+	                    '3'
 	                  ),
 	                  _react2.default.createElement(
-	                    "small",
-	                    { className: "label pull-right bg-blue" },
-	                    "17"
+	                    'small',
+	                    { className: 'label pull-right bg-blue' },
+	                    '17'
 	                  )
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
+	              'li',
 	              null,
 	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-envelope" }),
-	                " ",
+	                'a',
+	                { href: '#' },
+	                _react2.default.createElement('i', { className: 'fa fa-envelope' }),
+	                ' ',
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Mailbox"
+	                  'Mailbox'
 	                ),
 	                _react2.default.createElement(
-	                  "span",
-	                  { className: "pull-right-container" },
+	                  'span',
+	                  { className: 'pull-right-container' },
 	                  _react2.default.createElement(
-	                    "small",
-	                    { className: "label pull-right bg-yellow" },
-	                    "12"
+	                    'small',
+	                    { className: 'label pull-right bg-yellow' },
+	                    '12'
 	                  ),
 	                  _react2.default.createElement(
-	                    "small",
-	                    { className: "label pull-right bg-green" },
-	                    "16"
+	                    'small',
+	                    { className: 'label pull-right bg-green' },
+	                    '16'
 	                  ),
 	                  _react2.default.createElement(
-	                    "small",
-	                    { className: "label pull-right bg-red" },
-	                    "5"
+	                    'small',
+	                    { className: 'label pull-right bg-red' },
+	                    '5'
 	                  )
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
-	              { className: "treeview" },
+	              'li',
+	              { className: 'treeview' },
 	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-folder" }),
-	                " ",
+	                'a',
+	                { href: '#' },
+	                _react2.default.createElement('i', { className: 'fa fa-folder' }),
+	                ' ',
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Examples"
+	                  'Examples'
 	                ),
 	                _react2.default.createElement(
-	                  "span",
-	                  { className: "pull-right-container" },
-	                  _react2.default.createElement("i", { className: "fa fa-angle-left pull-right" })
+	                  'span',
+	                  { className: 'pull-right-container' },
+	                  _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
 	                )
 	              ),
 	              _react2.default.createElement(
-	                "ul",
-	                { className: "treeview-menu" },
+	                'ul',
+	                { className: 'treeview-menu' },
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Invoice"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Invoice'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Profile"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Profile'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Login"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Login'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Register"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Register'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Lockscreen"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Lockscreen'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " 404 Error"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' 404 Error'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " 500 Error"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' 500 Error'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Blank Page"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Blank Page'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Pace Page"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Pace Page'
 	                  )
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
-	              { className: "treeview" },
+	              'li',
+	              { className: 'treeview' },
 	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-share" }),
-	                " ",
+	                'a',
+	                { href: '#' },
+	                _react2.default.createElement('i', { className: 'fa fa-share' }),
+	                ' ',
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Multilevel"
+	                  'Multilevel'
 	                ),
 	                _react2.default.createElement(
-	                  "span",
-	                  { className: "pull-right-container" },
-	                  _react2.default.createElement("i", { className: "fa fa-angle-left pull-right" })
+	                  'span',
+	                  { className: 'pull-right-container' },
+	                  _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
 	                )
 	              ),
 	              _react2.default.createElement(
-	                "ul",
-	                { className: "treeview-menu" },
+	                'ul',
+	                { className: 'treeview-menu' },
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Level One"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Level One'
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Level One",
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Level One',
 	                    _react2.default.createElement(
-	                      "span",
-	                      { className: "pull-right-container" },
-	                      _react2.default.createElement("i", { className: "fa fa-angle-left pull-right" })
+	                      'span',
+	                      { className: 'pull-right-container' },
+	                      _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
 	                    )
 	                  ),
 	                  _react2.default.createElement(
-	                    "ul",
-	                    { className: "treeview-menu" },
+	                    'ul',
+	                    { className: 'treeview-menu' },
 	                    _react2.default.createElement(
-	                      "li",
+	                      'li',
 	                      null,
 	                      _react2.default.createElement(
-	                        "a",
-	                        { href: "#" },
-	                        _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                        " Level Two"
+	                        'a',
+	                        { href: '#' },
+	                        _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                        ' Level Two'
 	                      )
 	                    ),
 	                    _react2.default.createElement(
-	                      "li",
+	                      'li',
 	                      null,
 	                      _react2.default.createElement(
-	                        "a",
-	                        { href: "#" },
-	                        _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                        " Level Two",
+	                        'a',
+	                        { href: '#' },
+	                        _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                        ' Level Two',
 	                        _react2.default.createElement(
-	                          "span",
-	                          { className: "pull-right-container" },
-	                          _react2.default.createElement("i", { className: "fa fa-angle-left pull-right" })
+	                          'span',
+	                          { className: 'pull-right-container' },
+	                          _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
 	                        )
 	                      ),
 	                      _react2.default.createElement(
-	                        "ul",
-	                        { className: "treeview-menu" },
+	                        'ul',
+	                        { className: 'treeview-menu' },
 	                        _react2.default.createElement(
-	                          "li",
+	                          'li',
 	                          null,
 	                          _react2.default.createElement(
-	                            "a",
-	                            { href: "#" },
-	                            _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                            " Level Three"
+	                            'a',
+	                            { href: '#' },
+	                            _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                            ' Level Three'
 	                          )
 	                        ),
 	                        _react2.default.createElement(
-	                          "li",
+	                          'li',
 	                          null,
 	                          _react2.default.createElement(
-	                            "a",
-	                            { href: "#" },
-	                            _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                            " Level Three"
+	                            'a',
+	                            { href: '#' },
+	                            _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                            ' Level Three'
 	                          )
 	                        )
 	                      )
@@ -33072,64 +33045,64 @@
 	                  )
 	                ),
 	                _react2.default.createElement(
-	                  "li",
+	                  'li',
 	                  null,
 	                  _react2.default.createElement(
-	                    "a",
-	                    { href: "#" },
-	                    _react2.default.createElement("i", { className: "fa fa-circle-o" }),
-	                    " Level One"
+	                    'a',
+	                    { href: '#' },
+	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                    ' Level One'
 	                  )
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
-	              { className: "header" },
-	              "LABELS"
+	              'li',
+	              { className: 'header' },
+	              'LABELS'
 	            ),
 	            _react2.default.createElement(
-	              "li",
+	              'li',
 	              null,
 	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-circle-o text-red" }),
-	                " ",
+	                'a',
+	                { href: '#' },
+	                _react2.default.createElement('i', { className: 'fa fa-circle-o text-red' }),
+	                ' ',
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Important"
+	                  'Important'
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
+	              'li',
 	              null,
 	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-circle-o text-yellow" }),
-	                " ",
+	                'a',
+	                { href: '#' },
+	                _react2.default.createElement('i', { className: 'fa fa-circle-o text-yellow' }),
+	                ' ',
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Warning"
+	                  'Warning'
 	                )
 	              )
 	            ),
 	            _react2.default.createElement(
-	              "li",
+	              'li',
 	              null,
 	              _react2.default.createElement(
-	                "a",
-	                { href: "#" },
-	                _react2.default.createElement("i", { className: "fa fa-circle-o text-aqua" }),
-	                " ",
+	                'a',
+	                { href: '#' },
+	                _react2.default.createElement('i', { className: 'fa fa-circle-o text-aqua' }),
+	                ' ',
 	                _react2.default.createElement(
-	                  "span",
+	                  'span',
 	                  null,
-	                  "Information"
+	                  'Information'
 	                )
 	              )
 	            )
@@ -33146,6 +33119,143 @@
 
 /***/ },
 /* 305 */
+/*!*********************************************************************!*\
+  !*** ./public/js/components/common/sidebar/user-panel.component.js ***!
+  \*********************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var UserPanel = function (_Component) {
+	    _inherits(UserPanel, _Component);
+	
+	    function UserPanel() {
+	        _classCallCheck(this, UserPanel);
+	
+	        return _possibleConstructorReturn(this, (UserPanel.__proto__ || Object.getPrototypeOf(UserPanel)).apply(this, arguments));
+	    }
+	
+	    _createClass(UserPanel, [{
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                "div",
+	                { className: "user-panel" },
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "pull-left image" },
+	                    _react2.default.createElement("img", { src: "js/theme/img/user2-160x160.jpg", className: "img-circle", alt: "User Image" })
+	                ),
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "pull-left info" },
+	                    _react2.default.createElement(
+	                        "p",
+	                        null,
+	                        "Alexander Pierce"
+	                    ),
+	                    _react2.default.createElement(
+	                        "a",
+	                        { href: "#" },
+	                        _react2.default.createElement("i", { className: "fa fa-circle text-success" }),
+	                        " Online"
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return UserPanel;
+	}(_react.Component);
+	
+	exports.default = UserPanel;
+
+/***/ },
+/* 306 */
+/*!*****************************************************************!*\
+  !*** ./public/js/components/common/sidebar/search.component.js ***!
+  \*****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Search = function (_Component) {
+	    _inherits(Search, _Component);
+	
+	    function Search() {
+	        _classCallCheck(this, Search);
+	
+	        return _possibleConstructorReturn(this, (Search.__proto__ || Object.getPrototypeOf(Search)).apply(this, arguments));
+	    }
+	
+	    _createClass(Search, [{
+	        key: "render",
+	        value: function render() {
+	            return _react2.default.createElement(
+	                "form",
+	                { action: "#", method: "get", className: "sidebar-form" },
+	                _react2.default.createElement(
+	                    "div",
+	                    { className: "input-group" },
+	                    _react2.default.createElement("input", { type: "text", name: "q", className: "form-control", placeholder: "Search..." }),
+	                    _react2.default.createElement(
+	                        "span",
+	                        { className: "input-group-btn" },
+	                        _react2.default.createElement(
+	                            "button",
+	                            { type: "submit", name: "search", id: "search-btn", className: "btn btn-flat" },
+	                            _react2.default.createElement("i", {
+	                                className: "fa fa-search" })
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return Search;
+	}(_react.Component);
+	
+	exports.default = Search;
+
+/***/ },
+/* 307 */
 /*!****************************************************************!*\
   !*** ./public/js/components/common/footer/footer.component.js ***!
   \****************************************************************/
@@ -33218,7 +33328,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 306 */
+/* 308 */
 /*!***********************************************************!*\
   !*** ./public/js/components/error/not-found.component.js ***!
   \***********************************************************/
@@ -33279,7 +33389,7 @@
 	exports.default = NotFoundPage;
 
 /***/ },
-/* 307 */
+/* 309 */
 /*!*******************************************************!*\
   !*** ./public/js/components/login/login.component.js ***!
   \*******************************************************/
@@ -33330,6 +33440,11 @@
 	    }
 	
 	    _createClass(Login, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            window.$('body').addClass('hold-transition login-page');
+	        }
+	    }, {
 	        key: 'handleSubmit',
 	        value: function handleSubmit(e) {
 	            e.preventDefault();
@@ -33439,7 +33554,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Login);
 
 /***/ },
-/* 308 */
+/* 310 */
 /*!***************************************************************!*\
   !*** ./public/js/components/dashboard/dashboard.component.js ***!
   \***************************************************************/
@@ -33457,11 +33572,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _title = __webpack_require__(/*! ./title.component */ 309);
+	var _title = __webpack_require__(/*! ./title.component */ 311);
 	
 	var _title2 = _interopRequireDefault(_title);
 	
-	var _boxRowOne = __webpack_require__(/*! ./box-row-one.component */ 310);
+	var _boxRowOne = __webpack_require__(/*! ./box-row-one.component */ 312);
 	
 	var _boxRowOne2 = _interopRequireDefault(_boxRowOne);
 	
@@ -33507,7 +33622,7 @@
 	exports.default = Dashboard;
 
 /***/ },
-/* 309 */
+/* 311 */
 /*!***********************************************************!*\
   !*** ./public/js/components/dashboard/title.component.js ***!
   \***********************************************************/
@@ -33582,7 +33697,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 310 */
+/* 312 */
 /*!*****************************************************************!*\
   !*** ./public/js/components/dashboard/box-row-one.component.js ***!
   \*****************************************************************/
@@ -33747,7 +33862,7 @@
 	exports.default = BoxRowOne;
 
 /***/ },
-/* 311 */
+/* 313 */
 /*!***********************************************************!*\
   !*** ./public/js/components/product/product.component.js ***!
   \***********************************************************/
@@ -33769,7 +33884,7 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _lodash = __webpack_require__(/*! lodash */ 312);
+	var _lodash = __webpack_require__(/*! lodash */ 314);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -33777,11 +33892,11 @@
 	
 	var ActionType = _interopRequireWildcard(_actionType);
 	
-	var _message = __webpack_require__(/*! ../../constants/message */ 313);
+	var _message = __webpack_require__(/*! ../../constants/message */ 315);
 	
 	var _message2 = _interopRequireDefault(_message);
 	
-	var _common = __webpack_require__(/*! ../../constants/common */ 314);
+	var _common = __webpack_require__(/*! ../../constants/common */ 316);
 	
 	var _common2 = _interopRequireDefault(_common);
 	
@@ -33789,23 +33904,23 @@
 	
 	var apiAction = _interopRequireWildcard(_apiAction);
 	
-	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 315);
+	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 317);
 	
 	var crudAction = _interopRequireWildcard(_crudAction);
 	
-	var _apiService = __webpack_require__(/*! ../../services/apiService */ 316);
+	var _apiService = __webpack_require__(/*! ../../services/apiService */ 318);
 	
 	var _apiService2 = _interopRequireDefault(_apiService);
 	
-	var _title = __webpack_require__(/*! ./title.component */ 319);
+	var _title = __webpack_require__(/*! ./title.component */ 321);
 	
 	var _title2 = _interopRequireDefault(_title);
 	
-	var _productListBox = __webpack_require__(/*! ./product-list-box.component */ 320);
+	var _productList = __webpack_require__(/*! ./product-list.component */ 322);
 	
-	var _productListBox2 = _interopRequireDefault(_productListBox);
+	var _productList2 = _interopRequireDefault(_productList);
 	
-	var _productConfirmBox = __webpack_require__(/*! ./product-confirm-box.component */ 321);
+	var _productConfirmBox = __webpack_require__(/*! ./product-confirm-box.component */ 326);
 	
 	var _productConfirmBox2 = _interopRequireDefault(_productConfirmBox);
 	
@@ -33870,7 +33985,7 @@
 	                _react2.default.createElement(
 	                    'section',
 	                    { className: 'content' },
-	                    _react2.default.createElement(_productListBox2.default, null),
+	                    _react2.default.createElement(_productList2.default, { data: this.props.products }),
 	                    _react2.default.createElement(_productConfirmBox2.default, null)
 	                )
 	            );
@@ -33915,7 +34030,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Product);
 
 /***/ },
-/* 312 */
+/* 314 */
 /*!****************************!*\
   !*** ./~/lodash/lodash.js ***!
   \****************************/
@@ -51009,7 +51124,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(/*! ./../webpack/buildin/module.js */ 203)(module)))
 
 /***/ },
-/* 313 */
+/* 315 */
 /*!****************************************!*\
   !*** ./public/js/constants/message.js ***!
   \****************************************/
@@ -51033,7 +51148,7 @@
 	exports.default = messages;
 
 /***/ },
-/* 314 */
+/* 316 */
 /*!***************************************!*\
   !*** ./public/js/constants/common.js ***!
   \***************************************/
@@ -51055,7 +51170,7 @@
 	exports.default = commons;
 
 /***/ },
-/* 315 */
+/* 317 */
 /*!*****************************************!*\
   !*** ./public/js/actions/crudAction.js ***!
   \*****************************************/
@@ -51077,7 +51192,7 @@
 	
 	var apiAction = _interopRequireWildcard(_apiAction);
 	
-	var _apiService = __webpack_require__(/*! ../services/apiService */ 316);
+	var _apiService = __webpack_require__(/*! ../services/apiService */ 318);
 	
 	var apiService = _interopRequireWildcard(_apiService);
 	
@@ -51153,7 +51268,7 @@
 	}
 
 /***/ },
-/* 316 */
+/* 318 */
 /*!******************************************!*\
   !*** ./public/js/services/apiService.js ***!
   \******************************************/
@@ -51169,11 +51284,11 @@
 	exports.update = update;
 	exports.destroy = destroy;
 	
-	var _apiUtil = __webpack_require__(/*! ../utils/apiUtil */ 317);
+	var _apiUtil = __webpack_require__(/*! ../utils/apiUtil */ 319);
 	
 	var ApiUtil = _interopRequireWildcard(_apiUtil);
 	
-	var _converter = __webpack_require__(/*! ../utils/converter */ 318);
+	var _converter = __webpack_require__(/*! ../utils/converter */ 320);
 	
 	var Converter = _interopRequireWildcard(_converter);
 	
@@ -51201,7 +51316,7 @@
 	}
 
 /***/ },
-/* 317 */
+/* 319 */
 /*!************************************!*\
   !*** ./public/js/utils/apiUtil.js ***!
   \************************************/
@@ -51252,7 +51367,7 @@
 	}
 
 /***/ },
-/* 318 */
+/* 320 */
 /*!**************************************!*\
   !*** ./public/js/utils/converter.js ***!
   \**************************************/
@@ -51292,7 +51407,7 @@
 	}
 
 /***/ },
-/* 319 */
+/* 321 */
 /*!*********************************************************!*\
   !*** ./public/js/components/product/title.component.js ***!
   \*********************************************************/
@@ -51367,13 +51482,291 @@
 	exports.default = Title;
 
 /***/ },
-/* 320 */
-/*!********************************************************************!*\
-  !*** ./public/js/components/product/product-list-box.component.js ***!
-  \********************************************************************/
+/* 322 */
+/*!****************************************************************!*\
+  !*** ./public/js/components/product/product-list.component.js ***!
+  \****************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _table = __webpack_require__(/*! ../common/table/table.component */ 323);
+	
+	var _table2 = _interopRequireDefault(_table);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// Import custom components
+	
+	
+	var ProductList = function (_Component) {
+	    _inherits(ProductList, _Component);
+	
+	    function ProductList() {
+	        _classCallCheck(this, ProductList);
+	
+	        return _possibleConstructorReturn(this, (ProductList.__proto__ || Object.getPrototypeOf(ProductList)).apply(this, arguments));
+	    }
+	
+	    _createClass(ProductList, [{
+	        key: 'render',
+	
+	
+	        // componentWillMount() {
+	        //     let jqueryTable = $('#product');
+	        //     jqueryTable.dataTable({
+	        //         "oLanguage": {"sSearch": ""},
+	        //         "aaSorting": [[1, "desc"]],
+	        //         "aoColumnDefs": [
+	        //             {'bSortable': false, 'aTargets': [0, 5]}
+	        //         ],
+	        //         "bDestroy": true
+	        //     });
+	        // }
+	        //
+	        // componentDidMount() {
+	        //     let jqueryTable = $('#product');
+	        //     let self = this;
+	        //     jqueryTable.dataTable({
+	        //         "oLanguage": {"sSearch": ""},
+	        //         "aaSorting": [[1, "desc"]],
+	        //         "aoColumnDefs": [
+	        //             {'bSortable': false, 'aTargets': [0, 5]}
+	        //         ],
+	        //         "fnDrawCallback": function () {
+	        //             self.forceUpdate();
+	        //         },
+	        //         "bDestroy": true
+	        //     });
+	        //
+	        // }
+	        //
+	        // componentWillUnmount() {
+	        //     let jqueryTable = $('#product');
+	        //     jqueryTable.dataTable({
+	        //         "bDestroy": true
+	        //     });
+	        // }
+	
+	        // componentDidUpdate() {
+	        //     let jqueryTable = $('#product');
+	        //     jqueryTable.dataTable({
+	        //         "bDestroy": true
+	        //     });
+	        // }
+	
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'row' },
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'col-xs-12' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'box box-info' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'box-header' },
+	                            _react2.default.createElement(
+	                                'h3',
+	                                { className: 'box-title' },
+	                                'Product List:'
+	                            ),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'pull-right box-tools' },
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { href: '#', className: 'btn btn-primary', role: 'button', 'data-toggle': 'modal',
+	                                        'data-target': '#product-add-modal', title: 'Add Product' },
+	                                    _react2.default.createElement('i', {
+	                                        className: 'glyphicon glyphicon-plus' }),
+	                                    '\xA0Add Product'
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'box-body' },
+	                            _react2.default.createElement(_table2.default, {
+	                                tableId: tableDefaults.tableId,
+	                                tableClassName: tableDefaults.tableClassName,
+	                                columns: columns,
+	                                data: this.props.data
+	                            })
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return ProductList;
+	}(_react.Component);
+	
+	var columns = [{
+	    title: 'ID', accessor: 'id'
+	}, {
+	    title: 'Code', accessor: 'code'
+	}, {
+	    title: 'Name', accessor: 'name'
+	}, {
+	    title: 'Description', accessor: 'description'
+	}, {
+	    title: 'Status', accessor: 'status'
+	}, {
+	    title: 'Actions', accessor: ''
+	}];
+	
+	var tableDefaults = {
+	    tableId: 'product',
+	    tableClassName: 'table table-bordered table-striped'
+	};
+	
+	exports.default = ProductList;
+
+/***/ },
+/* 323 */
+/*!**************************************************************!*\
+  !*** ./public/js/components/common/table/table.component.js ***!
+  \**************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _header = __webpack_require__(/*! ./header.component */ 324);
+	
+	var _header2 = _interopRequireDefault(_header);
+	
+	var _body = __webpack_require__(/*! ./body.component */ 325);
+	
+	var _body2 = _interopRequireDefault(_body);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// Import custom components
+	
+	
+	var Table = function (_Component) {
+	    _inherits(Table, _Component);
+	
+	    function Table() {
+	        _classCallCheck(this, Table);
+	
+	        return _possibleConstructorReturn(this, (Table.__proto__ || Object.getPrototypeOf(Table)).apply(this, arguments));
+	    }
+	
+	    _createClass(Table, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var jqueryTable = $('#' + this.props.tableId);
+	            var self = this;
+	            jqueryTable.dataTable({
+	                "oLanguage": { "sSearch": "" },
+	                "aaSorting": [[1, "desc"]],
+	                "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [0, 5] }],
+	                "fnDrawCallback": function fnDrawCallback() {
+	                    self.forceUpdate();
+	                },
+	                "bDestroy": true
+	            });
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            var jqueryTable = $('#' + this.props.tableId);
+	            jqueryTable.dataTable({
+	                "oLanguage": { "sSearch": "" },
+	                "aaSorting": [[1, "desc"]],
+	                "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [0, 5] }],
+	                "bDestroy": true
+	            });
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            return false;
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props,
+	                columns = _props.columns,
+	                data = _props.data,
+	                tableId = _props.tableId,
+	                tableClassName = _props.tableClassName;
+	
+	
+	            return _react2.default.createElement(
+	                'table',
+	                { id: tableId, className: tableClassName },
+	                _react2.default.createElement(_header2.default, { columns: columns }),
+	                _react2.default.createElement(_body2.default, { columns: columns, data: data })
+	            );
+	        }
+	    }], [{
+	        key: 'defaultProps',
+	        value: function defaultProps() {
+	            return {
+	                data: [],
+	                tableClassName: 'table table-bordered table-striped',
+	                tableId: 'product'
+	            };
+	        }
+	    }]);
+	
+	    return Table;
+	}(_react.Component);
+	
+	Table.propTypes = {
+	    data: _react.PropTypes.array,
+	    columns: _react.PropTypes.array,
+	    tableClassName: _react.PropTypes.string,
+	    tableId: _react.PropTypes.string
+	};
+	exports.default = Table;
+
+/***/ },
+/* 324 */
+/*!***************************************************************!*\
+  !*** ./public/js/components/common/table/header.component.js ***!
+  \***************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -51393,564 +51786,146 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var ProductListBox = function (_Component) {
-	    _inherits(ProductListBox, _Component);
+	var Header = function (_Component) {
+	    _inherits(Header, _Component);
 	
-	    function ProductListBox() {
-	        _classCallCheck(this, ProductListBox);
+	    function Header() {
+	        _classCallCheck(this, Header);
 	
-	        return _possibleConstructorReturn(this, (ProductListBox.__proto__ || Object.getPrototypeOf(ProductListBox)).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (Header.__proto__ || Object.getPrototypeOf(Header)).apply(this, arguments));
 	    }
 	
-	    _createClass(ProductListBox, [{
-	        key: "render",
+	    _createClass(Header, [{
+	        key: 'render',
 	        value: function render() {
+	
+	            var columns = this.props.columns; // [{title, accessor}]
 	            return _react2.default.createElement(
-	                "div",
-	                { className: "row" },
+	                'thead',
+	                null,
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "col-xs-12" },
-	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "box box-info" },
-	                        _react2.default.createElement(
-	                            "div",
-	                            { className: "box-header" },
-	                            _react2.default.createElement(
-	                                "h3",
-	                                { className: "box-title" },
-	                                "Product List:"
-	                            ),
-	                            _react2.default.createElement(
-	                                "div",
-	                                { className: "pull-right box-tools" },
-	                                _react2.default.createElement(
-	                                    "a",
-	                                    { href: "#", className: "btn btn-primary", role: "button", "data-toggle": "modal", "data-target": "#product-add-modal", title: "Add Product" },
-	                                    _react2.default.createElement("i", { className: "glyphicon glyphicon-plus" }),
-	                                    "\xA0Add Product"
-	                                )
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            "div",
-	                            { className: "box-body" },
-	                            _react2.default.createElement(
-	                                "table",
-	                                { id: "product", className: "table table-bordered table-striped" },
-	                                _react2.default.createElement(
-	                                    "thead",
-	                                    null,
-	                                    _react2.default.createElement(
-	                                        "tr",
-	                                        null,
-	                                        _react2.default.createElement(
-	                                            "th",
-	                                            null,
-	                                            "SN"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "th",
-	                                            null,
-	                                            "Code"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "th",
-	                                            null,
-	                                            "Name"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "th",
-	                                            null,
-	                                            "Description"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "th",
-	                                            null,
-	                                            "Status"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "th",
-	                                            { style: { textAlign: "center" } },
-	                                            "Actions"
-	                                        )
-	                                    )
-	                                ),
-	                                _react2.default.createElement(
-	                                    "tbody",
-	                                    null,
-	                                    _react2.default.createElement(
-	                                        "tr",
-	                                        null,
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Trident"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Internet Explorer 4.0"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Win 95+"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            " 4"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "X"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            { style: { textAlign: "center" } },
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "View", className: "view-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-eye-open" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Edit", className: "edit-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-pencil" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Remove", className: "delete-btn", "data-toggle": "modal", "data-target": "#product-confirm-modal" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-trash" })
-	                                            )
-	                                        )
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        "tr",
-	                                        null,
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Trident"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Internet Explorer 5.0"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Win 95+"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "5"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "C"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            { style: { textAlign: "center" } },
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "View", className: "view-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-eye-open" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Edit", className: "edit-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-pencil" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Remove", className: "delete-btn", "data-toggle": "modal", "data-target": "#product-confirm-modal" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-trash" })
-	                                            )
-	                                        )
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        "tr",
-	                                        null,
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Trident"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Internet Explorer 6"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Win 98+"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "6"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "A"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            { style: { textAlign: "center" } },
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "View", className: "view-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-eye-open" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Edit", className: "edit-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-pencil" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Remove", className: "delete-btn", "data-toggle": "modal", "data-target": "#product-confirm-modal" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-trash" })
-	                                            )
-	                                        )
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        "tr",
-	                                        null,
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Trident"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Internet Explorer 7"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Win XP SP2+"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "7"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "A"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            { style: { textAlign: "center" } },
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "View", className: "view-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-eye-open" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Edit", className: "edit-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-pencil" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Remove", className: "delete-btn", "data-toggle": "modal", "data-target": "#product-confirm-modal" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-trash" })
-	                                            )
-	                                        )
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        "tr",
-	                                        null,
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Trident"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "AOL browser (AOL desktop)"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Win XP"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "6"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "A"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            { style: { textAlign: "center" } },
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "View", className: "view-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-eye-open" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Edit", className: "edit-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-pencil" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Remove", className: "delete-btn", "data-toggle": "modal", "data-target": "#product-confirm-modal" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-trash" })
-	                                            )
-	                                        )
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        "tr",
-	                                        null,
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Presto"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Opera 8.5"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Win 95+ / OSX.2+"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "-"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "A"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            { style: { textAlign: "center" } },
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "View", className: "view-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-eye-open" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Edit", className: "edit-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-pencil" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Remove", className: "delete-btn", "data-toggle": "modal", "data-target": "#product-confirm-modal" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-trash" })
-	                                            )
-	                                        )
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        "tr",
-	                                        null,
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Presto"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Opera 9.0"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Win 95+ / OSX.3+"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "-"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "A"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            { style: { textAlign: "center" } },
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "View", className: "view-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-eye-open" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Edit", className: "edit-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-pencil" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Remove", className: "delete-btn", "data-toggle": "modal", "data-target": "#product-confirm-modal" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-trash" })
-	                                            )
-	                                        )
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        "tr",
-	                                        null,
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Presto"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Nintendo DS browser"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Nintendo DS"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "8.5"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "C/A",
-	                                            _react2.default.createElement(
-	                                                "sup",
-	                                                null,
-	                                                "1"
-	                                            )
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            { style: { textAlign: "center" } },
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "View", className: "view-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-eye-open" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Edit", className: "edit-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-pencil" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Remove", className: "delete-btn", "data-toggle": "modal", "data-target": "#product-confirm-modal" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-trash" })
-	                                            )
-	                                        )
-	                                    ),
-	                                    _react2.default.createElement(
-	                                        "tr",
-	                                        null,
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "Other browsers"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "All others"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "-"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "-"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            null,
-	                                            "U"
-	                                        ),
-	                                        _react2.default.createElement(
-	                                            "td",
-	                                            { style: { textAlign: "center" } },
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "View", className: "view-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-eye-open" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Edit", className: "edit-btn" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-pencil" })
-	                                            ),
-	                                            "\xA0",
-	                                            _react2.default.createElement(
-	                                                "a",
-	                                                { href: "javascript:void(0)", title: "Remove", className: "delete-btn", "data-toggle": "modal", "data-target": "#product-confirm-modal" },
-	                                                _react2.default.createElement("i", { className: "glyphicon glyphicon-trash" })
-	                                            )
-	                                        )
-	                                    )
-	                                )
-	                            )
-	                        )
-	                    )
+	                    'tr',
+	                    null,
+	                    columns.map(function (colData, index) {
+	                        return _react2.default.createElement(
+	                            'th',
+	                            { key: index },
+	                            ' ',
+	                            colData.title,
+	                            ' '
+	                        );
+	                    })
 	                )
 	            );
 	        }
 	    }]);
 	
-	    return ProductListBox;
+	    return Header;
 	}(_react.Component);
 	
-	exports.default = ProductListBox;
+	exports.default = Header;
 
 /***/ },
-/* 321 */
+/* 325 */
+/*!*************************************************************!*\
+  !*** ./public/js/components/common/table/body.component.js ***!
+  \*************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Body = function (_Component) {
+	    _inherits(Body, _Component);
+	
+	    function Body() {
+	        _classCallCheck(this, Body);
+	
+	        return _possibleConstructorReturn(this, (Body.__proto__ || Object.getPrototypeOf(Body)).apply(this, arguments));
+	    }
+	
+	    _createClass(Body, [{
+	        key: 'render',
+	        value: function render() {
+	            var columns = this.props.columns,
+	                // [{title, accessor}]
+	            data = this.props.data;
+	
+	            return _react2.default.createElement(
+	                'tbody',
+	                null,
+	                data.map(function (item) {
+	                    // handle the column data within each row
+	                    var cells = columns.map(function (colData) {
+	                        // colData.accessor might be "firstName"
+	                        if (colData.accessor == '') {
+	                            return _react2.default.createElement(
+	                                'td',
+	                                { style: { textAlign: "center" } },
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { href: 'javascript:void(0)', title: 'View', className: 'view-btn' },
+	                                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-eye-open' })
+	                                ),
+	                                '\xA0',
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { href: 'javascript:void(0)', title: 'Edit', className: 'edit-btn' },
+	                                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-pencil' })
+	                                ),
+	                                '\xA0',
+	                                _react2.default.createElement(
+	                                    'a',
+	                                    { href: 'javascript:void(0)', title: 'Remove', className: 'delete-btn', 'data-toggle': 'modal', 'data-target': '#product-confirm-modal' },
+	                                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-trash' })
+	                                )
+	                            );
+	                        } else {
+	                            return _react2.default.createElement(
+	                                'td',
+	                                null,
+	                                ' ',
+	                                item[colData.accessor],
+	                                ' '
+	                            );
+	                        }
+	                    });
+	                    return _react2.default.createElement(
+	                        'tr',
+	                        { key: item.id },
+	                        ' ',
+	                        cells,
+	                        ' '
+	                    );
+	                })
+	            );
+	        }
+	    }]);
+	
+	    return Body;
+	}(_react.Component);
+	
+	exports.default = Body;
+
+/***/ },
+/* 326 */
 /*!***********************************************************************!*\
   !*** ./public/js/components/product/product-confirm-box.component.js ***!
   \***********************************************************************/
@@ -52049,7 +52024,7 @@
 	exports.default = ProductConfirmBox;
 
 /***/ },
-/* 322 */
+/* 327 */
 /*!**********************************!*\
   !*** ./public/js/store/store.js ***!
   \**********************************/
@@ -52063,15 +52038,15 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 189);
 	
-	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 323);
+	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 328);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reduxLogger = __webpack_require__(/*! redux-logger */ 324);
+	var _reduxLogger = __webpack_require__(/*! redux-logger */ 329);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
-	var _rootReducer = __webpack_require__(/*! ../reducers/rootReducer */ 330);
+	var _rootReducer = __webpack_require__(/*! ../reducers/rootReducer */ 335);
 	
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 	
@@ -52094,7 +52069,7 @@
 	exports.default = store;
 
 /***/ },
-/* 323 */
+/* 328 */
 /*!************************************!*\
   !*** ./~/redux-thunk/lib/index.js ***!
   \************************************/
@@ -52125,7 +52100,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 324 */
+/* 329 */
 /*!*************************************!*\
   !*** ./~/redux-logger/lib/index.js ***!
   \*************************************/
@@ -52139,11 +52114,11 @@
 	  value: true
 	});
 	
-	var _core = __webpack_require__(/*! ./core */ 325);
+	var _core = __webpack_require__(/*! ./core */ 330);
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 326);
+	var _helpers = __webpack_require__(/*! ./helpers */ 331);
 	
-	var _defaults = __webpack_require__(/*! ./defaults */ 329);
+	var _defaults = __webpack_require__(/*! ./defaults */ 334);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -52246,7 +52221,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 325 */
+/* 330 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/core.js ***!
   \************************************/
@@ -52259,9 +52234,9 @@
 	});
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 326);
+	var _helpers = __webpack_require__(/*! ./helpers */ 331);
 	
-	var _diff = __webpack_require__(/*! ./diff */ 327);
+	var _diff = __webpack_require__(/*! ./diff */ 332);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -52390,7 +52365,7 @@
 	}
 
 /***/ },
-/* 326 */
+/* 331 */
 /*!***************************************!*\
   !*** ./~/redux-logger/lib/helpers.js ***!
   \***************************************/
@@ -52417,7 +52392,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 327 */
+/* 332 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/diff.js ***!
   \************************************/
@@ -52430,7 +52405,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(/*! deep-diff */ 328);
+	var _deepDiff = __webpack_require__(/*! deep-diff */ 333);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -52516,7 +52491,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 328 */
+/* 333 */
 /*!******************************!*\
   !*** ./~/deep-diff/index.js ***!
   \******************************/
@@ -52948,7 +52923,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 329 */
+/* 334 */
 /*!****************************************!*\
   !*** ./~/redux-logger/lib/defaults.js ***!
   \****************************************/
@@ -53002,7 +52977,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 330 */
+/* 335 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/rootReducer.js ***!
   \*******************************************/
@@ -53016,15 +52991,15 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 189);
 	
-	var _authReducer = __webpack_require__(/*! ./authReducer */ 331);
+	var _authReducer = __webpack_require__(/*! ./authReducer */ 336);
 	
 	var _authReducer2 = _interopRequireDefault(_authReducer);
 	
-	var _crudReducer = __webpack_require__(/*! ./crudReducer */ 332);
+	var _crudReducer = __webpack_require__(/*! ./crudReducer */ 337);
 	
 	var _crudReducer2 = _interopRequireDefault(_crudReducer);
 	
-	var _apiReducer = __webpack_require__(/*! ./apiReducer */ 333);
+	var _apiReducer = __webpack_require__(/*! ./apiReducer */ 338);
 	
 	var _apiReducer2 = _interopRequireDefault(_apiReducer);
 	
@@ -53040,7 +53015,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 331 */
+/* 336 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/authReducer.js ***!
   \*******************************************/
@@ -53079,7 +53054,7 @@
 	    }
 	};
 	
-	var _lodash = __webpack_require__(/*! lodash */ 312);
+	var _lodash = __webpack_require__(/*! lodash */ 314);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -53107,7 +53082,7 @@
 	 */
 
 /***/ },
-/* 332 */
+/* 337 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/crudReducer.js ***!
   \*******************************************/
@@ -53151,7 +53126,7 @@
 	    }
 	};
 	
-	var _lodash = __webpack_require__(/*! lodash */ 312);
+	var _lodash = __webpack_require__(/*! lodash */ 314);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -53177,7 +53152,7 @@
 	// Import constants
 
 /***/ },
-/* 333 */
+/* 338 */
 /*!******************************************!*\
   !*** ./public/js/reducers/apiReducer.js ***!
   \******************************************/
@@ -53219,7 +53194,7 @@
 	    }
 	};
 	
-	var _lodash = __webpack_require__(/*! lodash */ 312);
+	var _lodash = __webpack_require__(/*! lodash */ 314);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	

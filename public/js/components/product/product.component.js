@@ -23,7 +23,7 @@ import apiService from '../../services/apiService';
 
 // Import custom components
 import Title from './title.component';
-import ProductListBox from './product-list-box.component';
+import ProductList from './product-list.component';
 import ProductConfirmBox from './product-confirm-box.component';
 
 class Product extends Component {
@@ -52,7 +52,7 @@ class Product extends Component {
 
                 <section className="content">
 
-                    <ProductListBox />
+                    <ProductList data={this.props.products}/>
 
                     <ProductConfirmBox />
 

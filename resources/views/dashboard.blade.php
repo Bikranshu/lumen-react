@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="js/theme/plugins/datatables/dataTables.bootstrap.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="js/theme/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -42,15 +44,15 @@
 <!--Container for React rendering-->
 <div id="root-container"></div>
 
-<!--Bundled file-->
-<script src="js/build/bundle.js"></script>
-
 <!-- jQuery 2.2.3 -->
 <script src="js/theme/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
 <script src="js/theme/bootstrap/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="js/theme/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="js/theme/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <!-- Sparkline -->
 <script src="js/theme/plugins/sparkline/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
@@ -71,5 +73,8 @@
 <script src="js/theme/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="js/theme/app.min.js"></script>
+
+<!--Bundled file-->
+<script src="js/build/bundle.js"></script>
 </body>
 </html>

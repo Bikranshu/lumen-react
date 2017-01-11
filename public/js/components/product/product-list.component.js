@@ -3,7 +3,8 @@ import React, {Component} from 'react';
 // Import custom components
 import Table from '../common/table/table.component';
 
-class ProductListBox extends Component {
+class ProductList extends Component {
+
     render() {
         return (
             <div className="row">
@@ -19,7 +20,12 @@ class ProductListBox extends Component {
                         </div>
                         <div className="box-body">
 
-                            <Table data={this.props.data} default={tableDefaults}/>
+                            <Table
+                                tableId={tableDefaults.tableId}
+                                tableClassName={tableDefaults.tableClassName}
+                                columns={columns}
+                                data={this.props.data}
+                            />
 
                         </div>
                     </div>
@@ -30,9 +36,24 @@ class ProductListBox extends Component {
 }
 
 
+const columns = [{
+    title: 'ID', accessor: 'id'
+}, {
+    title: 'Code', accessor: 'code'
+}, {
+    title: 'Name', accessor: 'name'
+}, {
+    title: 'Description', accessor: 'description'
+}, {
+    title: 'Status', accessor: 'status'
+}, {
+    title: 'Actions', accessor: '',
+}];
+
 const tableDefaults = {
     tableId: 'product',
     tableClassName: 'table table-bordered table-striped',
 };
 
-export default ProductListBox
+
+export default ProductList

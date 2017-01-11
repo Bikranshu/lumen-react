@@ -9,6 +9,10 @@ import * as authService from '../../services/authService';
 
 class Login extends Component {
 
+    componentWillMount() {
+        window.$('body').addClass('hold-transition login-page');
+    }
+
     handleSubmit(e) {
         e.preventDefault();
         var email = this.refs.email.value;

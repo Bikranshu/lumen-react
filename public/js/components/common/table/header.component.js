@@ -10,7 +10,7 @@ class Header extends Component {
                 <tr>
                     {
                         columns.map((colData, index) => (
-                            <th key={index}> {colData.title} </th>
+                            <th key={index}> {colData.displayName} </th>
                         ))
                     }
                 </tr>

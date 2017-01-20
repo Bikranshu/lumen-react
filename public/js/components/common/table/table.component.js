@@ -6,63 +6,45 @@ import Body from './body.component';
 
 class Table extends Component {
 
+    constructor(props) {
+        super(props);
+    }
+
     componentDidMount() {
-        let jqueryTable = $('#' + this.props.tableId);
-        let self = this;
-        jqueryTable.dataTable({
+        // Get the DOM node and store the jQuery element reference
+        this.$node = $(this.refs.datatable);
+        this.$node.dataTable({
             "oLanguage": {"sSearch": ""},
             "aaSorting": [[1, "desc"]],
             "aoColumnDefs": [
                 {'bSortable': false, 'aTargets': [0, 5]}
-            ],
-            "fnDrawCallback": function () {
-                self.forceUpdate();
-            },
-            "bDestroy": true
-        });
-
-    }
-
-    componentDidUpdate() {
-        let jqueryTable = $('#' + this.props.tableId);
-        jqueryTable.dataTable({
-            "oLanguage": {"sSearch": ""},
-            "aaSorting": [[1, "desc"]],
-            "aoColumnDefs": [
-                {'bSortable': false, 'aTargets': [0, 5]}
-            ],
-            "bDestroy": true
+            ]
         });
     }
 
-    componentWillUnmount() {
+    shouldComponentUpdate() {
         return false;
     }
 
+    componentWillUnmount() {
 
-    static propTypes = {
-        data: PropTypes.array,
-        columns: PropTypes.array,
-        tableClassName: PropTypes.string,
-        tableId: PropTypes.string,
-    };
-
-    static defaultProps() {
-        return {
-            data: [],
-            tableClassName: 'table table-bordered table-striped',
-            tableId: 'product',
-        }
+        // Clean up the mess when the component unmounts
+        this.$node.dataTable({
+            "oLanguage": {"sSearch": ""},
+            "aaSorting": [[1, "desc"]],
+            "aoColumnDefs": [
+                {'bSortable': false, 'aTargets': [0, 5]}
+            ],
+            "bDestroy": true
+        });
     }
 
     render() {
 
-        const {columns, data, tableId, tableClassName} = this.props;
-
         return (
-            <table id={tableId} className={tableClassName}>
-                <Header columns={columns}/>
-                <Body columns={columns} data={data}/>
+            <table ref="datatable" className="table table-bordered table-striped">
+                <Header {...this.props}/>
+                <Body {...this.props}/>
             </table>
         );
     }

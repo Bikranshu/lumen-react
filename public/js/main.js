@@ -8,6 +8,7 @@ import RequireAuth from './components/auth/authenticate.component';
 
 // Import routing components
 import {hashHistory, Router, Route, IndexRoute} from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 
 // Import custom components
 import App from './components/app.component';
@@ -15,6 +16,7 @@ import NotFoundPage from './components/error/not-found.component';
 import Login from './components/login/login.component';
 import Dashboard from './components/dashboard/dashboard.component';
 import Product from './components/product/product.component';
+import ProductList from './components/product/product-list.component';
 import store from './store/store';
 
 /**
@@ -22,7 +24,7 @@ import store from './store/store';
  */
 import * as ActionType from './constants/actionType';
 
-
+const history = syncHistoryWithStore(hashHistory, store);
 const token = cookie.load('token');
 if (token) {
     // Update application state. User has token and is probably authenticated
@@ -34,11 +36,15 @@ if (token) {
 
 render(
     <Provider store={store}>
-        <Router history={hashHistory}>
+        <Router  history={history}>
             <Route path="/" component={Login}/>
             <Route path="/dashboard" component={App}>
                 <IndexRoute component={RequireAuth(Dashboard)} />
-                <Route path="/products" component={RequireAuth(Product)}/>
+                <Route path="/products" component={RequireAuth(Product)}>
+                    <IndexRoute component={ProductList}/>
+                    {/*<Route path="new"  component={ProductForm}/>*/}
+                    {/*<Route path=":id/view" component={ProductDetail}/>*/}
+                </Route>
             </Route>
             <Route path="*" component={NotFoundPage} />
         </Router>

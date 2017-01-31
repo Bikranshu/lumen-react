@@ -1,11 +1,22 @@
-// Import constants
+/**
+ * Import all ActionType as an object.
+ */
 import * as ActionType from '../constants/actionType';
 
-// Import apiAction
+/**
+ * Import all apiAction as an object.
+ */
 import * as apiAction from './apiAction';
 
-// Import apiService
+/**
+ * Import all apiService as an object.
+ */
 import * as apiService from '../services/apiService';
+
+/**
+ * Import all converter as an object.
+ */
+import * as Converter from '../utils/converter';
 
 /**
  * Actions that are dispatched from crudAction
@@ -19,6 +30,14 @@ var commonActions = {
         }
     },
 
+    selectItem: function (entity, data) {
+        return {
+            type: ActionType.SELECT_ITEM,
+            entity: entity,
+            data: data
+        }
+    },
+
     delete: function (entity, id) {
         return {
             type: ActionType.DELETE,
@@ -27,13 +46,6 @@ var commonActions = {
         }
     },
 
-    pageIndex: function (data, count) {
-        return {
-            type: ActionType.PAGINATION_INDEX,
-            index: data.start,
-            count: count
-        }
-    }
 };
 
 /**
@@ -50,11 +62,30 @@ var commonActions = {
 export function fetchAll(entity, data) {
     return function (dispatch) {
         dispatch(apiAction.apiRequest());
-        return apiService.fetch(entity, data) .then((response) => {
-                dispatch(commonActions.list(entity, response.data));
-            })
+        return apiService.fetch(entity, data).then((response) => {
+            dispatch(commonActions.list(entity, response.data));
+        })
             .catch(response => dispatch(errorHandler(response.data.error)));
     };
+}
+
+export function fetchById(entity, id) {
+    return function (dispatch) {
+        dispatch(apiAction.apiRequest());
+        return apiService.fetch(Converter.getPathParam(entity, id)).then((response) => {
+            dispatch(commonActions.selectItem(entity, response.data));
+        })
+            .catch(response => dispatch(errorHandler(response.data.error)));
+    };
+}
+
+export function updateSelectedItem(entity, key, value) {
+    return {
+        type: ActionType.UPDATE_SELECTED_ITEM,
+        entity: entity,
+        key: key,
+        value: value
+    }
 }
 
 export function errorHandler(dispatch, error, type) {

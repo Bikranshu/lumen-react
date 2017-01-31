@@ -8,8 +8,6 @@ import _ from 'lodash';
 /**
  * Import all constants as an object.
  */
-import * as ActionType from '../../constants/actionType';
-import Message from '../../constants/message';
 import Common from '../../constants/common';
 
 /**
@@ -31,6 +29,7 @@ class ProductList extends Component {
     static propTypes = {
         data: PropTypes.array.isRequired,
         columns: PropTypes.array.isRequired,
+        options: PropTypes.object.isRequired,
     };
 
     componentWillMount() {
@@ -52,17 +51,16 @@ class ProductList extends Component {
         return (
             <div className="row">
                 <div className="col-xs-12">
-                    <div className="box box-info">
+                    <div className="box box-primary">
                         <div className="box-header">
                             <h3 className="box-title">Product List:</h3>
                             <div className="pull-right box-tools">
-                                <a href="#" className="btn btn-primary" role="button" data-toggle="modal"
-                                   data-target="#product-add-modal" title="Add Product"><i
+                                <a href="/#/products/new" className="btn btn-primary" role="button" title="Add Product"><i
                                     className="glyphicon glyphicon-plus"></i>&nbsp;Add Product</a>
                             </div>
                         </div>
                         <div className="box-body">
-                            {data.length > 0 && <DataTable columns={columns} data={data}/>}
+                            {data.length > 0 && <DataTable columns={columns} data={data} options={options}/>}
                         </div>
                     </div>
                 </div>
@@ -81,7 +79,6 @@ class ProductList extends Component {
 function mapStateToProps(state) {
     return {
         products: state.crud.products,
-        pagination: state.crud.pagination,
         apiState: state.api
     }
 }
@@ -103,6 +100,8 @@ const columns = [
     {displayName: 'Status', attribute: 'status'},
     {displayName: 'Actions', attribute: ''}
 ];
+
+const options = {model: 'products'};
 
 /**
  * Connect the component to the Redux store.

@@ -5,7 +5,6 @@ const messages = {
     UPDATED_MESSAGE: 'Product updated successfully.',
     DELETED_MESSAGE: 'Product deleted successfully.',
 
-    NO_RECORDS_FOUND: 'No records available.'
 };
 
 export default messages

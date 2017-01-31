@@ -7,13 +7,13 @@ export const LIST = 'LIST';
 export const ADD = 'ADD';
 export const UPDATE = 'UPDATE';
 export const DELETE = 'DELETE';
+export const SELECT_ITEM = 'SELECT_ITEM';
+export const UPDATE_SELECTED_ITEM = 'UPDATE_SELECTED_ITEM';
 export const CLEAR_LIST = 'CLEAR_LIST';
-export const PAGINATION_INDEX = 'PAGINATION_INDEX';
 
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
-export const CLEAR_PRODUCT_INDEX = 'CLEAR_PRODUCT_INDEX';
 export const CLEAR_PRODUCT_STATE = 'CLEAR_PRODUCT_STATE';
 
 export const API_REQUEST = 'API_REQUEST';

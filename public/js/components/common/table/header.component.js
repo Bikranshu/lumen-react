@@ -4,7 +4,7 @@ class Header extends Component {
 
     render() {
 
-        let columns = this.props.columns; // [{title, accessor}]
+        let columns = this.props.columns; // [{displayName, attribute}]
         return (
             <thead>
                 <tr>

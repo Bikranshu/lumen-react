@@ -5,14 +5,17 @@ import _ from 'lodash';
 import * as ActionType from '../constants/actionType';
 
 var initialState = {
-    products: [],
+    products :[],
+    selectedItem: {
+        product: {},
+    },
     pagination: {},
 };
 
 /**
  * A reducer takes two arguments, the current state and an action.
  */
-export default function (state , action) {
+export default function (state, action) {
     state = state || initialState;
 
     switch (action.type) {
@@ -21,6 +24,15 @@ export default function (state , action) {
             newState[action.entity + 's'] = _.cloneDeep(action.data.data);
             return newState;
 
+        case ActionType.SELECT_ITEM:
+            newState = _.cloneDeep(state);
+            newState.selectedItem[action.entity] = action.data.data;
+            return newState;
+
+        case ActionType.UPDATE_SELECTED_ITEM:
+            newState = _.cloneDeep(state);
+            newState.selectedItem[action.entity][action.key] = action.value;
+            return newState;
 
         case ActionType.DELETE:
             var newState = _.cloneDeep(state);
@@ -32,12 +44,6 @@ export default function (state , action) {
         case ActionType.CLEAR_LIST:
             var newState = _.cloneDeep(state);
             newState[action.entity + 's'] = {};
-            return newState;
-
-        case ActionType.PAGINATION_INDEX:
-            var newState = _.cloneDeep(state);
-            newState.pagination.startPage = action.index;
-            newState.pagination.count = action.count;
             return newState;
 
         default:

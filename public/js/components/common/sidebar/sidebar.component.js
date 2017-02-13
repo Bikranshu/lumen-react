@@ -23,7 +23,7 @@ class Sidebar extends Component {
                 </li>
                 <li>
                   <a href="/#/products">
-                    <i className="fa fa-dashboard"></i> <span>Product</span>
+                    <i className="fa fa-cart-plus"></i> <span>Product</span>
                   </a>
                 </li>
                 <li className="treeview">
@@ -177,10 +177,6 @@ class Sidebar extends Component {
                     <li><a href="#"><i className="fa fa-circle-o"></i> Level One</a></li>
                   </ul>
                 </li>
-                <li className="header">LABELS</li>
-                <li><a href="#"><i className="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-                <li><a href="#"><i className="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-                <li><a href="#"><i className="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
               </ul>
             </section>
           </aside>

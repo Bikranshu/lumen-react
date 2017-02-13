@@ -101,7 +101,7 @@
 	
 	var _productDetail2 = _interopRequireDefault(_productDetail);
 	
-	var _store = __webpack_require__(/*! ./store/store */ 334);
+	var _store = __webpack_require__(/*! ./store/store */ 333);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -32808,10 +32808,10 @@
 	    value: true
 	});
 	var appConstant = {
-	    API_URL: 'http://localhost:8000/api/',
-	    ROOT_URL: 'http://localhost:8000/#/',
-	    // API_URL: 'http://dev.react.com/api/',
-	    // ROOT_URL: 'http://dev.react.com/#/',
+	    // API_URL: 'http://localhost:8000/api/',
+	    // ROOT_URL: 'http://localhost:8000/#/',
+	    API_URL: 'http://dev.react.com/api/',
+	    ROOT_URL: 'http://dev.react.com/#/',
 	    AUTHORIZATION: 'Authorization',
 	    BEARER: 'Bearer',
 	    TOKEN: 'token',
@@ -32960,7 +32960,7 @@
 	              _react2.default.createElement(
 	                'a',
 	                { href: '/#/products' },
-	                _react2.default.createElement('i', { className: 'fa fa-dashboard' }),
+	                _react2.default.createElement('i', { className: 'fa fa-cart-plus' }),
 	                ' ',
 	                _react2.default.createElement(
 	                  'span',
@@ -33590,56 +33590,6 @@
 	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
 	                    ' Level One'
 	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'header' },
-	              'LABELS'
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                _react2.default.createElement('i', { className: 'fa fa-circle-o text-red' }),
-	                ' ',
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Important'
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                _react2.default.createElement('i', { className: 'fa fa-circle-o text-yellow' }),
-	                ' ',
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Warning'
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                _react2.default.createElement('i', { className: 'fa fa-circle-o text-aqua' }),
-	                ' ',
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Information'
 	                )
 	              )
 	            )
@@ -34525,7 +34475,11 @@
 	                    _react2.default.createElement(
 	                        "li",
 	                        { className: "active" },
-	                        "Product"
+	                        _react2.default.createElement(
+	                            "a",
+	                            { href: "/#/products" },
+	                            "Product"
+	                        )
 	                    )
 	                )
 	            );
@@ -51828,10 +51782,7 @@
 	    value: true
 	});
 	var commons = {
-	    PRODUCT: 'product',
-	    START_INDEX: '1',
-	    OFFSET: '10',
-	    PER_PAGE: 16
+	    PRODUCT: 'product'
 	};
 	
 	exports.default = commons;
@@ -52343,20 +52294,36 @@
 	                                { style: { textAlign: "center" }, key: index },
 	                                _react2.default.createElement(
 	                                    'a',
-	                                    { href: "/#/" + options.model + "/" + item.id + "/view", title: 'View', className: 'view-btn' },
+	                                    { href: "/#/" + options.model + "/" + item.id + "/view", title: 'View',
+	                                        className: 'view-btn' },
 	                                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-eye-open' })
 	                                ),
 	                                '\xA0',
 	                                _react2.default.createElement(
 	                                    'a',
 	                                    { href: "/#/" + options.model + "/" + item.id, title: 'Edit', className: 'edit-btn' },
-	                                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-pencil' })
+	                                    _react2.default.createElement('i', {
+	                                        className: 'glyphicon glyphicon-pencil' })
 	                                ),
 	                                '\xA0',
 	                                _react2.default.createElement(
 	                                    'a',
-	                                    { href: 'javascript:void(0)', 'data-id': item.id, title: 'Remove', className: 'delete-btn', 'data-toggle': 'modal', 'data-target': '#product-confirm-modal' },
-	                                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-trash' })
+	                                    { href: 'javascript:void(0)', 'data-id': item.id, title: 'Remove', className: 'delete-btn',
+	                                        'data-toggle': 'modal', 'data-target': '#product-confirm-modal' },
+	                                    _react2.default.createElement('i', {
+	                                        className: 'glyphicon glyphicon-trash' })
+	                                )
+	                            );
+	                        } else if (colData.attribute == 'status') {
+	                            var classNames = item[colData.attribute] === 0 ? "label label-success" : "label label-warning";
+	                            var status = item[colData.attribute] === 0 ? "Open" : "Close";
+	                            return _react2.default.createElement(
+	                                'td',
+	                                { key: index },
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    { className: classNames },
+	                                    status
 	                                )
 	                            );
 	                        } else {
@@ -52543,8 +52510,6 @@
 	 */
 	
 	
-	// Import custom components
-	
 	var ProductForm = function (_Component) {
 	    _inherits(ProductForm, _Component);
 	
@@ -52557,12 +52522,6 @@
 	        _this.handleSubmit = _this.handleSubmit.bind(_this);
 	        return _this;
 	    }
-	
-	    //
-	    // static propTypes = {
-	    //     value: PropTypes.string,
-	    //     product: PropTypes.object,
-	    // };
 	
 	    _createClass(ProductForm, [{
 	        key: 'componentWillMount',
@@ -52593,6 +52552,9 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	
+	            var isClose = this.props.selectedItem.product.status === 1 ? true : false;
+	            var isOpen = this.props.selectedItem.product.status === 0 || this.props.selectedItem.product ? true : false;
 	
 	            return _react2.default.createElement(
 	                'div',
@@ -52668,7 +52630,9 @@
 	                                                            type: 'radio',
 	                                                            name: 'status',
 	                                                            value: '0',
-	                                                            className: 'flat-red'
+	                                                            className: 'flat-red',
+	                                                            checked: isOpen,
+	                                                            onChange: this.handleChange
 	                                                        }),
 	                                                        'Open'
 	                                                    ),
@@ -52680,7 +52644,9 @@
 	                                                            type: 'radio',
 	                                                            name: 'status',
 	                                                            value: '1',
-	                                                            className: 'flat-red'
+	                                                            className: 'flat-red',
+	                                                            checked: isClose,
+	                                                            onChange: this.handleChange
 	                                                        }),
 	                                                        'Close'
 	                                                    )
@@ -52731,7 +52697,7 @@
 	                                                    name: 'description',
 	                                                    cols: '40',
 	                                                    rows: '3',
-	                                                    defaultValue: this.props.selectedItem.product.description,
+	                                                    value: this.props.selectedItem.product.description,
 	                                                    onChange: this.handleChange
 	                                                })
 	                                            )
@@ -52817,14 +52783,6 @@
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _actionType = __webpack_require__(/*! ../../constants/actionType */ 306);
-	
-	var ActionType = _interopRequireWildcard(_actionType);
-	
-	var _message = __webpack_require__(/*! ../../constants/message */ 333);
-	
-	var _message2 = _interopRequireDefault(_message);
-	
 	var _common = __webpack_require__(/*! ../../constants/common */ 322);
 	
 	var _common2 = _interopRequireDefault(_common);
@@ -52836,14 +52794,6 @@
 	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 323);
 	
 	var crudAction = _interopRequireWildcard(_crudAction);
-	
-	var _table = __webpack_require__(/*! ../common/table/table.component */ 327);
-	
-	var _table2 = _interopRequireDefault(_table);
-	
-	var _productConfirmBox = __webpack_require__(/*! ./product-confirm-box.component */ 330);
-	
-	var _productConfirmBox2 = _interopRequireDefault(_productConfirmBox);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -52868,9 +52818,6 @@
 	 */
 	
 	
-	// Import custom components
-	
-	
 	var ProductDetail = function (_Component) {
 	    _inherits(ProductDetail, _Component);
 	
@@ -52881,8 +52828,23 @@
 	    }
 	
 	    _createClass(ProductDetail, [{
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            if (this.props.params.id) {
+	                this.props.actions.fetchById(_common2.default.PRODUCT, this.props.params.id);
+	            }
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this.props.actions.clearSelectedItem(_common2.default.PRODUCT);
+	            this.props.actions.apiClearState();
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
+	
+	            var status = this.props.selectedItem.product.status === 0 ? 'Open' : 'Close';
 	
 	            return _react2.default.createElement(
 	                'div',
@@ -52922,7 +52884,7 @@
 	                                        _react2.default.createElement(
 	                                            'dd',
 	                                            null,
-	                                            'Krishna Timilsina'
+	                                            this.props.selectedItem.product.code
 	                                        )
 	                                    )
 	                                ),
@@ -52940,7 +52902,7 @@
 	                                        _react2.default.createElement(
 	                                            'dd',
 	                                            null,
-	                                            'fsdfsdf'
+	                                            this.props.selectedItem.product.name
 	                                        )
 	                                    )
 	                                ),
@@ -52958,7 +52920,7 @@
 	                                        _react2.default.createElement(
 	                                            'dd',
 	                                            null,
-	                                            'fsdfsdf'
+	                                            this.props.selectedItem.product.description
 	                                        )
 	                                    )
 	                                ),
@@ -52976,7 +52938,7 @@
 	                                        _react2.default.createElement(
 	                                            'dd',
 	                                            null,
-	                                            'fsdfsdf'
+	                                            this.props.selectedItem.product.created_by
 	                                        )
 	                                    )
 	                                ),
@@ -52994,7 +52956,7 @@
 	                                        _react2.default.createElement(
 	                                            'dd',
 	                                            null,
-	                                            'fsdfsdf'
+	                                            status
 	                                        )
 	                                    )
 	                                )
@@ -53009,33 +52971,31 @@
 	    return ProductDetail;
 	}(_react.Component);
 	
-	exports.default = ProductDetail;
+	/**
+	 * Map the state to props.
+	 */
+	
+	
+	function mapStateToProps(state) {
+	    return {
+	        selectedItem: state.crud.selectedItem,
+	        apiState: state.api
+	    };
+	}
+	
+	/**
+	 * Map the actions to props.
+	 */
+	function mapDispatchToProps(dispatch) {
+	    return {
+	        actions: (0, _redux.bindActionCreators)(_lodash2.default.assign({}, crudAction, apiAction), dispatch)
+	    };
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ProductDetail);
 
 /***/ },
 /* 333 */
-/*!****************************************!*\
-  !*** ./public/js/constants/message.js ***!
-  \****************************************/
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	var messages = {
-	    DELETE_CONFIRM_MESSAGE: 'Are you sure you want to delete this product?',
-	
-	    ADDED_MESSAGE: 'Product added successfully.',
-	    UPDATED_MESSAGE: 'Product updated successfully.',
-	    DELETED_MESSAGE: 'Product deleted successfully.'
-	
-	};
-	
-	exports.default = messages;
-
-/***/ },
-/* 334 */
 /*!**********************************!*\
   !*** ./public/js/store/store.js ***!
   \**********************************/
@@ -53049,15 +53009,15 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 189);
 	
-	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 335);
+	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 334);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reduxLogger = __webpack_require__(/*! redux-logger */ 336);
+	var _reduxLogger = __webpack_require__(/*! redux-logger */ 335);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
-	var _rootReducer = __webpack_require__(/*! ../reducers/rootReducer */ 342);
+	var _rootReducer = __webpack_require__(/*! ../reducers/rootReducer */ 341);
 	
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 	
@@ -53081,7 +53041,7 @@
 	exports.default = store;
 
 /***/ },
-/* 335 */
+/* 334 */
 /*!************************************!*\
   !*** ./~/redux-thunk/lib/index.js ***!
   \************************************/
@@ -53112,7 +53072,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 336 */
+/* 335 */
 /*!*************************************!*\
   !*** ./~/redux-logger/lib/index.js ***!
   \*************************************/
@@ -53126,11 +53086,11 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _core = __webpack_require__(/*! ./core */ 337);
+	var _core = __webpack_require__(/*! ./core */ 336);
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 338);
+	var _helpers = __webpack_require__(/*! ./helpers */ 337);
 	
-	var _defaults = __webpack_require__(/*! ./defaults */ 341);
+	var _defaults = __webpack_require__(/*! ./defaults */ 340);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -53233,7 +53193,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 337 */
+/* 336 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/core.js ***!
   \************************************/
@@ -53249,9 +53209,9 @@
 	
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 338);
+	var _helpers = __webpack_require__(/*! ./helpers */ 337);
 	
-	var _diff = __webpack_require__(/*! ./diff */ 339);
+	var _diff = __webpack_require__(/*! ./diff */ 338);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -53378,7 +53338,7 @@
 	}
 
 /***/ },
-/* 338 */
+/* 337 */
 /*!***************************************!*\
   !*** ./~/redux-logger/lib/helpers.js ***!
   \***************************************/
@@ -53405,7 +53365,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 339 */
+/* 338 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/diff.js ***!
   \************************************/
@@ -53418,7 +53378,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(/*! deep-diff */ 340);
+	var _deepDiff = __webpack_require__(/*! deep-diff */ 339);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -53507,7 +53467,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 340 */
+/* 339 */
 /*!******************************!*\
   !*** ./~/deep-diff/index.js ***!
   \******************************/
@@ -53939,7 +53899,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 341 */
+/* 340 */
 /*!****************************************!*\
   !*** ./~/redux-logger/lib/defaults.js ***!
   \****************************************/
@@ -53993,7 +53953,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 342 */
+/* 341 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/rootReducer.js ***!
   \*******************************************/
@@ -54009,15 +53969,15 @@
 	
 	var _reactRouterRedux = __webpack_require__(/*! react-router-redux */ 272);
 	
-	var _authReducer = __webpack_require__(/*! ./authReducer */ 343);
+	var _authReducer = __webpack_require__(/*! ./authReducer */ 342);
 	
 	var _authReducer2 = _interopRequireDefault(_authReducer);
 	
-	var _crudReducer = __webpack_require__(/*! ./crudReducer */ 344);
+	var _crudReducer = __webpack_require__(/*! ./crudReducer */ 343);
 	
 	var _crudReducer2 = _interopRequireDefault(_crudReducer);
 	
-	var _apiReducer = __webpack_require__(/*! ./apiReducer */ 345);
+	var _apiReducer = __webpack_require__(/*! ./apiReducer */ 344);
 	
 	var _apiReducer2 = _interopRequireDefault(_apiReducer);
 	
@@ -54034,7 +53994,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 343 */
+/* 342 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/authReducer.js ***!
   \*******************************************/
@@ -54101,7 +54061,7 @@
 	 */
 
 /***/ },
-/* 344 */
+/* 343 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/crudReducer.js ***!
   \*******************************************/
@@ -54183,7 +54143,7 @@
 	// Import constants
 
 /***/ },
-/* 345 */
+/* 344 */
 /*!******************************************!*\
   !*** ./public/js/reducers/apiReducer.js ***!
   \******************************************/

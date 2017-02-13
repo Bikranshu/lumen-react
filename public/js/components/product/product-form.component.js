@@ -16,8 +16,6 @@ import Common from '../../constants/common';
 import * as apiAction from '../../actions/apiAction';
 import * as crudAction from '../../actions/crudAction';
 
-// Import custom components
-
 class ProductForm extends Component {
 
     constructor(props) {
@@ -26,12 +24,6 @@ class ProductForm extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
-    //
-    // static propTypes = {
-    //     value: PropTypes.string,
-    //     product: PropTypes.object,
-    // };
 
     componentWillMount() {
         if (this.props.params.id) {
@@ -57,6 +49,9 @@ class ProductForm extends Component {
     }
 
     render() {
+
+        const isClose = this.props.selectedItem.product.status === 1 ? true : false;
+        const isOpen = ((this.props.selectedItem.product.status === 0) || (this.props.selectedItem.product)) ? true : false;
 
         return (
 
@@ -95,6 +90,8 @@ class ProductForm extends Component {
                                                             name="status"
                                                             value="0"
                                                             className="flat-red"
+                                                            checked={isOpen}
+                                                            onChange={this.handleChange}
                                                         />
                                                         Open
                                                     </label>
@@ -105,6 +102,8 @@ class ProductForm extends Component {
                                                             name="status"
                                                             value="1"
                                                             className="flat-red"
+                                                            checked={isClose}
+                                                            onChange={this.handleChange}
                                                         />
                                                         Close
                                                     </label>
@@ -138,7 +137,7 @@ class ProductForm extends Component {
                                                     name="description"
                                                     cols="40"
                                                     rows="3"
-                                                    defaultValue={this.props.selectedItem.product.description}
+                                                    value={this.props.selectedItem.product.description}
                                                     onChange={this.handleChange}
                                                 />
                                             </div>

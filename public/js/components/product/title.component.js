@@ -7,7 +7,7 @@ class Title extends Component {
                     <h1>Product</h1>
                     <ol className="breadcrumb">
                         <li><a href="#"><i className="fa fa-dashboard"></i> Home</a></li>
-                        <li className="active">Product</li>
+                        <li className="active"><a href="/#/products">Product</a></li>
                     </ol>
                 </section>
         );

@@ -8,8 +8,6 @@ import _ from 'lodash';
 /**
  * Import all constants as an object.
  */
-import * as ActionType from '../../constants/actionType';
-import Message from '../../constants/message';
 import Common from '../../constants/common';
 
 /**
@@ -18,17 +16,26 @@ import Common from '../../constants/common';
 import * as apiAction from '../../actions/apiAction';
 import * as crudAction from '../../actions/crudAction';
 
-// Import custom components
-import DataTable from '../common/table/table.component';
-import ProductConfirmBox from './product-confirm-box.component';
-
 class ProductDetail extends Component {
 
     constructor(props) {
         super(props);
     }
 
+    componentWillMount() {
+        if (this.props.params.id) {
+            this.props.actions.fetchById(Common.PRODUCT, this.props.params.id);
+        }
+    }
+
+    componentWillUnmount() {
+        this.props.actions.clearSelectedItem(Common.PRODUCT);
+        this.props.actions.apiClearState();
+    }
+
     render() {
+
+        const status = this.props.selectedItem.product.status === 0 ? 'Open' : 'Close';
 
         return (
             <div className="row">
@@ -42,31 +49,31 @@ class ProductDetail extends Component {
                                 <div className="col-sm-6">
                                     <dl className="dl-horizontal">
                                         <dt>Code:</dt>
-                                        <dd>Krishna Timilsina</dd>
+                                        <dd>{this.props.selectedItem.product.code}</dd>
                                     </dl>
                                 </div>
                                 <div className="col-sm-6">
                                     <dl className="dl-horizontal">
                                         <dt>Name:</dt>
-                                        <dd>fsdfsdf</dd>
+                                        <dd>{this.props.selectedItem.product.name}</dd>
                                     </dl>
                                 </div>
                                 <div className="col-sm-6">
                                     <dl className="dl-horizontal">
                                         <dt>Description:</dt>
-                                        <dd>fsdfsdf</dd>
+                                        <dd>{this.props.selectedItem.product.description}</dd>
                                     </dl>
                                 </div>
                                 <div className="col-sm-6">
                                     <dl className="dl-horizontal">
                                         <dt>Created By:</dt>
-                                        <dd>fsdfsdf</dd>
+                                        <dd>{this.props.selectedItem.product.created_by}</dd>
                                     </dl>
                                 </div>
                                 <div className="col-sm-6">
                                     <dl className="dl-horizontal">
                                         <dt>Status:</dt>
-                                        <dd>fsdfsdf</dd>
+                                        <dd>{status}</dd>
                                     </dl>
                                 </div>
                             </div>
@@ -79,4 +86,23 @@ class ProductDetail extends Component {
     }
 }
 
-export default ProductDetail
+/**
+ * Map the state to props.
+ */
+function mapStateToProps(state) {
+    return {
+        selectedItem: state.crud.selectedItem,
+        apiState: state.api
+    }
+}
+
+/**
+ * Map the actions to props.
+ */
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(_.assign({}, crudAction, apiAction), dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail)

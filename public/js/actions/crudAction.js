@@ -79,12 +79,26 @@ export function fetchById(entity, id) {
     };
 }
 
+export function clearList(entity) {
+    return {
+        type: ActionType.CLEAR_LIST,
+        entity: entity
+    }
+}
+
 export function updateSelectedItem(entity, key, value) {
     return {
         type: ActionType.UPDATE_SELECTED_ITEM,
         entity: entity,
         key: key,
         value: value
+    }
+}
+
+export function clearSelectedItem(entity) {
+    return {
+        type: ActionType.CLEAR_SELECTED_ITEM,
+        entity: entity
     }
 }
 

@@ -37,7 +37,8 @@ class ProductList extends Component {
     }
 
     componentWillUnmount() {
-
+        this.props.actions.clearList(Common.PRODUCT);
+        this.props.actions.apiClearState();
     }
 
     fetchData() {

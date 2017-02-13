@@ -39,6 +39,10 @@ class ProductForm extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.props.actions.clearSelectedItem(Common.PRODUCT);
+        this.props.actions.apiClearState();
+    }
 
     handleSubmit(event) {
         event.preventDefault();
@@ -145,7 +149,8 @@ class ProductForm extends Component {
                             <div className="box-footer">
                                 <div className="col-xs-6">
                                     <div className="form-group">
-                                        <button type="submit" className="btn btn-primary">{(this.props.params.id) ? 'Update' : 'Save'}</button>
+                                        <button type="submit"
+                                                className="btn btn-primary">{(this.props.params.id) ? 'Update' : 'Save'}</button>
                                     </div>
                                 </div>
                             </div>

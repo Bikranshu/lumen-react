@@ -10,6 +10,7 @@ export const DELETE = 'DELETE';
 export const SELECT_ITEM = 'SELECT_ITEM';
 export const UPDATE_SELECTED_ITEM = 'UPDATE_SELECTED_ITEM';
 export const CLEAR_LIST = 'CLEAR_LIST';
+export const CLEAR_SELECTED_ITEM = 'CLEAR_SELECTED_ITEM';
 
 export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';

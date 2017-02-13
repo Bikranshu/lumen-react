@@ -65,6 +65,8 @@ class ProductController extends BaseController
             'code' =>  $request->get('code'),
             'name' => $request->get('name'),
             'description' => $request->get('description'),
+            'status' => $request->get('status'),
+            'created_by' => 1,
         ];
         $this->product->create($attributes);
 
@@ -97,6 +99,7 @@ class ProductController extends BaseController
         $product->code = $request->get('code');
         $product->name = $request->get('name');
         $product->description = $request->get('description');
+        $product->status = $request->get('status');
         $product->update();
 
         return $this->response->noContent();

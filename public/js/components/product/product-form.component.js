@@ -25,6 +25,14 @@ class ProductForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    // static defaultProps = {
+    //     maxLoops: 10
+    // };
+    //
+    // static propTypes = {
+    //     maxLoops: PropTypes.number.isRequired,
+    // };
+
     componentWillMount() {
         if (this.props.params.id) {
             this.props.actions.fetchById(Common.PRODUCT, this.props.params.id);
@@ -38,7 +46,7 @@ class ProductForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        // this.props.actions.submitForm(Common.PRODUCT, product, this.props.params.id);
+        this.props.actions.submitForm(Common.PRODUCT, this.props.selectedItem.product, this.props.params.id);
 
     }
 
@@ -50,8 +58,7 @@ class ProductForm extends Component {
 
     render() {
 
-        const isClose = this.props.selectedItem.product.status === 1 ? true : false;
-        const isOpen = ((this.props.selectedItem.product.status === 0) || (this.props.selectedItem.product)) ? true : false;
+        const status = this.props.selectedItem.product.status || '0';
 
         return (
 
@@ -90,7 +97,7 @@ class ProductForm extends Component {
                                                             name="status"
                                                             value="0"
                                                             className="flat-red"
-                                                            checked={isOpen}
+                                                            checked={status == 0}
                                                             onChange={this.handleChange}
                                                         />
                                                         Open
@@ -102,7 +109,7 @@ class ProductForm extends Component {
                                                             name="status"
                                                             value="1"
                                                             className="flat-red"
-                                                            checked={isClose}
+                                                            checked={status == 1}
                                                             onChange={this.handleChange}
                                                         />
                                                         Close

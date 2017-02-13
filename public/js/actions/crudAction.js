@@ -1,3 +1,5 @@
+import {browserHistory} from 'react-router';
+
 /**
  * Import all ActionType as an object.
  */
@@ -77,6 +79,48 @@ export function fetchById(entity, id) {
         })
             .catch(response => dispatch(errorHandler(response.data.error)));
     };
+}
+
+export function storeItem(entity, data) {
+    return function (dispatch) {
+        dispatch(apiAction.apiRequest());
+        return apiService.store(entity, data).then((response) => {
+            // message
+            browserHistory.goBack();
+        })
+            .catch(response => dispatch(errorHandler(response.data.error)));
+    };
+}
+
+export function updateItem(entity, data, id) {
+    return function (dispatch) {
+        dispatch(apiAction.apiRequest());
+        return apiService.update(entity, data, id).then((response) => {
+            // message
+            browserHistory.goBack();
+        })
+            .catch(response => dispatch(errorHandler(response.data.error)));
+    };
+}
+
+export function destroyItem(entity, id) {
+    return function (dispatch) {
+        dispatch(apiAction.apiRequest());
+        return apiService.destroy(entity, id).then((response) => {
+            // message
+        })
+            .catch(response => dispatch(errorHandler(response.data.error)));
+    };
+}
+
+export function submitForm(entity, data, id) {
+    return function (dispatch) {
+        if (id) {
+            dispatch(updateItem(entity, data, id));
+        } else {
+            dispatch(storeItem(entity, data));
+        }
+    }
 }
 
 export function clearList(entity) {

@@ -51801,10 +51801,16 @@
 	});
 	exports.fetchAll = fetchAll;
 	exports.fetchById = fetchById;
+	exports.storeItem = storeItem;
+	exports.updateItem = updateItem;
+	exports.destroyItem = destroyItem;
+	exports.submitForm = submitForm;
 	exports.clearList = clearList;
 	exports.updateSelectedItem = updateSelectedItem;
 	exports.clearSelectedItem = clearSelectedItem;
 	exports.errorHandler = errorHandler;
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 219);
 	
 	var _actionType = __webpack_require__(/*! ../constants/actionType */ 306);
 	
@@ -51832,6 +51838,8 @@
 	/**
 	 * Import all apiService as an object.
 	 */
+	
+	
 	/**
 	 * Import all ActionType as an object.
 	 */
@@ -51899,6 +51907,51 @@
 	        }).catch(function (response) {
 	            return dispatch(errorHandler(response.data.error));
 	        });
+	    };
+	}
+	
+	function storeItem(entity, data) {
+	    return function (dispatch) {
+	        dispatch(apiAction.apiRequest());
+	        return apiService.store(entity, data).then(function (response) {
+	            // message
+	            _reactRouter.browserHistory.goBack();
+	        }).catch(function (response) {
+	            return dispatch(errorHandler(response.data.error));
+	        });
+	    };
+	}
+	
+	function updateItem(entity, data, id) {
+	    return function (dispatch) {
+	        dispatch(apiAction.apiRequest());
+	        return apiService.update(entity, data, id).then(function (response) {
+	            // message
+	            _reactRouter.browserHistory.goBack();
+	        }).catch(function (response) {
+	            return dispatch(errorHandler(response.data.error));
+	        });
+	    };
+	}
+	
+	function destroyItem(entity, id) {
+	    return function (dispatch) {
+	        dispatch(apiAction.apiRequest());
+	        return apiService.destroy(entity, id).then(function (response) {
+	            // message
+	        }).catch(function (response) {
+	            return dispatch(errorHandler(response.data.error));
+	        });
+	    };
+	}
+	
+	function submitForm(entity, data, id) {
+	    return function (dispatch) {
+	        if (id) {
+	            dispatch(updateItem(entity, data, id));
+	        } else {
+	            dispatch(storeItem(entity, data));
+	        }
 	    };
 	}
 	
@@ -52523,6 +52576,14 @@
 	        return _this;
 	    }
 	
+	    // static defaultProps = {
+	    //     maxLoops: 10
+	    // };
+	    //
+	    // static propTypes = {
+	    //     maxLoops: PropTypes.number.isRequired,
+	    // };
+	
 	    _createClass(ProductForm, [{
 	        key: 'componentWillMount',
 	        value: function componentWillMount() {
@@ -52540,7 +52601,7 @@
 	        key: 'handleSubmit',
 	        value: function handleSubmit(event) {
 	            event.preventDefault();
-	            // this.props.actions.submitForm(Common.PRODUCT, product, this.props.params.id);
+	            this.props.actions.submitForm(_common2.default.PRODUCT, this.props.selectedItem.product, this.props.params.id);
 	        }
 	    }, {
 	        key: 'handleChange',
@@ -52553,8 +52614,7 @@
 	        key: 'render',
 	        value: function render() {
 	
-	            var isClose = this.props.selectedItem.product.status === 1 ? true : false;
-	            var isOpen = this.props.selectedItem.product.status === 0 || this.props.selectedItem.product ? true : false;
+	            var status = this.props.selectedItem.product.status || '0';
 	
 	            return _react2.default.createElement(
 	                'div',
@@ -52631,7 +52691,7 @@
 	                                                            name: 'status',
 	                                                            value: '0',
 	                                                            className: 'flat-red',
-	                                                            checked: isOpen,
+	                                                            checked: status == 0,
 	                                                            onChange: this.handleChange
 	                                                        }),
 	                                                        'Open'
@@ -52645,7 +52705,7 @@
 	                                                            name: 'status',
 	                                                            value: '1',
 	                                                            className: 'flat-red',
-	                                                            checked: isClose,
+	                                                            checked: status == 1,
 	                                                            onChange: this.handleChange
 	                                                        }),
 	                                                        'Close'

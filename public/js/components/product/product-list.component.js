@@ -18,7 +18,7 @@ import * as crudAction from '../../actions/crudAction';
 
 // Import custom components
 import DataTable from '../common/table/table.component';
-import ProductConfirmBox from './product-confirm-box.component';
+import ProductModelBox from './product-model-box.component';
 
 class ProductList extends Component {
 
@@ -66,7 +66,7 @@ class ProductList extends Component {
                     </div>
                 </div>
 
-                <ProductConfirmBox />
+                <ProductModelBox />
 
             </div>
 

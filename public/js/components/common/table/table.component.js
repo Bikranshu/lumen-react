@@ -27,7 +27,6 @@ class Table extends Component {
     }
 
     componentWillUnmount() {
-
         // Clean up the mess when the component unmounts
         this.$node.dataTable({
             "oLanguage": {"sSearch": ""},

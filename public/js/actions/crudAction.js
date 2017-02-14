@@ -103,11 +103,13 @@ export function updateItem(entity, data, id) {
     };
 }
 
-export function destroyItem(entity, id) {
+export function destroyItem(entity, id, data) {
     return function (dispatch) {
         dispatch(apiAction.apiRequest());
         return apiService.destroy(entity, id).then((response) => {
             // message
+
+            dispatch(fetchAll(entity, data));
         })
             .catch(response => dispatch(errorHandler(response.data.error)));
     };

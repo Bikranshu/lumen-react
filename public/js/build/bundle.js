@@ -34534,9 +34534,9 @@
 	
 	var _table2 = _interopRequireDefault(_table);
 	
-	var _productConfirmBox = __webpack_require__(/*! ./product-confirm-box.component */ 330);
+	var _productModelBox = __webpack_require__(/*! ./product-model-box.component */ 330);
 	
-	var _productConfirmBox2 = _interopRequireDefault(_productConfirmBox);
+	var _productModelBox2 = _interopRequireDefault(_productModelBox);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -34631,7 +34631,7 @@
 	                        )
 	                    )
 	                ),
-	                _react2.default.createElement(_productConfirmBox2.default, null)
+	                _react2.default.createElement(_productModelBox2.default, null)
 	            );
 	        }
 	    }]);
@@ -51934,11 +51934,13 @@
 	    };
 	}
 	
-	function destroyItem(entity, id) {
+	function destroyItem(entity, id, data) {
 	    return function (dispatch) {
 	        dispatch(apiAction.apiRequest());
 	        return apiService.destroy(entity, id).then(function (response) {
 	            // message
+	
+	            dispatch(fetchAll(entity, data));
 	        }).catch(function (response) {
 	            return dispatch(errorHandler(response.data.error));
 	        });
@@ -52197,7 +52199,6 @@
 	    }, {
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
-	
 	            // Clean up the mess when the component unmounts
 	            this.$node.dataTable({
 	                "oLanguage": { "sSearch": "" },
@@ -52297,7 +52298,7 @@
   \*************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -52320,22 +52321,30 @@
 	var Body = function (_Component) {
 	    _inherits(Body, _Component);
 	
-	    function Body() {
+	    function Body(props) {
 	        _classCallCheck(this, Body);
 	
-	        return _possibleConstructorReturn(this, (Body.__proto__ || Object.getPrototypeOf(Body)).apply(this, arguments));
+	        return _possibleConstructorReturn(this, (Body.__proto__ || Object.getPrototypeOf(Body)).call(this, props));
 	    }
 	
 	    _createClass(Body, [{
-	        key: 'render',
+	        key: "handleItem",
+	        value: function handleItem(id, event) {
+	            event.preventDefault();
+	            $("#" + this.props.options.model + "-id").val(id);
+	        }
+	    }, {
+	        key: "render",
 	        value: function render() {
 	            var columns = this.props.columns,
 	                // [{displayName, attribute}]
 	            data = this.props.data,
 	                options = this.props.options;
 	
+	            var _this = this;
+	
 	            return _react2.default.createElement(
-	                'tbody',
+	                "tbody",
 	                null,
 	                data.map(function (item) {
 	                    // handle the column data within each row
@@ -52343,52 +52352,49 @@
 	                        // colData.attribute might be "first_name"
 	                        if (colData.attribute == '') {
 	                            return _react2.default.createElement(
-	                                'td',
+	                                "td",
 	                                { style: { textAlign: "center" }, key: index },
 	                                _react2.default.createElement(
-	                                    'a',
-	                                    { href: "/#/" + options.model + "/" + item.id + "/view", title: 'View',
-	                                        className: 'view-btn' },
-	                                    _react2.default.createElement('i', { className: 'glyphicon glyphicon-eye-open' })
+	                                    "a",
+	                                    { href: "/#/" + options.model + "/" + item.id + "/view", title: "View" },
+	                                    _react2.default.createElement("i", { className: "glyphicon glyphicon-eye-open" })
 	                                ),
-	                                '\xA0',
+	                                "\xA0",
 	                                _react2.default.createElement(
-	                                    'a',
-	                                    { href: "/#/" + options.model + "/" + item.id, title: 'Edit', className: 'edit-btn' },
-	                                    _react2.default.createElement('i', {
-	                                        className: 'glyphicon glyphicon-pencil' })
+	                                    "a",
+	                                    { href: "/#/" + options.model + "/" + item.id, title: "Edit" },
+	                                    _react2.default.createElement("i", { className: "glyphicon glyphicon-pencil" })
 	                                ),
-	                                '\xA0',
+	                                "\xA0",
 	                                _react2.default.createElement(
-	                                    'a',
-	                                    { href: 'javascript:void(0)', 'data-id': item.id, title: 'Remove', className: 'delete-btn',
-	                                        'data-toggle': 'modal', 'data-target': '#product-confirm-modal' },
-	                                    _react2.default.createElement('i', {
-	                                        className: 'glyphicon glyphicon-trash' })
+	                                    "a",
+	                                    { href: "javascript:void(0)", onClick: _this.handleItem.bind(_this, item.id),
+	                                        title: "Remove", "data-toggle": "modal", "data-target": '#' + options.model + '-box-modal' },
+	                                    _react2.default.createElement("i", { className: "glyphicon glyphicon-trash" })
 	                                )
 	                            );
 	                        } else if (colData.attribute == 'status') {
 	                            var classNames = item[colData.attribute] === 0 ? "label label-success" : "label label-warning";
 	                            var status = item[colData.attribute] === 0 ? "Open" : "Close";
 	                            return _react2.default.createElement(
-	                                'td',
+	                                "td",
 	                                { key: index },
 	                                _react2.default.createElement(
-	                                    'span',
+	                                    "span",
 	                                    { className: classNames },
 	                                    status
 	                                )
 	                            );
 	                        } else {
 	                            return _react2.default.createElement(
-	                                'td',
+	                                "td",
 	                                { key: index },
 	                                item[colData.attribute]
 	                            );
 	                        }
 	                    });
 	                    return _react2.default.createElement(
-	                        'tr',
+	                        "tr",
 	                        { key: item.id },
 	                        cells
 	                    );
@@ -52404,12 +52410,12 @@
 
 /***/ },
 /* 330 */
-/*!***********************************************************************!*\
-  !*** ./public/js/components/product/product-confirm-box.component.js ***!
-  \***********************************************************************/
+/*!*********************************************************************!*\
+  !*** ./public/js/components/product/product-model-box.component.js ***!
+  \*********************************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -52421,6 +52427,28 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _redux = __webpack_require__(/*! redux */ 189);
+	
+	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
+	
+	var _lodash = __webpack_require__(/*! lodash */ 321);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _common = __webpack_require__(/*! ../../constants/common */ 322);
+	
+	var _common2 = _interopRequireDefault(_common);
+	
+	var _apiAction = __webpack_require__(/*! ../../actions/apiAction */ 308);
+	
+	var apiAction = _interopRequireWildcard(_apiAction);
+	
+	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 323);
+	
+	var crudAction = _interopRequireWildcard(_crudAction);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -52429,65 +52457,93 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var ProductConfirmBox = function (_Component) {
-	    _inherits(ProductConfirmBox, _Component);
+	//libraries
 	
-	    function ProductConfirmBox() {
-	        _classCallCheck(this, ProductConfirmBox);
 	
-	        return _possibleConstructorReturn(this, (ProductConfirmBox.__proto__ || Object.getPrototypeOf(ProductConfirmBox)).apply(this, arguments));
+	/**
+	 * Import all constants as an object.
+	 */
+	
+	
+	/**
+	 * Import all apiAction and crudAction as an object.
+	 */
+	
+	
+	var ProductModelBox = function (_Component) {
+	    _inherits(ProductModelBox, _Component);
+	
+	    function ProductModelBox(props) {
+	        _classCallCheck(this, ProductModelBox);
+	
+	        var _this = _possibleConstructorReturn(this, (ProductModelBox.__proto__ || Object.getPrototypeOf(ProductModelBox)).call(this, props));
+	
+	        _this.handleRemove = _this.handleRemove.bind(_this);
+	        return _this;
 	    }
 	
-	    _createClass(ProductConfirmBox, [{
-	        key: "render",
+	    _createClass(ProductModelBox, [{
+	        key: 'handleRemove',
+	        value: function handleRemove(event) {
+	            event.preventDefault();
+	            var id = $("#products-id").val();
+	            this.props.actions.destroyItem(_common2.default.PRODUCT, id);
+	            $("#products-box-modal").modal('hide');
+	        }
+	    }, {
+	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "div",
-	                { className: "modal fade", id: "product-confirm-modal", tabIndex: "1", role: "dialog", "aria-labelledby": "confirm-modal-label", "aria-hidden": "true" },
+	                'div',
+	                { className: 'modal fade', id: 'products-box-modal', tabIndex: '1', role: 'dialog',
+	                    'aria-labelledby': 'confirm-modal-label', 'aria-hidden': 'true' },
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "modal-dialog" },
+	                    'div',
+	                    { className: 'modal-dialog' },
 	                    _react2.default.createElement(
-	                        "div",
-	                        { className: "modal-content confirm-modal-box-small" },
+	                        'div',
+	                        { className: 'modal-content confirm-modal-box-small' },
 	                        _react2.default.createElement(
-	                            "div",
-	                            { className: "modal-header" },
+	                            'div',
+	                            { className: 'modal-header' },
 	                            _react2.default.createElement(
-	                                "button",
-	                                { type: "button", className: "close", "data-dismiss": "modal", "aria-hidden": "true" },
-	                                "\xD7"
+	                                'button',
+	                                { type: 'button', className: 'close', 'data-dismiss': 'modal', 'aria-hidden': 'true' },
+	                                '\xD7'
 	                            ),
 	                            _react2.default.createElement(
-	                                "h4",
-	                                { className: "modal-title", id: "myModalLabel" },
-	                                "Delete"
+	                                'h4',
+	                                { className: 'modal-title', id: 'myModalLabel' },
+	                                'Delete'
 	                            )
 	                        ),
 	                        _react2.default.createElement(
-	                            "div",
-	                            { className: "modal-body" },
-	                            _react2.default.createElement("input", { id: "product-id", value: "", type: "hidden" }),
+	                            'div',
+	                            { className: 'modal-body' },
+	                            _react2.default.createElement('input', { id: 'products-id', value: '', type: 'hidden' }),
 	                            _react2.default.createElement(
-	                                "p",
+	                                'p',
 	                                null,
-	                                "Are you sure you want to delete?"
+	                                'Are you sure you want to delete?'
 	                            )
 	                        ),
 	                        _react2.default.createElement(
-	                            "div",
-	                            { className: "modal-footer" },
+	                            'div',
+	                            { className: 'modal-footer' },
 	                            _react2.default.createElement(
-	                                "button",
-	                                { type: "button", className: "product-delete-yes-btn btn btn-primary" },
-	                                _react2.default.createElement("span", { className: "glyphicon glyphicon-ok-sign" }),
-	                                "\xA0Yes"
+	                                'button',
+	                                { type: 'button', className: 'product-delete-yes-btn btn btn-primary',
+	                                    onClick: this.handleRemove },
+	                                _react2.default.createElement('span', {
+	                                    className: 'glyphicon glyphicon-ok-sign' }),
+	                                '\xA0Yes'
 	                            ),
 	                            _react2.default.createElement(
-	                                "button",
-	                                { type: "button", className: "btn btn-default", "data-dismiss": "modal" },
-	                                _react2.default.createElement("span", { className: "glyphicon glyphicon-remove" }),
-	                                "\xA0No"
+	                                'button',
+	                                { type: 'button', className: 'btn btn-default', 'data-dismiss': 'modal' },
+	                                _react2.default.createElement('span', {
+	                                    className: 'glyphicon glyphicon-remove' }),
+	                                '\xA0No'
 	                            )
 	                        )
 	                    )
@@ -52496,10 +52552,21 @@
 	        }
 	    }]);
 	
-	    return ProductConfirmBox;
+	    return ProductModelBox;
 	}(_react.Component);
 	
-	exports.default = ProductConfirmBox;
+	/**
+	 * Map the actions to props.
+	 */
+	
+	
+	function mapDispatchToProps(dispatch) {
+	    return {
+	        actions: (0, _redux.bindActionCreators)(_lodash2.default.assign({}, crudAction, apiAction), dispatch)
+	    };
+	}
+	
+	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(ProductModelBox);
 
 /***/ },
 /* 331 */

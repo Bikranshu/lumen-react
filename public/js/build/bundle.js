@@ -93,15 +93,15 @@
 	
 	var _productList2 = _interopRequireDefault(_productList);
 	
-	var _productForm = __webpack_require__(/*! ./components/product/product-form.component */ 334);
+	var _productForm = __webpack_require__(/*! ./components/product/product-form.component */ 335);
 	
 	var _productForm2 = _interopRequireDefault(_productForm);
 	
-	var _productDetail = __webpack_require__(/*! ./components/product/product-detail.component */ 335);
+	var _productDetail = __webpack_require__(/*! ./components/product/product-detail.component */ 336);
 	
 	var _productDetail2 = _interopRequireDefault(_productDetail);
 	
-	var _store = __webpack_require__(/*! ./store/store */ 336);
+	var _store = __webpack_require__(/*! ./store/store */ 337);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -34544,7 +34544,7 @@
 	
 	var _productModelBox2 = _interopRequireDefault(_productModelBox);
 	
-	var _message = __webpack_require__(/*! ../common/flash/message.component */ 332);
+	var _message = __webpack_require__(/*! ../common/flash/message.component */ 333);
 	
 	var _message2 = _interopRequireDefault(_message);
 	
@@ -51937,7 +51937,7 @@
 	        dispatch(apiAction.apiRequest());
 	        return apiService.store(entity, data).then(function (response) {
 	
-	            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' saved successfully.'));
+	            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' added successfully.'));
 	
 	            _reactRouter.browserHistory.goBack();
 	        }).catch(function (response) {
@@ -52507,6 +52507,10 @@
 	
 	var _common2 = _interopRequireDefault(_common);
 	
+	var _message = __webpack_require__(/*! ../../constants/message */ 332);
+	
+	var _message2 = _interopRequireDefault(_message);
+	
 	var _apiAction = __webpack_require__(/*! ../../actions/apiAction */ 308);
 	
 	var apiAction = _interopRequireWildcard(_apiAction);
@@ -52592,7 +52596,7 @@
 	                            _react2.default.createElement(
 	                                'p',
 	                                null,
-	                                'Are you sure you want to delete?'
+	                                _message2.default.DELETE_CONFIRM_MESSAGE
 	                            )
 	                        ),
 	                        _react2.default.createElement(
@@ -52634,10 +52638,32 @@
 	    };
 	}
 	
+	/**
+	 * Connect the component to the Redux store.
+	 */
 	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(ProductModelBox);
 
 /***/ },
 /* 332 */
+/*!****************************************!*\
+  !*** ./public/js/constants/message.js ***!
+  \****************************************/
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var messages = {
+	    DELETE_CONFIRM_MESSAGE: 'Are you sure you want to delete this product?'
+	
+	};
+	
+	exports.default = messages;
+
+/***/ },
+/* 333 */
 /*!****************************************************************!*\
   !*** ./public/js/components/common/flash/message.component.js ***!
   \****************************************************************/
@@ -52655,7 +52681,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _classnames = __webpack_require__(/*! classnames */ 333);
+	var _classnames = __webpack_require__(/*! classnames */ 334);
 	
 	var _classnames2 = _interopRequireDefault(_classnames);
 	
@@ -52704,7 +52730,7 @@
 	exports.default = FlashMessage;
 
 /***/ },
-/* 333 */
+/* 334 */
 /*!*******************************!*\
   !*** ./~/classnames/index.js ***!
   \*******************************/
@@ -52761,7 +52787,7 @@
 
 
 /***/ },
-/* 334 */
+/* 335 */
 /*!****************************************************************!*\
   !*** ./public/js/components/product/product-form.component.js ***!
   \****************************************************************/
@@ -53078,10 +53104,13 @@
 	    };
 	}
 	
+	/**
+	 * Connect the component to the Redux store.
+	 */
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ProductForm);
 
 /***/ },
-/* 335 */
+/* 336 */
 /*!******************************************************************!*\
   !*** ./public/js/components/product/product-detail.component.js ***!
   \******************************************************************/
@@ -53316,10 +53345,13 @@
 	    };
 	}
 	
+	/**
+	 * Connect the component to the Redux store.
+	 */
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ProductDetail);
 
 /***/ },
-/* 336 */
+/* 337 */
 /*!**********************************!*\
   !*** ./public/js/store/store.js ***!
   \**********************************/
@@ -53333,15 +53365,15 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 189);
 	
-	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 337);
+	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 338);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reduxLogger = __webpack_require__(/*! redux-logger */ 338);
+	var _reduxLogger = __webpack_require__(/*! redux-logger */ 339);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
-	var _rootReducer = __webpack_require__(/*! ../reducers/rootReducer */ 344);
+	var _rootReducer = __webpack_require__(/*! ../reducers/rootReducer */ 345);
 	
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 	
@@ -53365,7 +53397,7 @@
 	exports.default = store;
 
 /***/ },
-/* 337 */
+/* 338 */
 /*!************************************!*\
   !*** ./~/redux-thunk/lib/index.js ***!
   \************************************/
@@ -53396,7 +53428,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 338 */
+/* 339 */
 /*!*************************************!*\
   !*** ./~/redux-logger/lib/index.js ***!
   \*************************************/
@@ -53410,11 +53442,11 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _core = __webpack_require__(/*! ./core */ 339);
+	var _core = __webpack_require__(/*! ./core */ 340);
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 340);
+	var _helpers = __webpack_require__(/*! ./helpers */ 341);
 	
-	var _defaults = __webpack_require__(/*! ./defaults */ 343);
+	var _defaults = __webpack_require__(/*! ./defaults */ 344);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -53517,7 +53549,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 339 */
+/* 340 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/core.js ***!
   \************************************/
@@ -53533,9 +53565,9 @@
 	
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 340);
+	var _helpers = __webpack_require__(/*! ./helpers */ 341);
 	
-	var _diff = __webpack_require__(/*! ./diff */ 341);
+	var _diff = __webpack_require__(/*! ./diff */ 342);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -53662,7 +53694,7 @@
 	}
 
 /***/ },
-/* 340 */
+/* 341 */
 /*!***************************************!*\
   !*** ./~/redux-logger/lib/helpers.js ***!
   \***************************************/
@@ -53689,7 +53721,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 341 */
+/* 342 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/diff.js ***!
   \************************************/
@@ -53702,7 +53734,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(/*! deep-diff */ 342);
+	var _deepDiff = __webpack_require__(/*! deep-diff */ 343);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -53791,7 +53823,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 342 */
+/* 343 */
 /*!******************************!*\
   !*** ./~/deep-diff/index.js ***!
   \******************************/
@@ -54223,7 +54255,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 343 */
+/* 344 */
 /*!****************************************!*\
   !*** ./~/redux-logger/lib/defaults.js ***!
   \****************************************/
@@ -54277,7 +54309,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 344 */
+/* 345 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/rootReducer.js ***!
   \*******************************************/
@@ -54293,19 +54325,19 @@
 	
 	var _reactRouterRedux = __webpack_require__(/*! react-router-redux */ 272);
 	
-	var _authReducer = __webpack_require__(/*! ./authReducer */ 345);
+	var _authReducer = __webpack_require__(/*! ./authReducer */ 346);
 	
 	var _authReducer2 = _interopRequireDefault(_authReducer);
 	
-	var _crudReducer = __webpack_require__(/*! ./crudReducer */ 346);
+	var _crudReducer = __webpack_require__(/*! ./crudReducer */ 347);
 	
 	var _crudReducer2 = _interopRequireDefault(_crudReducer);
 	
-	var _apiReducer = __webpack_require__(/*! ./apiReducer */ 347);
+	var _apiReducer = __webpack_require__(/*! ./apiReducer */ 348);
 	
 	var _apiReducer2 = _interopRequireDefault(_apiReducer);
 	
-	var _flashMessageReducer = __webpack_require__(/*! ./flashMessageReducer */ 348);
+	var _flashMessageReducer = __webpack_require__(/*! ./flashMessageReducer */ 349);
 	
 	var _flashMessageReducer2 = _interopRequireDefault(_flashMessageReducer);
 	
@@ -54323,7 +54355,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 345 */
+/* 346 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/authReducer.js ***!
   \*******************************************/
@@ -54390,7 +54422,7 @@
 	 */
 
 /***/ },
-/* 346 */
+/* 347 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/crudReducer.js ***!
   \*******************************************/
@@ -54473,7 +54505,7 @@
 	// Import constants
 
 /***/ },
-/* 347 */
+/* 348 */
 /*!******************************************!*\
   !*** ./public/js/reducers/apiReducer.js ***!
   \******************************************/
@@ -54542,7 +54574,7 @@
 	// Import constants
 
 /***/ },
-/* 348 */
+/* 349 */
 /*!***************************************************!*\
   !*** ./public/js/reducers/flashMessageReducer.js ***!
   \***************************************************/
@@ -54563,10 +54595,6 @@
 	            newState.message['type'] = action.message.type;
 	            newState.message['text'] = action.message.text;
 	            return newState;
-	        // return _.assign({}, state, {
-	        //     type: action.message.type,
-	        //     text: action.message.text
-	        // });
 	
 	        default:
 	            return state;

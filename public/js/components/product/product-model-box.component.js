@@ -9,6 +9,7 @@ import _ from 'lodash';
  * Import all constants as an object.
  */
 import Common from '../../constants/common';
+import Message from '../../constants/message';
 
 /**
  * Import all apiAction and crudAction as an object.
@@ -45,7 +46,7 @@ class ProductModelBox extends Component {
 
                         <div className="modal-body">
                             <input id="products-id" value="" type="hidden"/>
-                            <p>Are you sure you want to delete?</p>
+                            <p>{Message.DELETE_CONFIRM_MESSAGE}</p>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="product-delete-yes-btn btn btn-primary"
@@ -73,4 +74,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
+/**
+ * Connect the component to the Redux store.
+ */
 export default connect(null, mapDispatchToProps)(ProductModelBox)

@@ -14,7 +14,7 @@ var initialState = {
  */
 export default function (state, action) {
     state = state || initialState;
-    let newState
+    let newState;
 
     switch (action.type) {
         case ActionType.API_REQUEST:

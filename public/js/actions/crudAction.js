@@ -91,7 +91,7 @@ export function storeItem(entity, data) {
         dispatch(apiAction.apiRequest());
         return apiService.store(entity, data).then((response) => {
 
-            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' saved successfully.'));
+            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' added successfully.'));
 
             browserHistory.goBack();
         })

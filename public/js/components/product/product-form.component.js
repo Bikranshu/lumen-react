@@ -190,4 +190,7 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
+/**
+ * Connect the component to the Redux store.
+ */
 export default connect(mapStateToProps, mapDispatchToProps)(ProductForm)

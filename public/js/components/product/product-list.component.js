@@ -15,10 +15,12 @@ import Common from '../../constants/common';
  */
 import * as apiAction from '../../actions/apiAction';
 import * as crudAction from '../../actions/crudAction';
+import * as flashMessage  from '../../actions/flashMessage';
 
 // Import custom components
 import DataTable from '../common/table/table.component';
 import ProductModelBox from './product-model-box.component';
+import FlashMessage from '../common/flash/message.component';
 
 class ProductList extends Component {
 
@@ -48,6 +50,7 @@ class ProductList extends Component {
     render() {
 
         let data = this.props.products;
+        let message = this.props.message;
 
         return (
             <div className="row">
@@ -60,9 +63,13 @@ class ProductList extends Component {
                                     className="glyphicon glyphicon-plus"></i>&nbsp;Add Product</a>
                             </div>
                         </div>
+
+                        {message !== null && <FlashMessage message={message} />}
+
                         <div className="box-body">
                             {data.length > 0 && <DataTable columns={columns} data={data} options={options}/>}
                         </div>
+
                     </div>
                 </div>
 
@@ -80,7 +87,8 @@ class ProductList extends Component {
 function mapStateToProps(state) {
     return {
         products: state.crud.products,
-        apiState: state.api
+        apiState: state.api,
+        message: state.flash.message
     }
 }
 
@@ -89,7 +97,7 @@ function mapStateToProps(state) {
  */
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(_.assign({}, crudAction, apiAction), dispatch)
+        actions: bindActionCreators(_.assign({}, crudAction, apiAction, flashMessage), dispatch)
     }
 }
 

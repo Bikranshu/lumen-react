@@ -21,6 +21,11 @@ import * as apiService from '../services/apiService';
 import * as Converter from '../utils/converter';
 
 /**
+ * Import flashMessage.
+ */
+import * as FlashMessage from './flashMessage';
+
+/**
  * Actions that are dispatched from crudAction
  */
 var commonActions = {
@@ -85,7 +90,9 @@ export function storeItem(entity, data) {
     return function (dispatch) {
         dispatch(apiAction.apiRequest());
         return apiService.store(entity, data).then((response) => {
-            // message
+
+            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' saved successfully.'));
+
             browserHistory.goBack();
         })
             .catch(response => dispatch(errorHandler(response.data.error)));
@@ -96,7 +103,9 @@ export function updateItem(entity, data, id) {
     return function (dispatch) {
         dispatch(apiAction.apiRequest());
         return apiService.update(entity, data, id).then((response) => {
-            // message
+
+            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' updated successfully.'));
+
             browserHistory.goBack();
         })
             .catch(response => dispatch(errorHandler(response.data.error)));
@@ -107,7 +116,8 @@ export function destroyItem(entity, id, data) {
     return function (dispatch) {
         dispatch(apiAction.apiRequest());
         return apiService.destroy(entity, id).then((response) => {
-            // message
+
+            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' deleted successfully.'));
 
             dispatch(fetchAll(entity, data));
         })

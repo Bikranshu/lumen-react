@@ -12,18 +12,19 @@ var initialState = {
 /**
  * A reducer takes two arguments, the current state and an action.
  */
-export default function (state , action) {
+export default function (state, action) {
     state = state || initialState;
+    let newState
 
     switch (action.type) {
         case ActionType.API_REQUEST:
-            var newState = _.cloneDeep(state);
+            newState = _.cloneDeep(state);
             newState.isRequesting = true;
             newState.numberOfRequests++;
             return newState;
 
         case ActionType.API_RESPONSE:
-            var newState = _.cloneDeep(state);
+            newState = _.cloneDeep(state);
             newState.numberOfRequests--;
             //set it false only if all responses are received
             if (newState.numberOfRequests <= 0) {
@@ -32,7 +33,7 @@ export default function (state , action) {
             return newState;
 
         case ActionType.API_CLEAR_STATE:
-            var newState = _.cloneDeep(state);
+            newState = _.cloneDeep(state);
             newState.numberOfRequests = 0;
             newState.isRequesting = false;
             return newState;

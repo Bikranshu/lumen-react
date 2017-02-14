@@ -12,7 +12,6 @@ class Body extends Component {
 
     }
 
-
     render() {
         let columns = this.props.columns, // [{displayName, attribute}]
             data = this.props.data,

@@ -38,6 +38,18 @@ class Table extends Component {
         });
     }
 
+    componentWillReceiveProps(nextProps) {
+        // return this.props !== nextProps
+        this.$node.dataTable({
+            "oLanguage": {"sSearch": ""},
+            "aaSorting": [[1, "desc"]],
+            "aoColumnDefs": [
+                {'bSortable': false, 'aTargets': [0, 5]}
+            ],
+            "bDestroy": true
+        });
+    }
+
     render() {
 
         return (

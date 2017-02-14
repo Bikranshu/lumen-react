@@ -15,6 +15,7 @@ import Common from '../../constants/common';
  */
 import * as apiAction from '../../actions/apiAction';
 import * as crudAction from '../../actions/crudAction';
+import * as flashMessage  from '../../actions/flashMessage';
 
 class ProductForm extends Component {
 
@@ -175,7 +176,8 @@ class ProductForm extends Component {
 function mapStateToProps(state) {
     return {
         selectedItem: state.crud.selectedItem,
-        apiState: state.api
+        apiState: state.api,
+        message: state.flash.message
     }
 }
 
@@ -184,7 +186,7 @@ function mapStateToProps(state) {
  */
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(_.assign({}, crudAction, apiAction), dispatch)
+        actions: bindActionCreators(_.assign({}, crudAction, apiAction, flashMessage), dispatch)
     }
 }
 

@@ -22,4 +22,7 @@ export const API_RESPONSE = 'API_RESPONSE';
 export const API_CLEAR_STATE = 'API_CLEAR_STATE';
 
 
+export const FLASH_MESSAGE = 'FLASH_MESSAGE';
+
+
 

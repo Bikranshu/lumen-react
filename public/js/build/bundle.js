@@ -93,15 +93,15 @@
 	
 	var _productList2 = _interopRequireDefault(_productList);
 	
-	var _productForm = __webpack_require__(/*! ./components/product/product-form.component */ 331);
+	var _productForm = __webpack_require__(/*! ./components/product/product-form.component */ 334);
 	
 	var _productForm2 = _interopRequireDefault(_productForm);
 	
-	var _productDetail = __webpack_require__(/*! ./components/product/product-detail.component */ 332);
+	var _productDetail = __webpack_require__(/*! ./components/product/product-detail.component */ 335);
 	
 	var _productDetail2 = _interopRequireDefault(_productDetail);
 	
-	var _store = __webpack_require__(/*! ./store/store */ 333);
+	var _store = __webpack_require__(/*! ./store/store */ 336);
 	
 	var _store2 = _interopRequireDefault(_store);
 	
@@ -32794,6 +32794,8 @@
 	var API_REQUEST = exports.API_REQUEST = 'API_REQUEST';
 	var API_RESPONSE = exports.API_RESPONSE = 'API_RESPONSE';
 	var API_CLEAR_STATE = exports.API_CLEAR_STATE = 'API_CLEAR_STATE';
+	
+	var FLASH_MESSAGE = exports.FLASH_MESSAGE = 'FLASH_MESSAGE';
 
 /***/ },
 /* 307 */
@@ -32859,7 +32861,7 @@
 	}
 	
 	// Everytime a response is received, this action gets called
-	// Import constants
+	// Import actionType constants
 	function apiResponse() {
 	    return {
 	        type: ActionType.API_RESPONSE
@@ -34530,13 +34532,21 @@
 	
 	var crudAction = _interopRequireWildcard(_crudAction);
 	
-	var _table = __webpack_require__(/*! ../common/table/table.component */ 327);
+	var _flashMessage = __webpack_require__(/*! ../../actions/flashMessage */ 327);
+	
+	var flashMessage = _interopRequireWildcard(_flashMessage);
+	
+	var _table = __webpack_require__(/*! ../common/table/table.component */ 328);
 	
 	var _table2 = _interopRequireDefault(_table);
 	
-	var _productModelBox = __webpack_require__(/*! ./product-model-box.component */ 330);
+	var _productModelBox = __webpack_require__(/*! ./product-model-box.component */ 331);
 	
 	var _productModelBox2 = _interopRequireDefault(_productModelBox);
+	
+	var _message = __webpack_require__(/*! ../common/flash/message.component */ 332);
+	
+	var _message2 = _interopRequireDefault(_message);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -34594,6 +34604,7 @@
 	        value: function render() {
 	
 	            var data = this.props.products;
+	            var message = this.props.message;
 	
 	            return _react2.default.createElement(
 	                'div',
@@ -34624,6 +34635,7 @@
 	                                )
 	                            )
 	                        ),
+	                        message !== null && _react2.default.createElement(_message2.default, { message: message }),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'box-body' },
@@ -34652,7 +34664,8 @@
 	function mapStateToProps(state) {
 	    return {
 	        products: state.crud.products,
-	        apiState: state.api
+	        apiState: state.api,
+	        message: state.flash.message
 	    };
 	}
 	
@@ -34661,7 +34674,7 @@
 	 */
 	function mapDispatchToProps(dispatch) {
 	    return {
-	        actions: (0, _redux.bindActionCreators)(_lodash2.default.assign({}, crudAction, apiAction), dispatch)
+	        actions: (0, _redux.bindActionCreators)(_lodash2.default.assign({}, crudAction, apiAction, flashMessage), dispatch)
 	    };
 	}
 	
@@ -51828,6 +51841,10 @@
 	
 	var Converter = _interopRequireWildcard(_converter);
 	
+	var _flashMessage = __webpack_require__(/*! ./flashMessage */ 327);
+	
+	var FlashMessage = _interopRequireWildcard(_flashMessage);
+	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	/**
@@ -51836,12 +51853,12 @@
 	
 	
 	/**
-	 * Import all apiService as an object.
+	 * Import all converter as an object.
 	 */
 	
 	
 	/**
-	 * Import all ActionType as an object.
+	 * Import all apiAction as an object.
 	 */
 	var commonActions = {
 	    list: function list(entity, data) {
@@ -51881,12 +51898,17 @@
 	 */
 	
 	/**
-	 * Import all converter as an object.
+	 * Import flashMessage.
 	 */
 	
 	
 	/**
-	 * Import all apiAction as an object.
+	 * Import all apiService as an object.
+	 */
+	
+	
+	/**
+	 * Import all ActionType as an object.
 	 */
 	function fetchAll(entity, data) {
 	    return function (dispatch) {
@@ -51914,7 +51936,9 @@
 	    return function (dispatch) {
 	        dispatch(apiAction.apiRequest());
 	        return apiService.store(entity, data).then(function (response) {
-	            // message
+	
+	            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' saved successfully.'));
+	
 	            _reactRouter.browserHistory.goBack();
 	        }).catch(function (response) {
 	            return dispatch(errorHandler(response.data.error));
@@ -51926,7 +51950,9 @@
 	    return function (dispatch) {
 	        dispatch(apiAction.apiRequest());
 	        return apiService.update(entity, data, id).then(function (response) {
-	            // message
+	
+	            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' updated successfully.'));
+	
 	            _reactRouter.browserHistory.goBack();
 	        }).catch(function (response) {
 	            return dispatch(errorHandler(response.data.error));
@@ -51938,7 +51964,8 @@
 	    return function (dispatch) {
 	        dispatch(apiAction.apiRequest());
 	        return apiService.destroy(entity, id).then(function (response) {
-	            // message
+	
+	            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' deleted successfully.'));
 	
 	            dispatch(fetchAll(entity, data));
 	        }).catch(function (response) {
@@ -52135,6 +52162,36 @@
 
 /***/ },
 /* 327 */
+/*!*******************************************!*\
+  !*** ./public/js/actions/flashMessage.js ***!
+  \*******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.flashMessage = flashMessage;
+	
+	var _actionType = __webpack_require__(/*! ../constants/actionType */ 306);
+	
+	/**
+	 * These are the actions dispatched whenever the API is used
+	 */
+	
+	function flashMessage(type, text) {
+	    return {
+	        type: _actionType.FLASH_MESSAGE,
+	        message: {
+	            type: type,
+	            text: text
+	        }
+	    };
+	} // Import constants
+
+/***/ },
+/* 328 */
 /*!**************************************************************!*\
   !*** ./public/js/components/common/table/table.component.js ***!
   \**************************************************************/
@@ -52152,11 +52209,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _header = __webpack_require__(/*! ./header.component */ 328);
+	var _header = __webpack_require__(/*! ./header.component */ 329);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
-	var _body = __webpack_require__(/*! ./body.component */ 329);
+	var _body = __webpack_require__(/*! ./body.component */ 330);
 	
 	var _body2 = _interopRequireDefault(_body);
 	
@@ -52208,6 +52265,17 @@
 	            });
 	        }
 	    }, {
+	        key: 'componentWillReceiveProps',
+	        value: function componentWillReceiveProps(nextProps) {
+	            // return this.props !== nextProps
+	            this.$node.dataTable({
+	                "oLanguage": { "sSearch": "" },
+	                "aaSorting": [[1, "desc"]],
+	                "aoColumnDefs": [{ 'bSortable': false, 'aTargets': [0, 5] }],
+	                "bDestroy": true
+	            });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	
@@ -52226,7 +52294,7 @@
 	exports.default = Table;
 
 /***/ },
-/* 328 */
+/* 329 */
 /*!***************************************************************!*\
   !*** ./public/js/components/common/table/header.component.js ***!
   \***************************************************************/
@@ -52292,7 +52360,7 @@
 	exports.default = Header;
 
 /***/ },
-/* 329 */
+/* 330 */
 /*!*************************************************************!*\
   !*** ./public/js/components/common/table/body.component.js ***!
   \*************************************************************/
@@ -52409,7 +52477,7 @@
 	exports.default = Body;
 
 /***/ },
-/* 330 */
+/* 331 */
 /*!*********************************************************************!*\
   !*** ./public/js/components/product/product-model-box.component.js ***!
   \*********************************************************************/
@@ -52569,7 +52637,131 @@
 	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(ProductModelBox);
 
 /***/ },
-/* 331 */
+/* 332 */
+/*!****************************************************************!*\
+  !*** ./public/js/components/common/flash/message.component.js ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(/*! classnames */ 333);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var FlashMessage = function (_Component) {
+	    _inherits(FlashMessage, _Component);
+	
+	    function FlashMessage(props) {
+	        _classCallCheck(this, FlashMessage);
+	
+	        return _possibleConstructorReturn(this, (FlashMessage.__proto__ || Object.getPrototypeOf(FlashMessage)).call(this, props));
+	    }
+	
+	    _createClass(FlashMessage, [{
+	        key: 'render',
+	        value: function render() {
+	            var type = this.props.message.type;
+	            var text = this.props.message.text;
+	            return _react2.default.createElement(
+	                'div',
+	                { className: (0, _classnames2.default)('alert', {
+	                        'alert-success': type === 'success',
+	                        'alert-danger': type === 'error',
+	                        'alert-warning': type === 'warning',
+	                        'alert-info': type === 'info'
+	                    }) },
+	                text
+	            );
+	        }
+	    }]);
+	
+	    return FlashMessage;
+	}(_react.Component);
+	
+	FlashMessage.propTypes = {
+	    message: _react.PropTypes.object.isRequired
+	};
+	
+	exports.default = FlashMessage;
+
+/***/ },
+/* 333 */
+/*!*******************************!*\
+  !*** ./~/classnames/index.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+	
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = [];
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+	
+			return classes.join(' ');
+		}
+	
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 334 */
 /*!****************************************************************!*\
   !*** ./public/js/components/product/product-form.component.js ***!
   \****************************************************************/
@@ -52606,6 +52798,10 @@
 	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 323);
 	
 	var crudAction = _interopRequireWildcard(_crudAction);
+	
+	var _flashMessage = __webpack_require__(/*! ../../actions/flashMessage */ 327);
+	
+	var flashMessage = _interopRequireWildcard(_flashMessage);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
@@ -52868,7 +53064,8 @@
 	function mapStateToProps(state) {
 	    return {
 	        selectedItem: state.crud.selectedItem,
-	        apiState: state.api
+	        apiState: state.api,
+	        message: state.flash.message
 	    };
 	}
 	
@@ -52877,14 +53074,14 @@
 	 */
 	function mapDispatchToProps(dispatch) {
 	    return {
-	        actions: (0, _redux.bindActionCreators)(_lodash2.default.assign({}, crudAction, apiAction), dispatch)
+	        actions: (0, _redux.bindActionCreators)(_lodash2.default.assign({}, crudAction, apiAction, flashMessage), dispatch)
 	    };
 	}
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ProductForm);
 
 /***/ },
-/* 332 */
+/* 335 */
 /*!******************************************************************!*\
   !*** ./public/js/components/product/product-detail.component.js ***!
   \******************************************************************/
@@ -53122,7 +53319,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ProductDetail);
 
 /***/ },
-/* 333 */
+/* 336 */
 /*!**********************************!*\
   !*** ./public/js/store/store.js ***!
   \**********************************/
@@ -53136,15 +53333,15 @@
 	
 	var _redux = __webpack_require__(/*! redux */ 189);
 	
-	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 334);
+	var _reduxThunk = __webpack_require__(/*! redux-thunk */ 337);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reduxLogger = __webpack_require__(/*! redux-logger */ 335);
+	var _reduxLogger = __webpack_require__(/*! redux-logger */ 338);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
-	var _rootReducer = __webpack_require__(/*! ../reducers/rootReducer */ 341);
+	var _rootReducer = __webpack_require__(/*! ../reducers/rootReducer */ 344);
 	
 	var _rootReducer2 = _interopRequireDefault(_rootReducer);
 	
@@ -53168,7 +53365,7 @@
 	exports.default = store;
 
 /***/ },
-/* 334 */
+/* 337 */
 /*!************************************!*\
   !*** ./~/redux-thunk/lib/index.js ***!
   \************************************/
@@ -53199,7 +53396,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 335 */
+/* 338 */
 /*!*************************************!*\
   !*** ./~/redux-logger/lib/index.js ***!
   \*************************************/
@@ -53213,11 +53410,11 @@
 	
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 	
-	var _core = __webpack_require__(/*! ./core */ 336);
+	var _core = __webpack_require__(/*! ./core */ 339);
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 337);
+	var _helpers = __webpack_require__(/*! ./helpers */ 340);
 	
-	var _defaults = __webpack_require__(/*! ./defaults */ 340);
+	var _defaults = __webpack_require__(/*! ./defaults */ 343);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -53320,7 +53517,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 336 */
+/* 339 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/core.js ***!
   \************************************/
@@ -53336,9 +53533,9 @@
 	
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(/*! ./helpers */ 337);
+	var _helpers = __webpack_require__(/*! ./helpers */ 340);
 	
-	var _diff = __webpack_require__(/*! ./diff */ 338);
+	var _diff = __webpack_require__(/*! ./diff */ 341);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -53465,7 +53662,7 @@
 	}
 
 /***/ },
-/* 337 */
+/* 340 */
 /*!***************************************!*\
   !*** ./~/redux-logger/lib/helpers.js ***!
   \***************************************/
@@ -53492,7 +53689,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 338 */
+/* 341 */
 /*!************************************!*\
   !*** ./~/redux-logger/lib/diff.js ***!
   \************************************/
@@ -53505,7 +53702,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(/*! deep-diff */ 339);
+	var _deepDiff = __webpack_require__(/*! deep-diff */ 342);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -53594,7 +53791,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 339 */
+/* 342 */
 /*!******************************!*\
   !*** ./~/deep-diff/index.js ***!
   \******************************/
@@ -54026,7 +54223,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 340 */
+/* 343 */
 /*!****************************************!*\
   !*** ./~/redux-logger/lib/defaults.js ***!
   \****************************************/
@@ -54080,7 +54277,7 @@
 	module.exports = exports["default"];
 
 /***/ },
-/* 341 */
+/* 344 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/rootReducer.js ***!
   \*******************************************/
@@ -54096,32 +54293,37 @@
 	
 	var _reactRouterRedux = __webpack_require__(/*! react-router-redux */ 272);
 	
-	var _authReducer = __webpack_require__(/*! ./authReducer */ 342);
+	var _authReducer = __webpack_require__(/*! ./authReducer */ 345);
 	
 	var _authReducer2 = _interopRequireDefault(_authReducer);
 	
-	var _crudReducer = __webpack_require__(/*! ./crudReducer */ 343);
+	var _crudReducer = __webpack_require__(/*! ./crudReducer */ 346);
 	
 	var _crudReducer2 = _interopRequireDefault(_crudReducer);
 	
-	var _apiReducer = __webpack_require__(/*! ./apiReducer */ 344);
+	var _apiReducer = __webpack_require__(/*! ./apiReducer */ 347);
 	
 	var _apiReducer2 = _interopRequireDefault(_apiReducer);
 	
+	var _flashMessageReducer = __webpack_require__(/*! ./flashMessageReducer */ 348);
+	
+	var _flashMessageReducer2 = _interopRequireDefault(_flashMessageReducer);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// Import custom components
 	var rootReducer = (0, _redux.combineReducers)({
 	    auth: _authReducer2.default,
 	    crud: _crudReducer2.default,
 	    api: _apiReducer2.default,
+	    flash: _flashMessageReducer2.default,
 	    routing: _reactRouterRedux.routerReducer
 	});
 	
-	// Import custom components
 	exports.default = rootReducer;
 
 /***/ },
-/* 342 */
+/* 345 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/authReducer.js ***!
   \*******************************************/
@@ -54188,7 +54390,7 @@
 	 */
 
 /***/ },
-/* 343 */
+/* 346 */
 /*!*******************************************!*\
   !*** ./public/js/reducers/crudReducer.js ***!
   \*******************************************/
@@ -54202,10 +54404,11 @@
 	
 	exports.default = function (state, action) {
 	    state = state || initialState;
+	    var newState = void 0;
 	
 	    switch (action.type) {
 	        case ActionType.LIST:
-	            var newState = _lodash2.default.cloneDeep(state);
+	            newState = _lodash2.default.cloneDeep(state);
 	            newState[action.entity + 's'] = _lodash2.default.cloneDeep(action.data.data);
 	            return newState;
 	
@@ -54220,19 +54423,19 @@
 	            return newState;
 	
 	        case ActionType.DELETE:
-	            var newState = _lodash2.default.cloneDeep(state);
+	            newState = _lodash2.default.cloneDeep(state);
 	            var data = newState[action.entity + 's'];
 	            var index = _lodash2.default.indexOf(data, _lodash2.default.find(data, { id: action.id }));
 	            data.splice(index, 1);
 	            return newState;
 	
 	        case ActionType.CLEAR_LIST:
-	            var newState = _lodash2.default.cloneDeep(state);
+	            newState = _lodash2.default.cloneDeep(state);
 	            newState[action.entity + 's'] = {};
 	            return newState;
 	
 	        case ActionType.CLEAR_SELECTED_ITEM:
-	            var newState = _lodash2.default.cloneDeep(state);
+	            newState = _lodash2.default.cloneDeep(state);
 	            newState.selectedItem[action.entity] = {};
 	            return newState;
 	
@@ -54270,7 +54473,7 @@
 	// Import constants
 
 /***/ },
-/* 344 */
+/* 347 */
 /*!******************************************!*\
   !*** ./public/js/reducers/apiReducer.js ***!
   \******************************************/
@@ -54284,16 +54487,17 @@
 	
 	exports.default = function (state, action) {
 	    state = state || initialState;
+	    var newState = void 0;
 	
 	    switch (action.type) {
 	        case ActionType.API_REQUEST:
-	            var newState = _lodash2.default.cloneDeep(state);
+	            newState = _lodash2.default.cloneDeep(state);
 	            newState.isRequesting = true;
 	            newState.numberOfRequests++;
 	            return newState;
 	
 	        case ActionType.API_RESPONSE:
-	            var newState = _lodash2.default.cloneDeep(state);
+	            newState = _lodash2.default.cloneDeep(state);
 	            newState.numberOfRequests--;
 	            //set it false only if all responses are received
 	            if (newState.numberOfRequests <= 0) {
@@ -54302,7 +54506,7 @@
 	            return newState;
 	
 	        case ActionType.API_CLEAR_STATE:
-	            var newState = _lodash2.default.cloneDeep(state);
+	            newState = _lodash2.default.cloneDeep(state);
 	            newState.numberOfRequests = 0;
 	            newState.isRequesting = false;
 	            return newState;
@@ -54336,6 +54540,63 @@
 	
 	
 	// Import constants
+
+/***/ },
+/* 348 */
+/*!***************************************************!*\
+  !*** ./public/js/reducers/flashMessageReducer.js ***!
+  \***************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	exports.default = function (state, action) {
+	    state = state || initialState;
+	
+	    switch (action.type) {
+	        case _actionType.FLASH_MESSAGE:
+	            var newState = _lodash2.default.cloneDeep(state);
+	            newState.message['type'] = action.message.type;
+	            newState.message['text'] = action.message.text;
+	            return newState;
+	        // return _.assign({}, state, {
+	        //     type: action.message.type,
+	        //     text: action.message.text
+	        // });
+	
+	        default:
+	            return state;
+	    }
+	};
+	
+	var _lodash = __webpack_require__(/*! lodash */ 321);
+	
+	var _lodash2 = _interopRequireDefault(_lodash);
+	
+	var _actionType = __webpack_require__(/*! ../constants/actionType */ 306);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	//libraries
+	var initialState = {
+	    message: {
+	        type: null,
+	        text: null
+	    }
+	};
+	
+	/**
+	 * A reducer takes two arguments, the current state and an action.
+	 */
+	
+	
+	/**
+	 * Import actionType.
+	 */
 
 /***/ }
 /******/ ]);

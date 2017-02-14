@@ -17,10 +17,11 @@ var initialState = {
  */
 export default function (state, action) {
     state = state || initialState;
+    let newState;
 
     switch (action.type) {
         case ActionType.LIST:
-            var newState = _.cloneDeep(state);
+            newState = _.cloneDeep(state);
             newState[action.entity + 's'] = _.cloneDeep(action.data.data);
             return newState;
 
@@ -35,19 +36,19 @@ export default function (state, action) {
             return newState;
 
         case ActionType.DELETE:
-            var newState = _.cloneDeep(state);
-            var data = newState[action.entity + 's'];
-            var index = _.indexOf(data, _.find(data, {id: action.id}));
+            newState = _.cloneDeep(state);
+            let data = newState[action.entity + 's'];
+            let index = _.indexOf(data, _.find(data, {id: action.id}));
             data.splice(index, 1);
             return newState;
 
         case ActionType.CLEAR_LIST:
-            var newState = _.cloneDeep(state);
+            newState = _.cloneDeep(state);
             newState[action.entity + 's'] = {};
             return newState;
 
         case ActionType.CLEAR_SELECTED_ITEM:
-            var newState = _.cloneDeep(state);
+            newState = _.cloneDeep(state);
             newState.selectedItem[action.entity] = {};
             return newState;
 

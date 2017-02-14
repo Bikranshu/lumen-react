@@ -1,8 +1,10 @@
 Lumen 5.3 Framework + ReactJS + AdminLTE
 
-## Versions
+## Technology Used
 - Lumen 5.3
-- ReactJS
+- React
+- Redux
+- Webpack
 - AdminLTE
 
 
@@ -16,7 +18,8 @@ Lumen 5.3 Framework + ReactJS + AdminLTE
 
 ## Installation
 
-- clone repository
+- clone app from repository:
+(```$ git clone https://github.com/Bikranshu/lumen-react.git```)
 - go to project folder
 - run the following command on terminal 
 ```

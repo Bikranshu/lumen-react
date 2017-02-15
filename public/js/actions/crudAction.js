@@ -70,9 +70,12 @@ export function fetchAll(entity, data) {
     return function (dispatch) {
         dispatch(apiAction.apiRequest());
         return apiService.fetch(entity, data).then((response) => {
+            dispatch(apiAction.apiResponse());
             dispatch(commonActions.list(entity, response.data));
         })
-            .catch(response => dispatch(errorHandler(response.data.error)));
+            .catch((error) => {
+                errorHandler(dispatch, error.response, ActionType.FAILURE);
+            });
     };
 }
 
@@ -80,9 +83,12 @@ export function fetchById(entity, id) {
     return function (dispatch) {
         dispatch(apiAction.apiRequest());
         return apiService.fetch(Converter.getPathParam(entity, id)).then((response) => {
+            dispatch(apiAction.apiResponse());
             dispatch(commonActions.selectItem(entity, response.data));
         })
-            .catch(response => dispatch(errorHandler(response.data.error)));
+            .catch((error) => {
+                errorHandler(dispatch, error.response, ActionType.FAILURE);
+            });
     };
 }
 
@@ -90,12 +96,15 @@ export function storeItem(entity, data) {
     return function (dispatch) {
         dispatch(apiAction.apiRequest());
         return apiService.store(entity, data).then((response) => {
+            dispatch(apiAction.apiResponse());
 
             dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' added successfully.'));
 
             browserHistory.goBack();
         })
-            .catch(response => dispatch(errorHandler(response.data.error)));
+            .catch((error) => {
+                errorHandler(dispatch, error.response, ActionType.FAILURE);
+            });
     };
 }
 
@@ -103,12 +112,15 @@ export function updateItem(entity, data, id) {
     return function (dispatch) {
         dispatch(apiAction.apiRequest());
         return apiService.update(entity, data, id).then((response) => {
+            dispatch(apiAction.apiResponse());
 
             dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' updated successfully.'));
 
             browserHistory.goBack();
         })
-            .catch(response => dispatch(errorHandler(response.data.error)));
+            .catch((error) => {
+                errorHandler(dispatch, error.response, ActionType.FAILURE);
+            });
     };
 }
 
@@ -116,12 +128,15 @@ export function destroyItem(entity, id, data) {
     return function (dispatch) {
         dispatch(apiAction.apiRequest());
         return apiService.destroy(entity, id).then((response) => {
+            dispatch(apiAction.apiResponse());
 
             dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' deleted successfully.'));
 
             dispatch(fetchAll(entity, data));
         })
-            .catch(response => dispatch(errorHandler(response.data.error)));
+            .catch((error) => {
+                errorHandler(dispatch, error.response, ActionType.FAILURE);
+            });
     };
 }
 
@@ -159,7 +174,7 @@ export function clearSelectedItem(entity) {
 }
 
 export function errorHandler(dispatch, error, type) {
-    let errorMessage = (error.data.error) ? error.data.error : error.data;
+    let errorMessage = (error.data.message) ? error.data.message : error.data;
 
     // NOT AUTHENTICATED ERROR
     if (error.status === 401) {

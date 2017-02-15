@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {IndexLink} from 'react-router';
 
 //libraries
 import _ from 'lodash';
@@ -59,8 +60,9 @@ class ProductList extends Component {
                         <div className="box-header">
                             <h3 className="box-title">Product List:</h3>
                             <div className="pull-right box-tools">
-                                <a href="/#/products/new" className="btn btn-primary" role="button" title="Add Product"><i
-                                    className="glyphicon glyphicon-plus"></i>&nbsp;Add Product</a>
+                                <IndexLink to={'/products/new'} className="btn btn-primary" title="Add Product"><i
+                                    className="glyphicon glyphicon-plus"></i>&nbsp;Add Product
+                                </IndexLink>
                             </div>
                         </div>
 

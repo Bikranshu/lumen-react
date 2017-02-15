@@ -31119,8 +31119,8 @@
 	    value: true
 	});
 	exports.login = login;
-	exports.refreshToken = refreshToken;
 	exports.logout = logout;
+	exports.authErrorHandler = authErrorHandler;
 	
 	var _axios = __webpack_require__(/*! axios */ 281);
 	
@@ -31160,10 +31160,26 @@
 	            _reactCookie2.default.save(_app2.default.TOKEN, response.data.token, { path: '/' });
 	            window.location.href = _app2.default.ROOT_URL + 'dashboard';
 	        }).catch(function (error) {
-	            errorHandler(dispatch, error.response, ActionType.LOG_IN_FAILURE);
+	            authErrorHandler(dispatch, error.response, ActionType.LOG_IN_FAILURE);
 	        });
 	    };
 	}
+	
+	// export function refreshToken() {
+	//     return axios
+	//         .post(AppConstant.API_URL + 'auth/login/refresh', {
+	//             headers: {'Authorization': AppConstant.BEARER + ' ' + cookie.load(AppConstant.TOKEN)}
+	//         }).then((response) => {
+	//             dispatch({
+	//                 type: ActionType.RECEIVE_REFRESH_TOKEN,
+	//                 payload: response.data.content,
+	//             });
+	//             window.location.href = ROOT_URL;
+	//         })
+	//         .catch((error) => {
+	//             authErrorHandler(dispatch, error.response, ActionType.LOG_IN_FAILURE);
+	//         });
+	// }
 	
 	/**
 	 * Import all apiAction as an object.
@@ -31173,20 +31189,6 @@
 	/**
 	 * Import all constants as an object.
 	 */
-	function refreshToken() {
-	    return _axios2.default.post(_app2.default.API_URL + 'auth/login/refresh', {
-	        headers: { 'Authorization': _app2.default.BEARER + ' ' + _reactCookie2.default.load(_app2.default.TOKEN) }
-	    }).then(function (response) {
-	        dispatch({
-	            type: ActionType.RECEIVE_REFRESH_TOKEN,
-	            payload: response.data.content
-	        });
-	        window.location.href = ROOT_URL;
-	    }).catch(function (error) {
-	        errorHandler(dispatch, error.response, ActionType.LOG_IN_FAILURE);
-	    });
-	}
-	
 	function logout(error) {
 	    return function (dispatch) {
 	        dispatch({ type: ActionType.LOG_OUT });
@@ -31194,6 +31196,20 @@
 	
 	        window.location.href = _app2.default.ROOT_URL;
 	    };
+	}
+	
+	function authErrorHandler(dispatch, error, type) {
+	    var errorMessage = error.data.message ? error.data.message : error.data;
+	
+	    // NOT AUTHENTICATED ERROR
+	    if (error.status === 401) {
+	        errorMessage = 'You are not authorized to do this. Please login and try again.';
+	    }
+	
+	    dispatch({
+	        type: type,
+	        payload: errorMessage
+	    });
 	}
 
 /***/ },
@@ -32785,6 +32801,7 @@
 	var UPDATE_SELECTED_ITEM = exports.UPDATE_SELECTED_ITEM = 'UPDATE_SELECTED_ITEM';
 	var CLEAR_LIST = exports.CLEAR_LIST = 'CLEAR_LIST';
 	var CLEAR_SELECTED_ITEM = exports.CLEAR_SELECTED_ITEM = 'CLEAR_SELECTED_ITEM';
+	var FAILURE = exports.FAILURE = 'FAILURE';
 	
 	var ADD_PRODUCT = exports.ADD_PRODUCT = 'ADD_PRODUCT';
 	var EDIT_PRODUCT = exports.EDIT_PRODUCT = 'EDIT_PRODUCT';
@@ -32885,7 +32902,7 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -32893,6 +32910,8 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 219);
 	
 	var _userPanel = __webpack_require__(/*! ./user-panel.component */ 310);
 	
@@ -32914,694 +32933,114 @@
 	
 	
 	var Sidebar = function (_Component) {
-	  _inherits(Sidebar, _Component);
+	    _inherits(Sidebar, _Component);
 	
-	  function Sidebar() {
-	    _classCallCheck(this, Sidebar);
+	    function Sidebar() {
+	        _classCallCheck(this, Sidebar);
 	
-	    return _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).apply(this, arguments));
-	  }
+	        return _possibleConstructorReturn(this, (Sidebar.__proto__ || Object.getPrototypeOf(Sidebar)).apply(this, arguments));
+	    }
 	
-	  _createClass(Sidebar, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'aside',
-	        { className: 'main-sidebar' },
-	        _react2.default.createElement(
-	          'section',
-	          { className: 'sidebar' },
-	          _react2.default.createElement(_userPanel2.default, null),
-	          _react2.default.createElement(_search2.default, null),
-	          _react2.default.createElement(
-	            'ul',
-	            { className: 'sidebar-menu' },
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'header' },
-	              'MAIN NAVIGATION'
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'active' },
-	              _react2.default.createElement(
-	                'a',
-	                { href: '/#/dashboard' },
-	                _react2.default.createElement('i', { className: 'fa fa-dashboard' }),
-	                ' ',
+	    _createClass(Sidebar, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'aside',
+	                { className: 'main-sidebar' },
 	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Dashboard'
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '/#/products' },
-	                _react2.default.createElement('i', { className: 'fa fa-cart-plus' }),
-	                ' ',
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Product'
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'treeview' },
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                _react2.default.createElement('i', { className: 'fa fa-files-o' }),
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Layout Options'
-	                ),
-	                _react2.default.createElement(
-	                  'span',
-	                  { className: 'pull-right-container' },
-	                  _react2.default.createElement(
-	                    'span',
-	                    { className: 'label label-primary pull-right' },
-	                    '4'
-	                  )
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'ul',
-	                { className: 'treeview-menu' },
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Top Navigation'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Boxed'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Fixed'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Collapsed Sidebar'
-	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                _react2.default.createElement('i', { className: 'fa fa-th' }),
-	                ' ',
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Widgets'
-	                ),
-	                _react2.default.createElement(
-	                  'span',
-	                  { className: 'pull-right-container' },
-	                  _react2.default.createElement(
-	                    'small',
-	                    { className: 'label pull-right bg-green' },
-	                    'new'
-	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'treeview' },
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                _react2.default.createElement('i', { className: 'fa fa-pie-chart' }),
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Charts'
-	                ),
-	                _react2.default.createElement(
-	                  'span',
-	                  { className: 'pull-right-container' },
-	                  _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'ul',
-	                { className: 'treeview-menu' },
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' ChartJS'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Morris'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Flot'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Inline charts'
-	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'treeview' },
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                _react2.default.createElement('i', { className: 'fa fa-laptop' }),
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'UI Elements'
-	                ),
-	                _react2.default.createElement(
-	                  'span',
-	                  { className: 'pull-right-container' },
-	                  _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'ul',
-	                { className: 'treeview-menu' },
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' General'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Icons'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Buttons'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Sliders'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Timeline'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Modals'
-	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'treeview' },
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                _react2.default.createElement('i', { className: 'fa fa-edit' }),
-	                ' ',
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Forms'
-	                ),
-	                _react2.default.createElement(
-	                  'span',
-	                  { className: 'pull-right-container' },
-	                  _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'ul',
-	                { className: 'treeview-menu' },
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' General Elements'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Advanced Elements'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Editors'
-	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'treeview' },
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                _react2.default.createElement('i', { className: 'fa fa-table' }),
-	                ' ',
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Tables'
-	                ),
-	                _react2.default.createElement(
-	                  'span',
-	                  { className: 'pull-right-container' },
-	                  _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'ul',
-	                { className: 'treeview-menu' },
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Simple tables'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Data tables'
-	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                _react2.default.createElement('i', { className: 'fa fa-calendar' }),
-	                ' ',
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Calendar'
-	                ),
-	                _react2.default.createElement(
-	                  'span',
-	                  { className: 'pull-right-container' },
-	                  _react2.default.createElement(
-	                    'small',
-	                    { className: 'label pull-right bg-red' },
-	                    '3'
-	                  ),
-	                  _react2.default.createElement(
-	                    'small',
-	                    { className: 'label pull-right bg-blue' },
-	                    '17'
-	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              null,
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                _react2.default.createElement('i', { className: 'fa fa-envelope' }),
-	                ' ',
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Mailbox'
-	                ),
-	                _react2.default.createElement(
-	                  'span',
-	                  { className: 'pull-right-container' },
-	                  _react2.default.createElement(
-	                    'small',
-	                    { className: 'label pull-right bg-yellow' },
-	                    '12'
-	                  ),
-	                  _react2.default.createElement(
-	                    'small',
-	                    { className: 'label pull-right bg-green' },
-	                    '16'
-	                  ),
-	                  _react2.default.createElement(
-	                    'small',
-	                    { className: 'label pull-right bg-red' },
-	                    '5'
-	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'treeview' },
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                _react2.default.createElement('i', { className: 'fa fa-folder' }),
-	                ' ',
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Examples'
-	                ),
-	                _react2.default.createElement(
-	                  'span',
-	                  { className: 'pull-right-container' },
-	                  _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'ul',
-	                { className: 'treeview-menu' },
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Invoice'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Profile'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Login'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Register'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Lockscreen'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' 404 Error'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' 500 Error'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Blank Page'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Pace Page'
-	                  )
-	                )
-	              )
-	            ),
-	            _react2.default.createElement(
-	              'li',
-	              { className: 'treeview' },
-	              _react2.default.createElement(
-	                'a',
-	                { href: '#' },
-	                _react2.default.createElement('i', { className: 'fa fa-share' }),
-	                ' ',
-	                _react2.default.createElement(
-	                  'span',
-	                  null,
-	                  'Multilevel'
-	                ),
-	                _react2.default.createElement(
-	                  'span',
-	                  { className: 'pull-right-container' },
-	                  _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'ul',
-	                { className: 'treeview-menu' },
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Level One'
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Level One',
+	                    'section',
+	                    { className: 'sidebar' },
+	                    _react2.default.createElement(_userPanel2.default, null),
+	                    _react2.default.createElement(_search2.default, null),
 	                    _react2.default.createElement(
-	                      'span',
-	                      { className: 'pull-right-container' },
-	                      _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
-	                    )
-	                  ),
-	                  _react2.default.createElement(
-	                    'ul',
-	                    { className: 'treeview-menu' },
-	                    _react2.default.createElement(
-	                      'li',
-	                      null,
-	                      _react2.default.createElement(
-	                        'a',
-	                        { href: '#' },
-	                        _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                        ' Level Two'
-	                      )
-	                    ),
-	                    _react2.default.createElement(
-	                      'li',
-	                      null,
-	                      _react2.default.createElement(
-	                        'a',
-	                        { href: '#' },
-	                        _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                        ' Level Two',
-	                        _react2.default.createElement(
-	                          'span',
-	                          { className: 'pull-right-container' },
-	                          _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
-	                        )
-	                      ),
-	                      _react2.default.createElement(
 	                        'ul',
-	                        { className: 'treeview-menu' },
+	                        { className: 'sidebar-menu' },
 	                        _react2.default.createElement(
-	                          'li',
-	                          null,
-	                          _react2.default.createElement(
-	                            'a',
-	                            { href: '#' },
-	                            _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                            ' Level Three'
-	                          )
+	                            'li',
+	                            { className: 'header' },
+	                            'MAIN NAVIGATION'
 	                        ),
 	                        _react2.default.createElement(
-	                          'li',
-	                          null,
-	                          _react2.default.createElement(
-	                            'a',
-	                            { href: '#' },
-	                            _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                            ' Level Three'
-	                          )
+	                            'li',
+	                            { className: 'active' },
+	                            _react2.default.createElement(
+	                                _reactRouter.IndexLink,
+	                                { to: '/dashboard', activeClassName: 'active' },
+	                                _react2.default.createElement('i', {
+	                                    className: 'fa fa-dashboard' }),
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    null,
+	                                    'Dashboard'
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'li',
+	                            null,
+	                            _react2.default.createElement(
+	                                _reactRouter.IndexLink,
+	                                { to: '/products', activeClassName: 'active' },
+	                                _react2.default.createElement('i', {
+	                                    className: 'fa fa-cart-plus' }),
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    null,
+	                                    'Product'
+	                                )
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'li',
+	                            { className: 'treeview' },
+	                            _react2.default.createElement(
+	                                _reactRouter.IndexLink,
+	                                { to: '#', activeClassName: 'active' },
+	                                _react2.default.createElement('i', {
+	                                    className: 'fa fa-gear' }),
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    null,
+	                                    'Setting'
+	                                ),
+	                                _react2.default.createElement(
+	                                    'span',
+	                                    { className: 'pull-right-container' },
+	                                    _react2.default.createElement('i', { className: 'fa fa-angle-left pull-right' })
+	                                )
+	                            ),
+	                            _react2.default.createElement(
+	                                'ul',
+	                                { className: 'treeview-menu' },
+	                                _react2.default.createElement(
+	                                    'li',
+	                                    null,
+	                                    _react2.default.createElement(
+	                                        _reactRouter.Link,
+	                                        { to: '#', activeClassName: 'active' },
+	                                        _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                                        'Notification'
+	                                    )
+	                                ),
+	                                _react2.default.createElement(
+	                                    'li',
+	                                    null,
+	                                    _react2.default.createElement(
+	                                        _reactRouter.Link,
+	                                        { to: '#', activeClassName: 'active' },
+	                                        _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
+	                                        'Discount'
+	                                    )
+	                                )
+	                            )
 	                        )
-	                      )
 	                    )
-	                  )
-	                ),
-	                _react2.default.createElement(
-	                  'li',
-	                  null,
-	                  _react2.default.createElement(
-	                    'a',
-	                    { href: '#' },
-	                    _react2.default.createElement('i', { className: 'fa fa-circle-o' }),
-	                    ' Level One'
-	                  )
 	                )
-	              )
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
+	            );
+	        }
+	    }]);
 	
-	  return Sidebar;
+	    return Sidebar;
 	}(_react.Component);
 	
 	exports.default = Sidebar;
@@ -34421,7 +33860,7 @@
   \*********************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -34432,6 +33871,8 @@
 	var _react = __webpack_require__(/*! react */ 1);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 219);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -34451,36 +33892,36 @@
 	    }
 	
 	    _createClass(Title, [{
-	        key: "render",
+	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "section",
-	                { className: "content-header" },
+	                'section',
+	                { className: 'content-header' },
 	                _react2.default.createElement(
-	                    "h1",
+	                    'h1',
 	                    null,
-	                    "Product"
+	                    'Product'
 	                ),
 	                _react2.default.createElement(
-	                    "ol",
-	                    { className: "breadcrumb" },
+	                    'ol',
+	                    { className: 'breadcrumb' },
 	                    _react2.default.createElement(
-	                        "li",
+	                        'li',
 	                        null,
 	                        _react2.default.createElement(
-	                            "a",
-	                            { href: "#" },
-	                            _react2.default.createElement("i", { className: "fa fa-dashboard" }),
-	                            " Home"
+	                            'a',
+	                            { href: '#' },
+	                            _react2.default.createElement('i', { className: 'fa fa-dashboard' }),
+	                            ' Home'
 	                        )
 	                    ),
 	                    _react2.default.createElement(
-	                        "li",
-	                        { className: "active" },
+	                        'li',
+	                        { className: 'active' },
 	                        _react2.default.createElement(
-	                            "a",
-	                            { href: "/#/products" },
-	                            "Product"
+	                            _reactRouter.IndexLink,
+	                            { to: '/products' },
+	                            'Product'
 	                        )
 	                    )
 	                )
@@ -34515,6 +33956,8 @@
 	var _redux = __webpack_require__(/*! redux */ 189);
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
+	
+	var _reactRouter = __webpack_require__(/*! react-router */ 219);
 	
 	var _lodash = __webpack_require__(/*! lodash */ 321);
 	
@@ -34627,8 +34070,8 @@
 	                                'div',
 	                                { className: 'pull-right box-tools' },
 	                                _react2.default.createElement(
-	                                    'a',
-	                                    { href: '/#/products/new', className: 'btn btn-primary', role: 'button', title: 'Add Product' },
+	                                    _reactRouter.IndexLink,
+	                                    { to: '/products/new', className: 'btn btn-primary', title: 'Add Product' },
 	                                    _react2.default.createElement('i', {
 	                                        className: 'glyphicon glyphicon-plus' }),
 	                                    '\xA0Add Product'
@@ -51914,9 +51357,10 @@
 	    return function (dispatch) {
 	        dispatch(apiAction.apiRequest());
 	        return apiService.fetch(entity, data).then(function (response) {
+	            dispatch(apiAction.apiResponse());
 	            dispatch(commonActions.list(entity, response.data));
-	        }).catch(function (response) {
-	            return dispatch(errorHandler(response.data.error));
+	        }).catch(function (error) {
+	            errorHandler(dispatch, error.response, ActionType.FAILURE);
 	        });
 	    };
 	}
@@ -51925,9 +51369,10 @@
 	    return function (dispatch) {
 	        dispatch(apiAction.apiRequest());
 	        return apiService.fetch(Converter.getPathParam(entity, id)).then(function (response) {
+	            dispatch(apiAction.apiResponse());
 	            dispatch(commonActions.selectItem(entity, response.data));
-	        }).catch(function (response) {
-	            return dispatch(errorHandler(response.data.error));
+	        }).catch(function (error) {
+	            errorHandler(dispatch, error.response, ActionType.FAILURE);
 	        });
 	    };
 	}
@@ -51936,12 +51381,13 @@
 	    return function (dispatch) {
 	        dispatch(apiAction.apiRequest());
 	        return apiService.store(entity, data).then(function (response) {
+	            dispatch(apiAction.apiResponse());
 	
 	            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' added successfully.'));
 	
 	            _reactRouter.browserHistory.goBack();
-	        }).catch(function (response) {
-	            return dispatch(errorHandler(response.data.error));
+	        }).catch(function (error) {
+	            errorHandler(dispatch, error.response, ActionType.FAILURE);
 	        });
 	    };
 	}
@@ -51950,12 +51396,13 @@
 	    return function (dispatch) {
 	        dispatch(apiAction.apiRequest());
 	        return apiService.update(entity, data, id).then(function (response) {
+	            dispatch(apiAction.apiResponse());
 	
 	            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' updated successfully.'));
 	
 	            _reactRouter.browserHistory.goBack();
-	        }).catch(function (response) {
-	            return dispatch(errorHandler(response.data.error));
+	        }).catch(function (error) {
+	            errorHandler(dispatch, error.response, ActionType.FAILURE);
 	        });
 	    };
 	}
@@ -51964,12 +51411,13 @@
 	    return function (dispatch) {
 	        dispatch(apiAction.apiRequest());
 	        return apiService.destroy(entity, id).then(function (response) {
+	            dispatch(apiAction.apiResponse());
 	
 	            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' deleted successfully.'));
 	
 	            dispatch(fetchAll(entity, data));
-	        }).catch(function (response) {
-	            return dispatch(errorHandler(response.data.error));
+	        }).catch(function (error) {
+	            errorHandler(dispatch, error.response, ActionType.FAILURE);
 	        });
 	    };
 	}
@@ -52008,7 +51456,7 @@
 	}
 	
 	function errorHandler(dispatch, error, type) {
-	    var errorMessage = error.data.error ? error.data.error : error.data;
+	    var errorMessage = error.data.message ? error.data.message : error.data;
 	
 	    // NOT AUTHENTICATED ERROR
 	    if (error.status === 401) {

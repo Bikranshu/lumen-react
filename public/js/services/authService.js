@@ -12,6 +12,11 @@ import AppConstant from '../constants/app';
  */
 import * as apiAction from '../actions/apiAction';
 
+/**
+ * Import flashMessage.
+ */
+import * as FlashMessage from '../actions/flashMessage';
+
 export function login({email, password}) {
     return function (dispatch) {
         dispatch(apiAction.apiRequest());
@@ -25,6 +30,7 @@ export function login({email, password}) {
         })
             .catch((error) => {
                 authErrorHandler(dispatch, error.response, ActionType.LOG_IN_FAILURE);
+                dispatch(FlashMessage.flashMessage('error', 'Invalid username and password.'));
             });
     };
 }

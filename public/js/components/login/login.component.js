@@ -7,6 +7,13 @@ import {connect} from 'react-redux';
  */
 import * as authService from '../../services/authService';
 
+import * as flashMessage  from '../../actions/flashMessage';
+
+/**
+ * Import custom components
+ */
+import FlashMessage from '../common/flash/message.component';
+
 class Login extends Component {
 
     componentWillMount() {
@@ -21,6 +28,7 @@ class Login extends Component {
     }
 
     render() {
+        let message = this.props.message;
 
         return (
             <div className="login-box">
@@ -29,6 +37,8 @@ class Login extends Component {
                 </div>
                 <div className="login-box-body">
                     <p className="login-box-msg">Sign in to start your session</p>
+
+                    {message !== null && <FlashMessage message={message} />}
 
                     <form method="post" onSubmit={this.handleSubmit.bind(this)}>
                         <div className="form-group has-feedback">
@@ -60,7 +70,8 @@ class Login extends Component {
 function mapStateToProps(state) {
     return {
         token: state.auth.token,
-        isAuthenticated: state.auth.isAuthenticated
+        isAuthenticated: state.auth.isAuthenticated,
+        message: state.flash.message
     }
 }
 
@@ -69,7 +80,7 @@ function mapStateToProps(state) {
  */
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(_.assign({}, authService), dispatch)
+        actions: bindActionCreators(_.assign({}, authService, flashMessage), dispatch)
     }
 }
 

@@ -73,23 +73,23 @@
 	
 	var _app2 = _interopRequireDefault(_app);
 	
-	var _notFound = __webpack_require__(/*! ./components/error/not-found.component */ 313);
+	var _notFound = __webpack_require__(/*! ./components/error/not-found.component */ 314);
 	
 	var _notFound2 = _interopRequireDefault(_notFound);
 	
-	var _login = __webpack_require__(/*! ./components/login/login.component */ 314);
+	var _login = __webpack_require__(/*! ./components/login/login.component */ 315);
 	
 	var _login2 = _interopRequireDefault(_login);
 	
-	var _dashboard = __webpack_require__(/*! ./components/dashboard/dashboard.component */ 315);
+	var _dashboard = __webpack_require__(/*! ./components/dashboard/dashboard.component */ 318);
 	
 	var _dashboard2 = _interopRequireDefault(_dashboard);
 	
-	var _product = __webpack_require__(/*! ./components/product/product.component */ 318);
+	var _product = __webpack_require__(/*! ./components/product/product.component */ 321);
 	
 	var _product2 = _interopRequireDefault(_product);
 	
-	var _productList = __webpack_require__(/*! ./components/product/product-list.component */ 320);
+	var _productList = __webpack_require__(/*! ./components/product/product-list.component */ 323);
 	
 	var _productList2 = _interopRequireDefault(_productList);
 	
@@ -30385,11 +30385,11 @@
 	
 	var _header2 = _interopRequireDefault(_header);
 	
-	var _sidebar = __webpack_require__(/*! ./common/sidebar/sidebar.component */ 309);
+	var _sidebar = __webpack_require__(/*! ./common/sidebar/sidebar.component */ 310);
 	
 	var _sidebar2 = _interopRequireDefault(_sidebar);
 	
-	var _footer = __webpack_require__(/*! ./common/footer/footer.component */ 312);
+	var _footer = __webpack_require__(/*! ./common/footer/footer.component */ 313);
 	
 	var _footer2 = _interopRequireDefault(_footer);
 	
@@ -31142,10 +31142,22 @@
 	
 	var apiAction = _interopRequireWildcard(_apiAction);
 	
+	var _flashMessage = __webpack_require__(/*! ../actions/flashMessage */ 309);
+	
+	var FlashMessage = _interopRequireWildcard(_flashMessage);
+	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	/**
+	 * Import all apiAction as an object.
+	 */
+	
+	
+	/**
+	 * Import all constants as an object.
+	 */
 	function login(_ref) {
 	    var email = _ref.email,
 	        password = _ref.password;
@@ -31161,6 +31173,7 @@
 	            window.location.href = _app2.default.ROOT_URL + 'dashboard';
 	        }).catch(function (error) {
 	            authErrorHandler(dispatch, error.response, ActionType.LOG_IN_FAILURE);
+	            dispatch(FlashMessage.flashMessage('error', 'Invalid username and password.'));
 	        });
 	    };
 	}
@@ -31182,12 +31195,7 @@
 	// }
 	
 	/**
-	 * Import all apiAction as an object.
-	 */
-	
-	
-	/**
-	 * Import all constants as an object.
+	 * Import flashMessage.
 	 */
 	function logout(error) {
 	    return function (dispatch) {
@@ -32894,6 +32902,36 @@
 
 /***/ },
 /* 309 */
+/*!*******************************************!*\
+  !*** ./public/js/actions/flashMessage.js ***!
+  \*******************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.flashMessage = flashMessage;
+	
+	var _actionType = __webpack_require__(/*! ../constants/actionType */ 306);
+	
+	/**
+	 * These are the actions dispatched whenever the API is used
+	 */
+	
+	function flashMessage(type, text) {
+	    return {
+	        type: _actionType.FLASH_MESSAGE,
+	        message: {
+	            type: type,
+	            text: text
+	        }
+	    };
+	} // Import constants
+
+/***/ },
+/* 310 */
 /*!******************************************************************!*\
   !*** ./public/js/components/common/sidebar/sidebar.component.js ***!
   \******************************************************************/
@@ -32913,11 +32951,11 @@
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 219);
 	
-	var _userPanel = __webpack_require__(/*! ./user-panel.component */ 310);
+	var _userPanel = __webpack_require__(/*! ./user-panel.component */ 311);
 	
 	var _userPanel2 = _interopRequireDefault(_userPanel);
 	
-	var _search = __webpack_require__(/*! ./search.component */ 311);
+	var _search = __webpack_require__(/*! ./search.component */ 312);
 	
 	var _search2 = _interopRequireDefault(_search);
 	
@@ -33046,7 +33084,7 @@
 	exports.default = Sidebar;
 
 /***/ },
-/* 310 */
+/* 311 */
 /*!*********************************************************************!*\
   !*** ./public/js/components/common/sidebar/user-panel.component.js ***!
   \*********************************************************************/
@@ -33117,7 +33155,7 @@
 	exports.default = UserPanel;
 
 /***/ },
-/* 311 */
+/* 312 */
 /*!*****************************************************************!*\
   !*** ./public/js/components/common/sidebar/search.component.js ***!
   \*****************************************************************/
@@ -33183,7 +33221,7 @@
 	exports.default = Search;
 
 /***/ },
-/* 312 */
+/* 313 */
 /*!****************************************************************!*\
   !*** ./public/js/components/common/footer/footer.component.js ***!
   \****************************************************************/
@@ -33256,7 +33294,7 @@
 	exports.default = Footer;
 
 /***/ },
-/* 313 */
+/* 314 */
 /*!***********************************************************!*\
   !*** ./public/js/components/error/not-found.component.js ***!
   \***********************************************************/
@@ -33317,7 +33355,7 @@
 	exports.default = NotFoundPage;
 
 /***/ },
-/* 314 */
+/* 315 */
 /*!*******************************************************!*\
   !*** ./public/js/components/login/login.component.js ***!
   \*******************************************************/
@@ -33343,6 +33381,14 @@
 	
 	var authService = _interopRequireWildcard(_authService);
 	
+	var _flashMessage = __webpack_require__(/*! ../../actions/flashMessage */ 309);
+	
+	var flashMessage = _interopRequireWildcard(_flashMessage);
+	
+	var _message = __webpack_require__(/*! ../common/flash/message.component */ 316);
+	
+	var _message2 = _interopRequireDefault(_message);
+	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -33355,6 +33401,11 @@
 	
 	/**
 	 * Import all authService as an object.
+	 */
+	
+	
+	/**
+	 * Import custom components
 	 */
 	
 	
@@ -33383,6 +33434,7 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var message = this.props.message;
 	
 	            return _react2.default.createElement(
 	                'div',
@@ -33409,6 +33461,7 @@
 	                        { className: 'login-box-msg' },
 	                        'Sign in to start your session'
 	                    ),
+	                    message !== null && _react2.default.createElement(_message2.default, { message: message }),
 	                    _react2.default.createElement(
 	                        'form',
 	                        { method: 'post', onSubmit: this.handleSubmit.bind(this) },
@@ -33463,7 +33516,8 @@
 	function mapStateToProps(state) {
 	    return {
 	        token: state.auth.token,
-	        isAuthenticated: state.auth.isAuthenticated
+	        isAuthenticated: state.auth.isAuthenticated,
+	        message: state.flash.message
 	    };
 	}
 	
@@ -33472,7 +33526,7 @@
 	 */
 	function mapDispatchToProps(dispatch) {
 	    return {
-	        actions: (0, _redux.bindActionCreators)(_.assign({}, authService), dispatch)
+	        actions: (0, _redux.bindActionCreators)(_.assign({}, authService, flashMessage), dispatch)
 	    };
 	}
 	
@@ -33482,7 +33536,131 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Login);
 
 /***/ },
-/* 315 */
+/* 316 */
+/*!****************************************************************!*\
+  !*** ./public/js/components/common/flash/message.component.js ***!
+  \****************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _classnames = __webpack_require__(/*! classnames */ 317);
+	
+	var _classnames2 = _interopRequireDefault(_classnames);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var FlashMessage = function (_Component) {
+	    _inherits(FlashMessage, _Component);
+	
+	    function FlashMessage(props) {
+	        _classCallCheck(this, FlashMessage);
+	
+	        return _possibleConstructorReturn(this, (FlashMessage.__proto__ || Object.getPrototypeOf(FlashMessage)).call(this, props));
+	    }
+	
+	    _createClass(FlashMessage, [{
+	        key: 'render',
+	        value: function render() {
+	            var type = this.props.message.type;
+	            var text = this.props.message.text;
+	            return _react2.default.createElement(
+	                'div',
+	                { className: (0, _classnames2.default)('alert', {
+	                        'alert-success': type === 'success',
+	                        'alert-danger': type === 'error',
+	                        'alert-warning': type === 'warning',
+	                        'alert-info': type === 'info'
+	                    }) },
+	                text
+	            );
+	        }
+	    }]);
+	
+	    return FlashMessage;
+	}(_react.Component);
+	
+	FlashMessage.propTypes = {
+	    message: _react.PropTypes.object.isRequired
+	};
+	
+	exports.default = FlashMessage;
+
+/***/ },
+/* 317 */
+/*!*******************************!*\
+  !*** ./~/classnames/index.js ***!
+  \*******************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+	  Copyright (c) 2016 Jed Watson.
+	  Licensed under the MIT License (MIT), see
+	  http://jedwatson.github.io/classnames
+	*/
+	/* global define */
+	
+	(function () {
+		'use strict';
+	
+		var hasOwn = {}.hasOwnProperty;
+	
+		function classNames () {
+			var classes = [];
+	
+			for (var i = 0; i < arguments.length; i++) {
+				var arg = arguments[i];
+				if (!arg) continue;
+	
+				var argType = typeof arg;
+	
+				if (argType === 'string' || argType === 'number') {
+					classes.push(arg);
+				} else if (Array.isArray(arg)) {
+					classes.push(classNames.apply(null, arg));
+				} else if (argType === 'object') {
+					for (var key in arg) {
+						if (hasOwn.call(arg, key) && arg[key]) {
+							classes.push(key);
+						}
+					}
+				}
+			}
+	
+			return classes.join(' ');
+		}
+	
+		if (typeof module !== 'undefined' && module.exports) {
+			module.exports = classNames;
+		} else if (true) {
+			// register as 'classnames', consistent with npm package name
+			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
+				return classNames;
+			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+		} else {
+			window.classNames = classNames;
+		}
+	}());
+
+
+/***/ },
+/* 318 */
 /*!***************************************************************!*\
   !*** ./public/js/components/dashboard/dashboard.component.js ***!
   \***************************************************************/
@@ -33500,11 +33678,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _title = __webpack_require__(/*! ./title.component */ 316);
+	var _title = __webpack_require__(/*! ./title.component */ 319);
 	
 	var _title2 = _interopRequireDefault(_title);
 	
-	var _boxRowOne = __webpack_require__(/*! ./box-row-one.component */ 317);
+	var _boxRowOne = __webpack_require__(/*! ./box-row-one.component */ 320);
 	
 	var _boxRowOne2 = _interopRequireDefault(_boxRowOne);
 	
@@ -33550,7 +33728,7 @@
 	exports.default = Dashboard;
 
 /***/ },
-/* 316 */
+/* 319 */
 /*!***********************************************************!*\
   !*** ./public/js/components/dashboard/title.component.js ***!
   \***********************************************************/
@@ -33625,7 +33803,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 317 */
+/* 320 */
 /*!*****************************************************************!*\
   !*** ./public/js/components/dashboard/box-row-one.component.js ***!
   \*****************************************************************/
@@ -33790,7 +33968,7 @@
 	exports.default = BoxRowOne;
 
 /***/ },
-/* 318 */
+/* 321 */
 /*!***********************************************************!*\
   !*** ./public/js/components/product/product.component.js ***!
   \***********************************************************/
@@ -33808,7 +33986,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _title = __webpack_require__(/*! ./title.component */ 319);
+	var _title = __webpack_require__(/*! ./title.component */ 322);
 	
 	var _title2 = _interopRequireDefault(_title);
 	
@@ -33854,7 +34032,7 @@
 	exports.default = Product;
 
 /***/ },
-/* 319 */
+/* 322 */
 /*!*********************************************************!*\
   !*** ./public/js/components/product/title.component.js ***!
   \*********************************************************/
@@ -33935,7 +34113,7 @@
 	exports.default = Title;
 
 /***/ },
-/* 320 */
+/* 323 */
 /*!****************************************************************!*\
   !*** ./public/js/components/product/product-list.component.js ***!
   \****************************************************************/
@@ -33959,11 +34137,11 @@
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 219);
 	
-	var _lodash = __webpack_require__(/*! lodash */ 321);
+	var _lodash = __webpack_require__(/*! lodash */ 324);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _common = __webpack_require__(/*! ../../constants/common */ 322);
+	var _common = __webpack_require__(/*! ../../constants/common */ 325);
 	
 	var _common2 = _interopRequireDefault(_common);
 	
@@ -33971,23 +34149,23 @@
 	
 	var apiAction = _interopRequireWildcard(_apiAction);
 	
-	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 323);
+	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 326);
 	
 	var crudAction = _interopRequireWildcard(_crudAction);
 	
-	var _flashMessage = __webpack_require__(/*! ../../actions/flashMessage */ 327);
+	var _flashMessage = __webpack_require__(/*! ../../actions/flashMessage */ 309);
 	
 	var flashMessage = _interopRequireWildcard(_flashMessage);
 	
-	var _table = __webpack_require__(/*! ../common/table/table.component */ 328);
+	var _table = __webpack_require__(/*! ../common/table/table.component */ 330);
 	
 	var _table2 = _interopRequireDefault(_table);
 	
-	var _productModelBox = __webpack_require__(/*! ./product-model-box.component */ 331);
+	var _productModelBox = __webpack_require__(/*! ./product-model-box.component */ 333);
 	
 	var _productModelBox2 = _interopRequireDefault(_productModelBox);
 	
-	var _message = __webpack_require__(/*! ../common/flash/message.component */ 333);
+	var _message = __webpack_require__(/*! ../common/flash/message.component */ 316);
 	
 	var _message2 = _interopRequireDefault(_message);
 	
@@ -34132,7 +34310,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(ProductList);
 
 /***/ },
-/* 321 */
+/* 324 */
 /*!****************************!*\
   !*** ./~/lodash/lodash.js ***!
   \****************************/
@@ -51226,7 +51404,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }()), __webpack_require__(/*! ./../webpack/buildin/module.js */ 203)(module)))
 
 /***/ },
-/* 322 */
+/* 325 */
 /*!***************************************!*\
   !*** ./public/js/constants/common.js ***!
   \***************************************/
@@ -51244,7 +51422,7 @@
 	exports.default = commons;
 
 /***/ },
-/* 323 */
+/* 326 */
 /*!*****************************************!*\
   !*** ./public/js/actions/crudAction.js ***!
   \*****************************************/
@@ -51276,15 +51454,15 @@
 	
 	var apiAction = _interopRequireWildcard(_apiAction);
 	
-	var _apiService = __webpack_require__(/*! ../services/apiService */ 324);
+	var _apiService = __webpack_require__(/*! ../services/apiService */ 327);
 	
 	var apiService = _interopRequireWildcard(_apiService);
 	
-	var _converter = __webpack_require__(/*! ../utils/converter */ 326);
+	var _converter = __webpack_require__(/*! ../utils/converter */ 329);
 	
 	var Converter = _interopRequireWildcard(_converter);
 	
-	var _flashMessage = __webpack_require__(/*! ./flashMessage */ 327);
+	var _flashMessage = __webpack_require__(/*! ./flashMessage */ 309);
 	
 	var FlashMessage = _interopRequireWildcard(_flashMessage);
 	
@@ -51470,7 +51648,7 @@
 	}
 
 /***/ },
-/* 324 */
+/* 327 */
 /*!******************************************!*\
   !*** ./public/js/services/apiService.js ***!
   \******************************************/
@@ -51486,11 +51664,11 @@
 	exports.update = update;
 	exports.destroy = destroy;
 	
-	var _apiUtil = __webpack_require__(/*! ../utils/apiUtil */ 325);
+	var _apiUtil = __webpack_require__(/*! ../utils/apiUtil */ 328);
 	
 	var ApiUtil = _interopRequireWildcard(_apiUtil);
 	
-	var _converter = __webpack_require__(/*! ../utils/converter */ 326);
+	var _converter = __webpack_require__(/*! ../utils/converter */ 329);
 	
 	var Converter = _interopRequireWildcard(_converter);
 	
@@ -51518,7 +51696,7 @@
 	}
 
 /***/ },
-/* 325 */
+/* 328 */
 /*!************************************!*\
   !*** ./public/js/utils/apiUtil.js ***!
   \************************************/
@@ -51569,7 +51747,7 @@
 	}
 
 /***/ },
-/* 326 */
+/* 329 */
 /*!**************************************!*\
   !*** ./public/js/utils/converter.js ***!
   \**************************************/
@@ -51609,37 +51787,7 @@
 	}
 
 /***/ },
-/* 327 */
-/*!*******************************************!*\
-  !*** ./public/js/actions/flashMessage.js ***!
-  \*******************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.flashMessage = flashMessage;
-	
-	var _actionType = __webpack_require__(/*! ../constants/actionType */ 306);
-	
-	/**
-	 * These are the actions dispatched whenever the API is used
-	 */
-	
-	function flashMessage(type, text) {
-	    return {
-	        type: _actionType.FLASH_MESSAGE,
-	        message: {
-	            type: type,
-	            text: text
-	        }
-	    };
-	} // Import constants
-
-/***/ },
-/* 328 */
+/* 330 */
 /*!**************************************************************!*\
   !*** ./public/js/components/common/table/table.component.js ***!
   \**************************************************************/
@@ -51657,11 +51805,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _header = __webpack_require__(/*! ./header.component */ 329);
+	var _header = __webpack_require__(/*! ./header.component */ 331);
 	
 	var _header2 = _interopRequireDefault(_header);
 	
-	var _body = __webpack_require__(/*! ./body.component */ 330);
+	var _body = __webpack_require__(/*! ./body.component */ 332);
 	
 	var _body2 = _interopRequireDefault(_body);
 	
@@ -51742,7 +51890,7 @@
 	exports.default = Table;
 
 /***/ },
-/* 329 */
+/* 331 */
 /*!***************************************************************!*\
   !*** ./public/js/components/common/table/header.component.js ***!
   \***************************************************************/
@@ -51808,7 +51956,7 @@
 	exports.default = Header;
 
 /***/ },
-/* 330 */
+/* 332 */
 /*!*************************************************************!*\
   !*** ./public/js/components/common/table/body.component.js ***!
   \*************************************************************/
@@ -51925,7 +52073,7 @@
 	exports.default = Body;
 
 /***/ },
-/* 331 */
+/* 333 */
 /*!*********************************************************************!*\
   !*** ./public/js/components/product/product-model-box.component.js ***!
   \*********************************************************************/
@@ -51947,15 +52095,15 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _lodash = __webpack_require__(/*! lodash */ 321);
+	var _lodash = __webpack_require__(/*! lodash */ 324);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _common = __webpack_require__(/*! ../../constants/common */ 322);
+	var _common = __webpack_require__(/*! ../../constants/common */ 325);
 	
 	var _common2 = _interopRequireDefault(_common);
 	
-	var _message = __webpack_require__(/*! ../../constants/message */ 332);
+	var _message = __webpack_require__(/*! ../../constants/message */ 334);
 	
 	var _message2 = _interopRequireDefault(_message);
 	
@@ -51963,7 +52111,7 @@
 	
 	var apiAction = _interopRequireWildcard(_apiAction);
 	
-	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 323);
+	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 326);
 	
 	var crudAction = _interopRequireWildcard(_crudAction);
 	
@@ -52092,7 +52240,7 @@
 	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(ProductModelBox);
 
 /***/ },
-/* 332 */
+/* 334 */
 /*!****************************************!*\
   !*** ./public/js/constants/message.js ***!
   \****************************************/
@@ -52109,130 +52257,6 @@
 	};
 	
 	exports.default = messages;
-
-/***/ },
-/* 333 */
-/*!****************************************************************!*\
-  !*** ./public/js/components/common/flash/message.component.js ***!
-  \****************************************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _classnames = __webpack_require__(/*! classnames */ 334);
-	
-	var _classnames2 = _interopRequireDefault(_classnames);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var FlashMessage = function (_Component) {
-	    _inherits(FlashMessage, _Component);
-	
-	    function FlashMessage(props) {
-	        _classCallCheck(this, FlashMessage);
-	
-	        return _possibleConstructorReturn(this, (FlashMessage.__proto__ || Object.getPrototypeOf(FlashMessage)).call(this, props));
-	    }
-	
-	    _createClass(FlashMessage, [{
-	        key: 'render',
-	        value: function render() {
-	            var type = this.props.message.type;
-	            var text = this.props.message.text;
-	            return _react2.default.createElement(
-	                'div',
-	                { className: (0, _classnames2.default)('alert', {
-	                        'alert-success': type === 'success',
-	                        'alert-danger': type === 'error',
-	                        'alert-warning': type === 'warning',
-	                        'alert-info': type === 'info'
-	                    }) },
-	                text
-	            );
-	        }
-	    }]);
-	
-	    return FlashMessage;
-	}(_react.Component);
-	
-	FlashMessage.propTypes = {
-	    message: _react.PropTypes.object.isRequired
-	};
-	
-	exports.default = FlashMessage;
-
-/***/ },
-/* 334 */
-/*!*******************************!*\
-  !*** ./~/classnames/index.js ***!
-  \*******************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
-	  Copyright (c) 2016 Jed Watson.
-	  Licensed under the MIT License (MIT), see
-	  http://jedwatson.github.io/classnames
-	*/
-	/* global define */
-	
-	(function () {
-		'use strict';
-	
-		var hasOwn = {}.hasOwnProperty;
-	
-		function classNames () {
-			var classes = [];
-	
-			for (var i = 0; i < arguments.length; i++) {
-				var arg = arguments[i];
-				if (!arg) continue;
-	
-				var argType = typeof arg;
-	
-				if (argType === 'string' || argType === 'number') {
-					classes.push(arg);
-				} else if (Array.isArray(arg)) {
-					classes.push(classNames.apply(null, arg));
-				} else if (argType === 'object') {
-					for (var key in arg) {
-						if (hasOwn.call(arg, key) && arg[key]) {
-							classes.push(key);
-						}
-					}
-				}
-			}
-	
-			return classes.join(' ');
-		}
-	
-		if (typeof module !== 'undefined' && module.exports) {
-			module.exports = classNames;
-		} else if (true) {
-			// register as 'classnames', consistent with npm package name
-			!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = function () {
-				return classNames;
-			}.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-		} else {
-			window.classNames = classNames;
-		}
-	}());
-
 
 /***/ },
 /* 335 */
@@ -52257,11 +52281,11 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _lodash = __webpack_require__(/*! lodash */ 321);
+	var _lodash = __webpack_require__(/*! lodash */ 324);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _common = __webpack_require__(/*! ../../constants/common */ 322);
+	var _common = __webpack_require__(/*! ../../constants/common */ 325);
 	
 	var _common2 = _interopRequireDefault(_common);
 	
@@ -52269,11 +52293,11 @@
 	
 	var apiAction = _interopRequireWildcard(_apiAction);
 	
-	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 323);
+	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 326);
 	
 	var crudAction = _interopRequireWildcard(_crudAction);
 	
-	var _flashMessage = __webpack_require__(/*! ../../actions/flashMessage */ 327);
+	var _flashMessage = __webpack_require__(/*! ../../actions/flashMessage */ 309);
 	
 	var flashMessage = _interopRequireWildcard(_flashMessage);
 	
@@ -52580,11 +52604,11 @@
 	
 	var _reactRedux = __webpack_require__(/*! react-redux */ 178);
 	
-	var _lodash = __webpack_require__(/*! lodash */ 321);
+	var _lodash = __webpack_require__(/*! lodash */ 324);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _common = __webpack_require__(/*! ../../constants/common */ 322);
+	var _common = __webpack_require__(/*! ../../constants/common */ 325);
 	
 	var _common2 = _interopRequireDefault(_common);
 	
@@ -52592,7 +52616,7 @@
 	
 	var apiAction = _interopRequireWildcard(_apiAction);
 	
-	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 323);
+	var _crudAction = __webpack_require__(/*! ../../actions/crudAction */ 326);
 	
 	var crudAction = _interopRequireWildcard(_crudAction);
 	
@@ -53842,7 +53866,7 @@
 	    }
 	};
 	
-	var _lodash = __webpack_require__(/*! lodash */ 321);
+	var _lodash = __webpack_require__(/*! lodash */ 324);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -53924,7 +53948,7 @@
 	    }
 	};
 	
-	var _lodash = __webpack_require__(/*! lodash */ 321);
+	var _lodash = __webpack_require__(/*! lodash */ 324);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -53996,7 +54020,7 @@
 	    }
 	};
 	
-	var _lodash = __webpack_require__(/*! lodash */ 321);
+	var _lodash = __webpack_require__(/*! lodash */ 324);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
@@ -54049,7 +54073,7 @@
 	    }
 	};
 	
-	var _lodash = __webpack_require__(/*! lodash */ 321);
+	var _lodash = __webpack_require__(/*! lodash */ 324);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	

@@ -98,7 +98,7 @@ export function storeItem(entity, data) {
         return apiService.store(entity, data).then((response) => {
             dispatch(apiAction.apiResponse());
 
-            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' added successfully.'));
+            dispatch(FlashMessage.addFlashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' added successfully.'));
 
             browserHistory.goBack();
         })
@@ -114,7 +114,7 @@ export function updateItem(entity, data, id) {
         return apiService.update(entity, data, id).then((response) => {
             dispatch(apiAction.apiResponse());
 
-            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' updated successfully.'));
+            dispatch(FlashMessage.addFlashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' updated successfully.'));
 
             browserHistory.goBack();
         })
@@ -130,7 +130,7 @@ export function destroyItem(entity, id, data) {
         return apiService.destroy(entity, id).then((response) => {
             dispatch(apiAction.apiResponse());
 
-            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' deleted successfully.'));
+            dispatch(FlashMessage.addFlashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' deleted successfully.'));
 
             dispatch(fetchAll(entity, data));
         })

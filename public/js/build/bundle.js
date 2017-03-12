@@ -31173,7 +31173,7 @@
 	            window.location.href = _app2.default.ROOT_URL + 'dashboard';
 	        }).catch(function (error) {
 	            authErrorHandler(dispatch, error.response, ActionType.LOG_IN_FAILURE);
-	            dispatch(FlashMessage.flashMessage('error', 'Invalid username and password.'));
+	            dispatch(FlashMessage.addFlashMessage('error', 'Invalid username and password.'));
 	        });
 	    };
 	}
@@ -32820,7 +32820,8 @@
 	var API_RESPONSE = exports.API_RESPONSE = 'API_RESPONSE';
 	var API_CLEAR_STATE = exports.API_CLEAR_STATE = 'API_CLEAR_STATE';
 	
-	var FLASH_MESSAGE = exports.FLASH_MESSAGE = 'FLASH_MESSAGE';
+	var ADD_FLASH_MESSAGE = exports.ADD_FLASH_MESSAGE = 'ADD_FLASH_MESSAGE';
+	var REMOVE_FLASH_MESSAGE = exports.REMOVE_FLASH_MESSAGE = 'REMOVE_FLASH_MESSAGE';
 
 /***/ },
 /* 307 */
@@ -32912,7 +32913,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.flashMessage = flashMessage;
+	exports.addFlashMessage = addFlashMessage;
+	exports.removeFlashMessage = removeFlashMessage;
 	
 	var _actionType = __webpack_require__(/*! ../constants/actionType */ 306);
 	
@@ -32920,15 +32922,20 @@
 	 * These are the actions dispatched whenever the API is used
 	 */
 	
-	function flashMessage(type, text) {
+	function addFlashMessage(type, text) {
 	    return {
-	        type: _actionType.FLASH_MESSAGE,
+	        type: _actionType.ADD_FLASH_MESSAGE,
 	        message: {
 	            type: type,
 	            text: text
 	        }
 	    };
 	} // Import constants
+	function removeFlashMessage() {
+	    return {
+	        type: _actionType.REMOVE_FLASH_MESSAGE
+	    };
+	}
 
 /***/ },
 /* 310 */
@@ -33433,11 +33440,13 @@
 	            window.$('body').addClass('hold-transition login-page');
 	        }
 	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            this.props.actions.removeFlashMessage();
+	        }
+	    }, {
 	        key: 'handleSubmit',
 	        value: function handleSubmit(formProps) {
-	            // e.preventDefault();
-	            // var email = this.refs.email.value;
-	            // var password = this.refs.password.value;
 	            this.props.actions.login(formProps);
 	        }
 	    }, {
@@ -33474,7 +33483,7 @@
 	                        { className: 'login-box-msg' },
 	                        'Sign in to start your session'
 	                    ),
-	                    message !== null && _react2.default.createElement(_message2.default, { message: message }),
+	                    _react2.default.createElement(_message2.default, { message: message }),
 	                    _react2.default.createElement(
 	                        'form',
 	                        { method: 'post', onSubmit: handleSubmit(this.handleSubmit) },
@@ -44124,8 +44133,13 @@
 	    _createClass(FlashMessage, [{
 	        key: 'render',
 	        value: function render() {
+	
 	            var type = this.props.message.type;
 	            var text = this.props.message.text;
+	            var message = this.props.message;
+	            if (!text) {
+	                return null;
+	            }
 	            return _react2.default.createElement(
 	                'div',
 	                { className: (0, _classnames2.default)('alert', {
@@ -44821,6 +44835,7 @@
 	        key: 'componentWillUnmount',
 	        value: function componentWillUnmount() {
 	            this.props.actions.clearList(_common2.default.PRODUCT);
+	            this.props.actions.removeFlashMessage();
 	            this.props.actions.apiClearState();
 	        }
 	    }, {
@@ -44864,7 +44879,7 @@
 	                                )
 	                            )
 	                        ),
-	                        message !== null && _react2.default.createElement(_message2.default, { message: message }),
+	                        _react2.default.createElement(_message2.default, { message: message }),
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'box-body' },
@@ -62169,7 +62184,7 @@
 	        return apiService.store(entity, data).then(function (response) {
 	            dispatch(apiAction.apiResponse());
 	
-	            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' added successfully.'));
+	            dispatch(FlashMessage.addFlashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' added successfully.'));
 	
 	            _reactRouter.browserHistory.goBack();
 	        }).catch(function (error) {
@@ -62184,7 +62199,7 @@
 	        return apiService.update(entity, data, id).then(function (response) {
 	            dispatch(apiAction.apiResponse());
 	
-	            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' updated successfully.'));
+	            dispatch(FlashMessage.addFlashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' updated successfully.'));
 	
 	            _reactRouter.browserHistory.goBack();
 	        }).catch(function (error) {
@@ -62199,7 +62214,7 @@
 	        return apiService.destroy(entity, id).then(function (response) {
 	            dispatch(apiAction.apiResponse());
 	
-	            dispatch(FlashMessage.flashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' deleted successfully.'));
+	            dispatch(FlashMessage.addFlashMessage('success', entity.charAt(0).toUpperCase() + entity.slice(1) + ' deleted successfully.'));
 	
 	            dispatch(fetchAll(entity, data));
 	        }).catch(function (error) {
@@ -63109,7 +63124,7 @@
 	function mapStateToProps(state) {
 	    return {
 	        selectedItem: state.crud.selectedItem,
-	        initialValues: state.crud.selectedItem.product ? state.crud.selectedItem.product : { status: true },
+	        initialValues: state.crud.selectedItem.product,
 	        apiState: state.api,
 	        message: state.flash.message
 	    };
@@ -64937,12 +64952,18 @@
 	
 	exports.default = function (state, action) {
 	    state = state || initialState;
-	
+	    var newState = void 0;
 	    switch (action.type) {
-	        case _actionType.FLASH_MESSAGE:
-	            var newState = _lodash2.default.cloneDeep(state);
+	        case _actionType.ADD_FLASH_MESSAGE:
+	            newState = _lodash2.default.cloneDeep(state);
 	            newState.message['type'] = action.message.type;
 	            newState.message['text'] = action.message.text;
+	            return newState;
+	
+	        case _actionType.REMOVE_FLASH_MESSAGE:
+	            newState = _lodash2.default.cloneDeep(state);
+	            newState.message['type'] = null;
+	            newState.message['text'] = null;
 	            return newState;
 	
 	        default:

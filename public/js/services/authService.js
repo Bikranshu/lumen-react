@@ -30,7 +30,7 @@ export function login({email, password}) {
         })
             .catch((error) => {
                 authErrorHandler(dispatch, error.response, ActionType.LOG_IN_FAILURE);
-                dispatch(FlashMessage.flashMessage('error', 'Invalid username and password.'));
+                dispatch(FlashMessage.addFlashMessage('error', 'Invalid username and password.'));
             });
     };
 }

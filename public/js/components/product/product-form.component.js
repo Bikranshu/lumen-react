@@ -148,7 +148,7 @@ ProductForm.propTypes = {
 function mapStateToProps(state) {
     return {
         selectedItem: state.crud.selectedItem,
-        initialValues: (state.crud.selectedItem.product) ? state.crud.selectedItem.product: {status: true},
+        initialValues: state.crud.selectedItem.product,
         apiState: state.api,
         message: state.flash.message
     }

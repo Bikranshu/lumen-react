@@ -28,10 +28,11 @@ class LoginForm extends Component {
         window.$('body').addClass('hold-transition login-page');
     }
 
+    componentWillUnmount() {
+        this.props.actions.removeFlashMessage();
+    }
+
     handleSubmit(formProps) {
-        // e.preventDefault();
-        // var email = this.refs.email.value;
-        // var password = this.refs.password.value;
         this.props.actions.login(formProps);
     }
 
@@ -47,7 +48,7 @@ class LoginForm extends Component {
                 <div className="login-box-body">
                     <p className="login-box-msg">Sign in to start your session</p>
 
-                    {message !== null && <FlashMessage message={message}/>}
+                    <FlashMessage message={message}/>
 
                     <form method="post" onSubmit={handleSubmit(this.handleSubmit)}>
                         <Field

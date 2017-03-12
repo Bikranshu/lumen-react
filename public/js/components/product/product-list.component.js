@@ -41,6 +41,7 @@ class ProductList extends Component {
 
     componentWillUnmount() {
         this.props.actions.clearList(Common.PRODUCT);
+        this.props.actions.removeFlashMessage();
         this.props.actions.apiClearState();
     }
 
@@ -66,7 +67,7 @@ class ProductList extends Component {
                             </div>
                         </div>
 
-                        {message !== null && <FlashMessage message={message} />}
+                        <FlashMessage message={message} />
 
                         <div className="box-body">
                             {data.length > 0 && <DataTable columns={columns} data={data} options={options}/>}

@@ -12,7 +12,7 @@ class FlashMessage extends Component {
 
         const type = this.props.message.type;
         const text = this.props.message.text;
-        const message = this.props.message;
+        
         if(!text){
             return null;
         }

@@ -16,7 +16,7 @@ class CreateProductsTable extends Migration
             $table->increments('id');
             $table->string('code');
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->boolean('status')->default(true);
             $table->integer('created_by')->unsigned();
             $table->timestamp('created_at');

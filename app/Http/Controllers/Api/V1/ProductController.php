@@ -55,7 +55,7 @@ class ProductController extends BaseController
         $validator = \Validator::make($request->input(), [
             'code' => 'required',
             'name' => 'required',
-            'description' => 'required',
+            //'description' => 'required',
         ]);
         if ($validator->fails()) {
             return $this->errorBadRequest($validator->messages());
@@ -90,7 +90,7 @@ class ProductController extends BaseController
         $validator = \Validator::make($request->input(), [
             'code' => 'required',
             'name' => 'required',
-            'description' => 'required',
+            //'description' => 'required',
         ]);
         if ($validator->fails()) {
             return $this->errorBadRequest($validator->messages());

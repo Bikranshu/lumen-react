@@ -13,7 +13,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 // Import custom components
 import App from './components/app.component';
 import NotFoundPage from './components/error/not-found.component';
-import Login from './components/login/login.component';
+import LoginForm from './components/login/login.component';
 import Dashboard from './components/dashboard/dashboard.component';
 import Product from './components/product/product.component';
 import ProductList from './components/product/product-list.component';
@@ -39,7 +39,7 @@ if (token) {
 render(
     <Provider store={store}>
         <Router  history={history}>
-            <Route path="/" component={Login}/>
+            <Route path="/" component={LoginForm}/>
             <Route path="/dashboard" component={App}>
                 <IndexRoute component={RequireAuth(Dashboard)} />
                 <Route path="/products" component={RequireAuth(Product)}>

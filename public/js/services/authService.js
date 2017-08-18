@@ -1,11 +1,10 @@
 import axios from 'axios';
-import cookie from 'react-cookie';
-
 /**
  * Import all constants as an object.
  */
 import * as ActionType from '../constants/actionType';
 import AppConstant from '../constants/app';
+import {clearToken, setToken, getToken} from '../utils/actionUtil';
 
 /**
  * Import all apiAction as an object.
@@ -25,7 +24,9 @@ export function login({email, password}) {
                 type: ActionType.LOG_IN_SUCCESS,
                 payload: response.data.token
             });
-            cookie.save(AppConstant.TOKEN, response.data.token, {path: '/'});
+
+            setToken(response.data.token);
+
             window.location.href = AppConstant.ROOT_URL + 'dashboard';
         })
             .catch((error) => {
@@ -35,26 +36,22 @@ export function login({email, password}) {
     };
 }
 
-// export function refreshToken() {
-//     return axios
-//         .post(AppConstant.API_URL + 'auth/login/refresh', {
-//             headers: {'Authorization': AppConstant.BEARER + ' ' + cookie.load(AppConstant.TOKEN)}
-//         }).then((response) => {
-//             dispatch({
-//                 type: ActionType.RECEIVE_REFRESH_TOKEN,
-//                 payload: response.data.content,
-//             });
-//             window.location.href = ROOT_URL;
-//         })
-//         .catch((error) => {
-//             authErrorHandler(dispatch, error.response, ActionType.LOG_IN_FAILURE);
-//         });
-// }
+export function verifyToken() {
+    return (dispatch) => {
+        const token = getToken();
+        // Update application state. User has token and is probably authenticated
+        if (token) {
+            dispatch({type: ActionType.LOG_IN_SUCCESS, payload: token});
+        }
+    };
+}
 
 export function logout(error) {
     return function (dispatch) {
+
         dispatch({type: ActionType.LOG_OUT});
-        cookie.remove(AppConstant.TOKEN, {path: '/'});
+
+        clearToken();
 
         window.location.href = AppConstant.ROOT_URL;
     };

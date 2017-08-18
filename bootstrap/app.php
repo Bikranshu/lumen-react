@@ -23,9 +23,9 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-// $app->withFacades();
+ $app->withFacades();
 
-// $app->withEloquent();
+ $app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -89,6 +89,11 @@ $app->singleton(
 
  // publish
  $app->register(Irazasyed\Larasupport\Providers\ArtisanServiceProvider::class);
+
+ $app['Dingo\Api\Auth\Auth']->extend('jwt', function ($app) {
+     return new Dingo\Api\Auth\Provider\JWT($app['Tymon\JWTAuth\JWTAuth']);
+ });
+
 
 /*
 |--------------------------------------------------------------------------

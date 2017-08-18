@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import cookie from 'react-cookie';
 
 // Import higher order components
 import RequireAuth from './components/auth/authenticate.component';
@@ -20,21 +19,12 @@ import ProductList from './components/product/product-list.component';
 import ProductForm from './components/product/product-form.component';
 import ProductDetail from './components/product/product-detail.component';
 import store from './store/store';
-
-/**
- * Import all constants as an object.
- */
-import * as ActionType from './constants/actionType';
+import { verifyToken } from './services/authService';
 
 const history = syncHistoryWithStore(hashHistory, store);
-const token = cookie.load('token');
-if (token) {
-    // Update application state. User has token and is probably authenticated
-    store.dispatch({
-        type: ActionType.LOG_IN_SUCCESS,
-        payload: token
-    });
-}
+
+// Used to log user in if token is valid
+store.dispatch(verifyToken());
 
 render(
     <Provider store={store}>

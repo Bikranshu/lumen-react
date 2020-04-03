@@ -11,11 +11,11 @@
 |
 */
 
-//$app->get('/', function () use ($app) {
-//    return $app->version();
+//$router->get('/', function () use ($router) {
+//    return $router->app->version();
 //});
 
-$app->get('/', function () {
+$router->get('/', function () {
     return view('dashboard');
 });
 
@@ -44,3 +44,4 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api\V1'], function ($a
         $api->delete('product/{id}', 'ProductController@destroy');
     });
 });
+

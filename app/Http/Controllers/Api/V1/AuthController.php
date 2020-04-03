@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api\V1;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Validator;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -38,10 +37,13 @@ class AuthController extends BaseController
         }
         // grab credentials from the request
         $credentials = $request->only('email', 'password');
-
-        // attempt to verify the credentials and create a token for the user
-        if (!$token = JWTAuth::attempt($credentials)) {
-            $this->response->errorForbidden(trans('auth.incorrect'));
+        try {
+            // attempt to verify the credentials and create a token for the user
+            if (!$token = JWTAuth::attempt($credentials)) {
+                $this->response->errorForbidden(trans('auth.incorrect'));
+            }
+        } catch (JWTException $e) {
+            $this->response->errorInternal('could_not_create_token');
         }
         // all good so return the token
         return $this->response->array(compact('token'));

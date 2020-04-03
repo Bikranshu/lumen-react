@@ -2,13 +2,14 @@ Lumen (Laravel Micro Framework) + ReactJS + AdminLTE + Webpack Boilerplate
 
 ## Prerequisites
 
-- PHP >= 5.6.4
+- PHP >= 7.2
 - OpenSSL PHP Extension
 - PDO PHP Extension
 - Mbstring PHP Extension
 - [NodeJs](https://nodejs.org/en/)
 - [Composer](https://getcomposer.org/download/) - Package manager for PHP
 - [NPM](https://npmjs.org/) - Node package manager
+- [MySQL](https://www.mysql.com/downloads/)
 
 
 ## Installation
@@ -18,7 +19,7 @@ On the command prompt run the following commands:
  $ cd lumen-react
  $ composer install
  $ npm install
- $ cp .env.example .env
+ $ cp .env.example .env (edit it with your database information)
  $ php artisan jwt:secret
  $ php artisan migrate
  $ php artisan db:seed
@@ -36,7 +37,6 @@ Credential:
 - transformer [fractal](http://fractal.thephpleague.com/)
 - apidoc [apidocjs](http://apidocjs.com/)
 - debug rest api [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=en)
-- api doc [http://lumen.lyyw.info/apidoc](http://lumen.lyyw.info/apidoc)
 - JavaScript library for building user interfaces - [React](https://facebook.github.io/react/)
 - Predictable state container - [Redux](http://redux.js.org/)
 - Promise based HTTP client - [Axios](https://github.com/mzabriskie/axios)

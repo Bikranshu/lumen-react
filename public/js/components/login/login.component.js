@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
@@ -7,7 +8,6 @@ import {Field, reduxForm} from 'redux-form';
  * Import all authService as an object.
  */
 import * as authService from '../../services/authService';
-
 import * as flashMessage  from '../../actions/flashMessage';
 
 /**

@@ -1,19 +1,9 @@
 import axios from 'axios';
-/**
- * Import all constants as an object.
- */
+
 import * as ActionType from '../constants/actionType';
 import AppConstant from '../constants/app';
 import {clearToken, setToken, getToken} from '../utils/actionUtil';
-
-/**
- * Import all apiAction as an object.
- */
 import * as apiAction from '../actions/apiAction';
-
-/**
- * Import flashMessage.
- */
 import * as FlashMessage from '../actions/flashMessage';
 
 export function login({email, password}) {
@@ -46,15 +36,10 @@ export function verifyToken() {
     };
 }
 
-export function logout(error) {
-    return function (dispatch) {
-
-        dispatch({type: ActionType.LOG_OUT});
-
-        clearToken();
-
-        window.location.href = AppConstant.ROOT_URL;
-    };
+export function logout() {
+    clearToken();
+    window.location.href = AppConstant.ROOT_URL;
+   
 }
 
 export function authErrorHandler(dispatch, error, type) {

@@ -9,7 +9,7 @@ Lumen (Laravel Micro Framework) + ReactJS + AdminLTE + Webpack Boilerplate
 - [NodeJs](https://nodejs.org/en/)
 - [Composer](https://getcomposer.org/download/) - Package manager for PHP
 - [NPM](https://npmjs.org/) - Node package manager
-- [MySQL](https://www.mysql.com/downloads/)
+- [MySQL](https://www.mysql.com/downloads/) - Relational database management system (RDBMS)
 
 
 ## Installation

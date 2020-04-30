@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const renderTextArea = ({input, label, data, meta: {touched, error, invalid, warning}, cols, rows}) => (
     <div className={`form-group ${touched && invalid ? 'has-error' : ''}`}>

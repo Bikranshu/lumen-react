@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const renderSelect = ({input, label, data, meta: {touched, error, invalid, warning}, children}) => (
 
@@ -22,7 +22,7 @@ renderSelect.propTypes = {
     label: PropTypes.string,
     data: PropTypes.string,
     meta: PropTypes.object,
-    children: React.PropTypes.array.isRequired
+    children: PropTypes.node.isRequired
 };
 
 export default renderSelect;

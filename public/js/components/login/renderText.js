@@ -1,8 +1,7 @@
-import React, {Component, PropTypes} from 'react';
-
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const renderText = ({input, label, type, meta: {touched, error, invalid, warning}, children}) => (
-
 
     <div className={`form-group has-feedback ${touched && invalid ? 'has-error' : ''}`}>
         <input {...input} type={type} className="form-control" placeholder={label}/>
@@ -19,7 +18,7 @@ renderText.propTypes = {
     label: PropTypes.string,
     type: PropTypes.string.isRequired,
     meta: PropTypes.object,
-    children: React.PropTypes.object.isRequired
+    children: PropTypes.node.isRequired
 };
 
 export default renderText;

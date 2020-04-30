@@ -1,5 +1,5 @@
-import React, {Component, PropTypes} from 'react';
-
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const renderText = ({input, label, type, data, meta: {touched, error, invalid, warning}}) => (
 

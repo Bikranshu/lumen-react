@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react';
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 class FlashMessage extends Component {
@@ -10,8 +11,9 @@ class FlashMessage extends Component {
 
     render() {
 
-        const type = this.props.message.type;
-        const text = this.props.message.text;
+        const {message} = this.props;
+        const type = message.type;
+        const text = message.text;
         
         if(!text){
             return null;

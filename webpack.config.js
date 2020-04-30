@@ -20,9 +20,16 @@ const config = {
             {
                 test: /\.(js|jsx)$/, //Check for all js files
                 exclude: /node_modules/,
-                use: [{
-                    loader: 'babel-loader?-babelrc,+cacheDirectory,presets[]=es2015,presets[]=stage-0,presets[]=react',
-                }]
+                loader: 'babel-loader',
+                options: {
+                    babelrc: false,
+                    presets: ['@babel/preset-env', '@babel/preset-react'],
+                    // This is a feature of `babel-loader` for webpack (not Babel itself).
+                    // It enables caching results in ./node_modules/.cache/babel-loader/
+                    // directory for faster rebuilds.
+                    cacheDirectory: true,
+                    plugins: [ '@babel/plugin-proposal-function-bind', '@babel/plugin-proposal-class-properties'],
+                },
             }
         ]
     },
